@@ -8,5 +8,5 @@ framework features that at the point were unknown and create an API to be used a
 ## Contributors
 It began as a group project, not all its development was made by myself
 
-- Josué Vargas
+- [Josué Vargas](https://github.com/JoVarHdez)
 
