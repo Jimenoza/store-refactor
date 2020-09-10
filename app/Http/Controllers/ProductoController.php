@@ -129,7 +129,7 @@ class ProductoController extends Controller
       $productos = Producto::buscar($filter,$catFiltro);
       $categorias = Categoria::getCategorias();
     }catch (\Exception $e){
-      return ClienteController::avisarError();
+      return ClienteController::avisarError($e);
     }
     $user = User::getUsuario();
     $carritoLen = Carrito::getTamano();
@@ -143,7 +143,7 @@ class ProductoController extends Controller
     try{
       $categorias = Categoria::getCategorias();
     }catch (\Exception $e){
-      return ClienteController::avisarError();
+      return ClienteController::avisarError($e);
     }
     $user = User::getUsuario();
     $carritoLen = Carrito::getTamano();
@@ -166,8 +166,8 @@ class ProductoController extends Controller
       $producto = Producto::productoPorId($id);
       $categorias = Categoria::getCategorias();
     }catch (\Exception $e){
-      //error_log($e);
-      return ClienteController::avisarError();
+      error_log($e);
+      return ClienteController::avisarError($e);
     }
     $user = User::getUsuario();
     $carritoLen = Carrito::getTamano();

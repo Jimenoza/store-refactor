@@ -31,7 +31,7 @@ class ClienteController extends Controller
         $productos = Producto::producosHabilitados();//Obtiene los productos en la base
     	  $categorias = Categoria::getCategorias(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
-        return self::avisarError();
+        return self::avisarError($e);
       }
       $user = User::getUsuario();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       $carritoLen = Carrito::getTamano();
@@ -66,7 +66,7 @@ class ClienteController extends Controller
         $tarjeta = null;
         return Redirect::back()->with('success', '1');
       }else{
-        return self::avisarError();
+        return self::avisarError($e);
       }    
     }
 
@@ -80,7 +80,7 @@ class ClienteController extends Controller
           $tarjetas = Tarjeta::verTarjetas($user->email);//obtiene las tarjetas asociadas al usuario loguado
           $categorias = Categoria::getCategorias(); //si no hay conexión a la base, le avisa al usuario
         }catch (\Exception $e){
-          return self::avisarError();
+          return self::avisarError($e);
         }
       }
       else{
@@ -102,16 +102,17 @@ class ClienteController extends Controller
             return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
           }
         }catch (\Exception $e){
-          return self::avisarError();
+          return self::avisarError($e);
         }
       }
     }
         
 
-    public static function avisarError(){
+    public static function avisarError($error){
       $user = User::getUsuario();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       $carritoLen = Carrito::getTamano();
       $total = Carrito::precioTotal();
+      error_log($error);
       return view('cliente.error',['usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);
     }
 }

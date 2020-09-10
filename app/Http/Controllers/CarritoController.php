@@ -24,7 +24,7 @@ class CarritoController extends Controller
         try{//El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
     	   $producto = Producto::hayEnInventario($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
         }catch (\Exception $e){
-            return ClienteController::avisarError();
+            return ClienteController::avisarError($e);
         }
     	if(count($producto) != 0){ //Hay stock del producto
     		$carrito = Carrito::getCarrito();
@@ -42,7 +42,7 @@ class CarritoController extends Controller
         try{
     	   $categorias = Categoria::getCategorias();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
         }catch (\Exception $e){
-            return ClienteController::avisarError();
+            return ClienteController::avisarError($e);
         }
     	$user = User::getUsuario();
     	$carritoLen = Carrito::getTamano(); //Obitene la cantidad de items en el carrito
@@ -81,7 +81,7 @@ class CarritoController extends Controller
                 //Si no hay conexión con la base de datos avisa del problema
                 Carrito::registrarCarrito($usuario->email);//Registra el carrito en la base de datos
             }catch (\Exception $e){
-                return ClienteController::avisarError();
+                return ClienteController::avisarError($e);
             }
             $tarjeta = $datos['tarjetas'];
             $direccion = $datos['direccion'];
