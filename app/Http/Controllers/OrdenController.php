@@ -19,7 +19,7 @@ class OrdenController extends Controller
             try{
     		  $categorias = DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
             }catch (\Exception $e){
-                return ClienteController::avisarError($e);
+                return handleError($e);
             }
 	    	$user = User::getUsuario();//Obtiene el usuario logueado
 	    	$carritoLen = self::lenCarrito();
@@ -57,7 +57,7 @@ class OrdenController extends Controller
                 $productos = DB::select("call productosPorOrden(".$id.");");
                 return view('cliente.popups.orden',['productos' => $productos]);
             }catch (\Exception $e){
-                return ClienteController::avisarError($e);
+                return handleError($e);
             }
         }else{
             return redirect('/usuarios/inicioSesionRegistro');

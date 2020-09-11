@@ -30,7 +30,7 @@ class UsuarioController extends Controller
             return redirect()->back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
           }
         }catch (\Exception $e){
-          return ClienteController::avisarError($e);
+          return handleError($e);
         }
       }
     }
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         Session::forget('frontSession');
         return redirect('/cliente');
       }catch (\Exception $e){
-        return ClienteController::avisarError($e);
+        return handleError($e);
       }
     }
 
