@@ -4,13 +4,11 @@ namespace tiendaVirtual\Http\Controllers;
 
 use Illuminate\Http\Request;
 use tiendaVirtual\Producto;
-use tiendaVirtual\Tarjeta;
 use tiendaVirtual\Categoria;
 use tiendaVirtual\Carrito;
 use tiendaVirtual\User;
 use Illuminate\Support\Facades\Redirect;
 use tiendaVirtual\Http\Requests\ClienteFormRequest;
-use tiendaVirtual\Http\Requests\TarjetaFormRequest;
 use Illuminate\Support\Facades\Input;
 use DB;
 use Session;
@@ -42,33 +40,6 @@ class ClienteController extends Controller
 
     public function show($id){
       return view('cliente.show', ['producto'=>Producto::findOrFail($id)]);
-    }
-
-    public function metodosPago(){
-      /*Retorna las tarjetas que tenga el usuario, si no hay usuario retorna la página de log in*/
-      if(User::hayUsuarioLogueado()){
-        return view('cliente/metodos');
-      }
-      return redirect('/usuarios/inicioSesionRegistro');
-    }
-
-    public function verMetodos(){
-      /*llama para desplegar las tarjetas asociadas al usuario*/
-      $user = User::getUsuario();
-      $carritoLen = Carrito::getTamano();
-      $total = Carrito::precioTotal();
-      if(User::hayUsuarioLogueado()){//revisa que haya alguien logueado
-        try{
-          $tarjetas = Tarjeta::verTarjetas($user->email);//obtiene las tarjetas asociadas al usuario loguado
-          $categorias = Categoria::getCategorias(); //si no hay conexión a la base, le avisa al usuario
-        }catch (\Exception $e){
-          return self::avisarError($e);
-        }
-      }
-      else{
-        return Redirect::back();
-      }
-      return view('cliente.vermetodos',['categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total, 'tarjetas' => $tarjetas]);
     }
 
     public function inicioSesion(Request $request) {//Hay diferencia con el otro login

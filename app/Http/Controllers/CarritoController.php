@@ -74,7 +74,6 @@ class CarritoController extends Controller
             }catch (\Exception $e){
                 return handleError($e);
             }
-            // $tarjeta = $datos['tarjetas'];
             $direccion = $datos['direccion'];
             Carrito::registrarCompra($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
