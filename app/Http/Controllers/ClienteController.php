@@ -52,24 +52,6 @@ class ClienteController extends Controller
       return redirect('/usuarios/inicioSesionRegistro');
     }
 
-    public function agregarMetodo(TarjetaFormRequest $request){
-      /*Agrega una tarjeta al usuario logueado, se revisó previamente que hubiera alguien logueado*/
-      $datos = $request->all();
-      if($datos['mes'] < 10){
-        $fecha_expiracion = "'".$datos['year']."-0".$datos['mes']."-01'";
-      }else{
-        $fecha_expiracion = "'".$datos['year']."-".$datos['mes']."-01'";
-      }
-      $Usuario_correo = User::getUsuario()->email;
-      $tarjeta = new Tarjeta($datos['titular'],$datos['numero'],$datos['ccv'],$fecha_expiracion,$Usuario_correo);
-      if($tarjeta->nuevaTarjeta()){//La función retorna true si se insertó en la base, false si no
-        $tarjeta = null;
-        return Redirect::back()->with('success', '1');
-      }else{
-        return self::avisarError($e);
-      }    
-    }
-
     public function verMetodos(){
       /*llama para desplegar las tarjetas asociadas al usuario*/
       $user = User::getUsuario();

@@ -73,7 +73,6 @@ Route::get('/carrito/verificar','CarritoController@verificar');
 Route::get('/carrito/orden','CarritoController@pagar');
 
 Route::get('/cliente/metodos','ClienteController@metodosPago');
-Route::post('/cliente/nuevoMetodo','ClienteController@agregarMetodo');
 Route::get('/cliente/vermetodos','ClienteController@verMetodos');
 
 Route::post('/cliente/inicioSesion', 'ClienteController@inicioSesion');

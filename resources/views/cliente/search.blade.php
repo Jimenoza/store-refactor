@@ -31,12 +31,12 @@
 										<a href="#" id="welcomeUser">Bienvenido {{$usuario->name}}<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="{{url('/cliente/ordenes')}}">Mis órdenes</a></li>
-											<li><a href="">Métodos de pago</a>
+											<!-- <li><a href="">Métodos de pago</a>
 												<ul>
 													<li><a href="/cliente/vermetodos">Ver métodos<i class="fas fa-chevron-right"></i></a></li>
 													<li><a href="#" onclick="nuevoMetodo()">Agregar<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
-											</li>
+											</li> -->
 										</ul>
 									</li>
 								</ul>
