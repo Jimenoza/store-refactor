@@ -70,14 +70,14 @@ class Carrito extends Model
         return DB::select("call ultimoCarrito();")[0]->idCarrito;//Obtiene el idCarrito del último carrito insertado en la base
     }
 
-    public static function registrarCompra($tarjeta,$dir){
+    public static function registrarCompra($dir){
         $carrito = self::getCarrito();
         $carritoID = self::getID();
         $total = self::precioTotal();
         foreach ($carrito as $producto) {
             DB::insert("call insertarCarritoXProducto(".$carritoID.",".$producto->idProducto.",1);");//Inserta todos los productos en el nuevo carrito asociado al usuario
         }
-        DB::insert("call insertarOrden('".$dir."',".$carritoID.",".$total.",".$tarjeta.");");
+        DB::insert("call insertarOrden('".$dir."',".$carritoID.",".$total.");");
 
     }
 }

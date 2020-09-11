@@ -19,7 +19,7 @@
             <form name="formularioOrden" id="formularioOrden" action="{{url('/carrito/pagar')}}" method="POST"> {{csrf_field()}}
               <div class="form-group">
                 <label for="tarjetas" class="col-form-label">Pagar con:</label>
-                <select class="form-control" name="tarjetas" id="tarjetas">
+                <!-- <select class="form-control" name="tarjetas" id="tarjetas">
                   @if(count($tarjetas) > 0)
                     @foreach($tarjetas as $tar)
                     <option value="{{$tar->idTarjeta}}">Tarjeta a nombre de {{$tar->nombre_tarjeta}} que expira en {{$tar->fecha_expiracion}}</option>
@@ -27,7 +27,7 @@
                   @else
                     <option value="">No hay tarjetas registradas</option>
                   @endif
-                </select>
+                </select> -->
                 <label for="direccion" class="col-form-label">Enviar a:</label>
                 <textarea class="form-control" id="direccion" name="direccion"></textarea>
               </div>

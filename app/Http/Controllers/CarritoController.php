@@ -72,9 +72,6 @@ class CarritoController extends Controller
         /*Genera una orden en la base de datos. Obtiene todo lo necesario para ello*/
         if($request->isMethod('post')) {
         $datos = $request->all();
-        if(!$datos['tarjetas']) {//Si no se seleccionó una tarjeta o no hay
-            return Redirect::back()->with('address_error', 'Por favor seleccione una tarjeta para pagar. Si no tiene ingrese una desde Métodos de pago -> Agregar');
-        }
         if($datos['direccion']) {
             $usuario = User::getUsuario();//Siempre retorna el usuario que esté logueado
             try{
@@ -83,9 +80,9 @@ class CarritoController extends Controller
             }catch (\Exception $e){
                 return handleError($e);
             }
-            $tarjeta = $datos['tarjetas'];
+            // $tarjeta = $datos['tarjetas'];
             $direccion = $datos['direccion'];
-            Carrito::registrarCompra($tarjeta,$direccion);//Genera una orden con el carrito creado
+            Carrito::registrarCompra($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');
             return redirect('cliente')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');
