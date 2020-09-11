@@ -49,8 +49,4 @@ class User extends Authenticatable
     public static function cerrarSesion(){
         Session::forget('frontSession');
     }
-
-    public static function getTarjetas($userID){
-        return DB::select("call tarjetasPorUsuario('".$userID."');");
-    }
 }

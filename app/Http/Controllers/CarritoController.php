@@ -48,13 +48,7 @@ class CarritoController extends Controller
     	$carritoLen = Carrito::getTamano(); //Obitene la cantidad de items en el carrito
         $carrito = Carrito::getCarrito(); //Obtiene una lista (array) de los productos en el carrito
       	$total = Carrito::precioTotal();
-        if(User::hayUsuarioLogueado()){
-            $tarjetas = User::getTarjetas($user->email);//Obitene las tarjetas del usuario logueado
-        }
-        else{
-            $tarjetas = array(); //Si el usuario no tiene tarjetas asociadas
-        }
-    	return view('cliente.cart',['categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total,'carrito' => $carrito, 'tarjetas' => $tarjetas]);
+    	return view('cliente.cart',['categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total,'carrito' => $carrito]);
     }
 
     public function eliminarCarrito(){
