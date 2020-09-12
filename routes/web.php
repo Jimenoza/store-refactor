@@ -44,8 +44,8 @@ Route::get('cliente/categories/{id}','ProductoController@filtrar');
 Route::get('cliente/results','ProductoController@search');
 Route::get('cliente/product/{id}','ProductoController@infoProducto');//<---------------
 try{
-	Route::post('cliente/comentar/{id}','ProductoController@comentarProducto');
-	Route::get('cliente/responder/{id}','ProductoController@responderComentario');
+	Route::post('cliente/comentar/{id}','ProductoController@comentarProducto')->middleware('auth');
+	Route::get('cliente/responder/{id}','ProductoController@responderComentario')->middleware('auth');;
 }catch (\Exception $e){
 	Route::get('cliente/comentar/{id}','ClienteController@index');
 	Route::get('cliente/responder/{id}','ClienteController@index');
@@ -56,7 +56,7 @@ Route::group(['middleware'=>['frontLogin']],function(){
 });
 Route::get('/usuarios/inicioSesionRegistro','UsuarioController@inicioSesionRegistro');
 Route::post('/usuarios/registrar','UsuarioController@registrar');
-Route::get('usuarios/cierreSesion','UsuarioController@cerrarSesion');
+Route::get('usuarios/cierreSesion','UsuarioController@cerrarSesion')->middleware('auth');
 Route::post('/usuarios/inicioSesion', 'UsuarioController@inicioSesion');
 
 
@@ -69,14 +69,10 @@ Route::get('/cliente/cart','CarritoController@verCarrito');
 Route::get('/carrito/eliminar','CarritoController@eliminarCarrito');
 Route::get('/carrito/quitar/{id}','CarritoController@quitarDelCarrito');
 
-Route::get('/carrito/verificar','CarritoController@verificar');
-Route::get('/carrito/orden','CarritoController@pagar');
 
-Route::get('/cliente/metodos','ClienteController@metodosPago');
-Route::get('/cliente/vermetodos','ClienteController@verMetodos');
 
 Route::post('/cliente/inicioSesion', 'ClienteController@inicioSesion');
-Route::post('/carrito/pagar', 'CarritoController@pagar');
+Route::post('/carrito/pagar', 'CarritoController@pagar')->middleware('auth');;
 
-Route::get('/cliente/ordenes','OrdenController@verOrdenes');
-Route::get('/cliente/orden/{id}','OrdenController@verOrden');
+Route::get('/cliente/ordenes','OrdenController@verOrdenes')->middleware('auth');
+Route::get('/cliente/orden/{id}','OrdenController@verOrden')->middleware('auth');

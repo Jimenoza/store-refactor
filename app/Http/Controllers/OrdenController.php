@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use tiendaVirtual\User;
 use DB;
 use Session;
+use Auth;
 
 class OrdenController extends Controller
 {
@@ -15,7 +16,7 @@ class OrdenController extends Controller
 
     public function verOrdenes(){
         /*Despliega las órdenes por usuario, si hay alguien logueado*/
-    	if(User::hayUsuarioLogueado()){//Pregunta que haya algún usuario logueado
+    	//if(User::hayUsuarioLogueado()){//Pregunta que haya algún usuario logueado
             try{
     		  $categorias = DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
             }catch (\Exception $e){
@@ -26,15 +27,15 @@ class OrdenController extends Controller
 	        $ordenes = self::getOrdenes();
 	      	$total = Session::get('total');
 	    	return view('cliente.ordenes',['categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total,'ordenes' => $ordenes]);
-    	}else{
+    	/*}else{
     		return redirect('/usuarios/inicioSesionRegistro');
-    	}
+    	}*/
     }
 
     private function getOrdenes(){
         /*obtiene las órdenes del usuario logueado*/
-    	if(User::hayUsuarioLogueado()){
-            $correo = User::getUsuario()->email;
+    	if(Auth::check()){
+            $correo = Auth::user()->email;
             return DB::select("call ordenesPorUsuario('".$correo."');");
         }
         else{
@@ -52,15 +53,11 @@ class OrdenController extends Controller
     }
 
     public function verOrden($id){
-        if(User::hayUsuarioLogueado()){
-            try{
-                $productos = DB::select("call productosPorOrden(".$id.");");
-                return view('cliente.popups.orden',['productos' => $productos]);
-            }catch (\Exception $e){
-                return handleError($e);
-            }
-        }else{
-            return redirect('/usuarios/inicioSesionRegistro');
+        try{
+            $productos = DB::select("call productosPorOrden(".$id.");");
+            return view('cliente.popups.orden',['productos' => $productos]);
+        }catch (\Exception $e){
+            return handleError($e);
         }
     }
 

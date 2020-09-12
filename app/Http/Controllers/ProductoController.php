@@ -176,15 +176,11 @@ class ProductoController extends Controller
   }
 
   public function comentarProducto(Request $request, $id){
-    if(User::hayUsuarioLogueado()){
-      $datos = $request->all();
-      $producto = Producto::productoPorId($id);
-      $usuarioCorreo = User::getUsuario()->email;
-      $producto->calificar($usuarioCorreo,$datos['comentario'],$datos['quantity_input']);
-      return redirect()->back();
-    }else{
-      return redirect('/cliente/');
-    }
+    $datos = $request->all();
+    $producto = Producto::productoPorId($id);
+    $usuarioCorreo = User::getUsuario()->email;
+    $producto->calificar($usuarioCorreo,$datos['comentario'],$datos['quantity_input']);
+    return redirect()->back();
   }
 
   public function responderComentario(Request $request, $id){

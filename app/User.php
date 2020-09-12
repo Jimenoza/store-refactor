@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Session;
 use DB;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,7 @@ class User extends Authenticatable
     }
 
     public static function cerrarSesion(){
+        Auth::logout();
         Session::forget('frontSession');
     }
 }
