@@ -31,7 +31,7 @@ class ClienteController extends Controller
       }catch (\Exception $e){
         return self::avisarError($e);
       }
-      $user = User::getUsuario();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
+      $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       $carritoLen = Carrito::getTamano();
       $total = Carrito::precioTotal();
     	return view('cliente.index', ['productos'=> $productos,'categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);

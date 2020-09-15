@@ -19,7 +19,7 @@
 						</ul>
 					</div>
 					<div class="top_bar_user">
-						@if($usuario == 'NULL')
+						@if(!$usuario)
 							<div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
 							<div><a href="{{url('/usuarios/inicioSesionRegistro')}}" id="register">Registrarse</a></div>
 							<div><a href="{{url('/usuarios/inicioSesionRegistro')}}" id="iniciarSesion">Iniciar Sesión</a></div>

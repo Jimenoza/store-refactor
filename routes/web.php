@@ -64,15 +64,15 @@ Route::match(['GET','POST'],'/usuarios/chequearEmail','UsuarioController@chequea
 
 Route::match(['GET','POST'],'/usuarios/chequearEmail','UsuarioController@chequearEmail');
 
-Route::get('/carrito/agregar/{id}','CarritoController@agregarItem');
-Route::get('/cliente/cart','CarritoController@verCarrito');
-Route::get('/carrito/eliminar','CarritoController@eliminarCarrito');
-Route::get('/carrito/quitar/{id}','CarritoController@quitarDelCarrito');
+Route::get('/carrito/agregar/{id}','CartController@addItem');
+Route::get('/cliente/cart','CartController@seeCart');
+Route::get('/carrito/eliminar','CartController@deleteCart');
+Route::get('/carrito/quitar/{id}','CartController@removeFromCart');
 
 
 
 Route::post('/cliente/inicioSesion', 'ClienteController@inicioSesion');
-Route::post('/carrito/pagar', 'CarritoController@pagar')->middleware('auth');;
+Route::post('/carrito/pagar', 'CartController@payCart')->middleware('auth');;
 
 Route::get('/cliente/ordenes','OrdenController@verOrdenes')->middleware('auth');
 Route::get('/cliente/orden/{id}','OrdenController@verOrden')->middleware('auth');

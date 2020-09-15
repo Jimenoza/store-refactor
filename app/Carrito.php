@@ -52,12 +52,17 @@ class Carrito extends Model
         $carrito = Session::get('carrito');
         $total = Session::get('total');
         for($i = 0; $i < count($carrito); $i++){
+            //dd($carrito);
             if($carrito[$i]->idProducto == $idProducto){//Encuentra el item a quitar del carrito
                 $total -= $carrito[$i]->precio;
-                unset($carrito[$i]);//Lo quita de la lista(array)
+                array_splice($carrito,$i,1);//Lo quita de la lista(array)
+                //unset($carrito[$i]);
                 break;
             }
-        }   
+        }
+        if($total < 0){
+            $total = 0;
+        }
         Session::put('total',$total);
         Session::put('carrito',$carrito);
     }
