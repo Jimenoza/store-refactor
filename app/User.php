@@ -47,7 +47,7 @@ class User extends Authenticatable
         return Session::get('frontSession')->admin;
     }
 
-    public static function cerrarSesion(){
+    public static function logout(){
         Auth::logout();
         Session::forget('frontSession');
     }

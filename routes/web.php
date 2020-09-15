@@ -14,17 +14,17 @@ Route::get('/', function () {
 });
 
 //Admin - Inicio y Ciere de Sesión
-Route::match(['get','post'],'/admin','AdminController@inicioSesion');
-Route::get('/logout', 'AdminController@cierreSesion');
+Route::match(['get','post'],'/admin','AdminController@loginAdmin');
+Route::get('/logout', 'AdminController@logout');
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function(){
   //Admin - Manejo de cuentas
-	Route::get('/admin/inicio','AdminController@inicio');
-	Route::match(['get', 'post'], '/admin/configuraciones', 'AdminController@configuraciones');
-  Route::match(['get', 'post'], '/admin/crearAdmin', 'AdminController@crearUsuarioAdministrador');
-	Route::post('/admin/revisarContrasena', 'AdminController@revisarContrasena');
-	Route::match(['get','post'], '/admin/actualizarContrasena', 'AdminController@actualizarContrasena');
+	Route::get('/admin/inicio','AdminController@index');
+	Route::match(['get', 'post'], '/admin/configuraciones', 'AdminController@configurations');
+  Route::match(['get', 'post'], '/admin/crearAdmin', 'AdminController@createAdminUser');
+	Route::post('/admin/revisarContrasena', 'AdminController@checkPassword');
+	Route::match(['get','post'], '/admin/actualizarContrasena', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías
 	Route::match(['get','post'], '/admin/agregarCategoria', 'CategoriaController@agregarCategoria');
 	Route::get('/admin/indexCategoria', 'CategoriaController@indexCategoria');

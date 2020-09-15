@@ -12,13 +12,13 @@ use DB;
 
 class AdminController extends Controller
 {
-  public function inicioSesion(Request $request) {
+  public function loginAdmin(Request $request) {
     /*Inicia sesión en la página de administrador, sino, retorna a la página de login indicando
     que no puede*/
     if($request->isMethod('post')){
-  		$datos = $request->input(); //Son las etiquetas del html, obitene lo que están en ellos
-  		if (Auth::attempt(['email'=>$datos['email'],'password'=>$datos['password'],'admin'=>'1'])){
-        User::loguearUsuario($datos['email']);//Hace el login, llamando a la clase User
+  		$data = $request->input(); //Son las etiquetas del html, obitene lo que están en ellos
+  		if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'1'])){
+        //User::loguearUsuario($datos['email']);//Hace el login, llamando a la clase User
   			return redirect('admin/indexProducto');
   		} else {
         // Volver a página principal con mensaje de error
@@ -28,80 +28,80 @@ class AdminController extends Controller
   	return view('admin.login');
   }
 
-  public function inicio() {
+  public function index() {
     // Lleva a la página de inicio de administrador
       return view('admin.inicio');
   }
 
   public function dashboard() {
     //Lleva a la página de del dashboard del administrador
-      self::verificarUsuarioAdministrador();//Verifica que el usuario logueado sea administrador
+      self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
       return view('admin.dashboard');
 
   }
-  public function cierreSesion() {
+  public function logout() {
     /*Cierra la sesión actual, en este caso, de la sesión del administrador*/
-    User::cerrarSesion();
-    return redirect('/cliente/index')->with('flash_message_success', '¡Cierre de sesión completo!');
+    User::logout();
+    return redirect('/cliente')->with('flash_message_success', '¡Cierre de sesión completo!');
   }
-  public function configuraciones() {
+  public function configurations() {
     /*Lleva a la página de las configuariones*/
-      self::verificarUsuarioAdministrador();//Verifica que el usuario logueado sea administrador
+      self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
       return view('admin.configuraciones');
   }
 
-  public function revisarContrasena(Request $request) {
+  public function checkPassword(Request $request) {
     /*Compara la contraseña ingresada con la que está registrada en la base de datos
     Retorna true si coinciden, false caso contrario*/
-      $datos = $request->all();
-      $contrasena = $datos['ctr_actual']; // Contiene la contraseña ingresada por el usuario
-      $chequearContrasena = User::where(['admin'=>'1'])->first(); //Obtiene la información del usuario actual
+      $data = $request->all();
+      $password = $dara['ctr_actual']; // Contiene la contraseña ingresada por el usuario
+      $checkPass = User::where(['admin'=>'1'])->first(); //Obtiene la información del usuario actual
       // Se verifica que la contraseña ingresada coincida con la contraseña almacenda en la BD por medio del hash
-      if (Hash::check($contrasenaActual, $chequearContrasena->contrasena)) {
+      if (Hash::check($contrasenaActual, $checkPass->contrasena)) {
           echo "true"; die;
       } else {
           echo "false"; die;
       }
   }
 
-  public function crearUsuarioAdministrador(Request $request) {
+  public function createAdminUser(Request $request) {
     /*Crea un nuevo usuario administrador, el usuario logueado debe ser administrador y
     el nuevo usuario debe estar previamente registrado en el sistema*/
-    self::verificarUsuarioAdministrador();//Verifica que el usuario logueado sea administrador
+    self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
     if($request->isMethod('post')) {
-      $datos = $request->all();
+      $data = $request->all();
       // Obtener cantidad de usuarios con el mismo correo
-      $cuentaUsuario = User::where('email', $datos['correo'])->count();
-      if ($cuentaUsuario > 0) {
+      $userCount = User::where('email', $datos['correo'])->count();
+      if ($userCount > 0) {
         // El correo ingresado ya existe
         return redirect('/admin/crearAdmin')->with('flash_message_error', '¡El correo introducido ya existe!');
       } else {
         // Creación de nuevo usuario administrador
-        $usuario = new User;
-        $usuario->name = $datos['nombre'];
-        $usuario->email = $datos['correo'];
-        $usuario->password = bcrypt($datos['ctr_nueva']);
-        $usuario->admin = '1';
-        $usuario->save();
+        $user = new User;
+        $user->name = $data['nombre'];
+        $user->email = $data['correo'];
+        $user->password = bcrypt($data['ctr_nueva']);
+        $data->admin = '1';
+        $user->save();
         return redirect('/admin/crearAdmin')->with('flash_message_success', '¡Se ha creado un nuevo Administrador!');
         }
       }
     return view('admin.crearAdmin');
   }
 
-  public function actualizarContrasena (Request $request) {
+  public function updatePassword (Request $request) {
     /*Permite cambiar la contraseña del usuario administrador logueado*/
-    self::verificarUsuarioAdministrador();//Verifica que el usuario logueado sea administrador
+    self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
       if($request->isMethod('post')) {
-          $datos = $request->all();
+          $data = $request->all();
           // Obtiene los datos del usuario actual
-          $chequearContrasena = User::where(['email' => Auth::user()->email])->first();
-          $contrasenaActual = $datos['ctr_actual'];
-          if (Hash::check($contrasenaActual, $chequearContrasena->password)) {
+          $checkPass = User::where(['email' => Auth::user()->email])->first();
+          $currentPass = $data['ctr_actual'];
+          if (Hash::check($currentPass, $checkPass->password)) {
               // Crea encriptación de contraseña ingresada
-              $contrasena = bcrypt($datos['ctr_nueva']);
+              $password = bcrypt($data['ctr_nueva']);
               // Actualización de la contraseña en la base de datos
-              User::where('id','1')->update(['password' => $contrasena]);
+              User::where('id','1')->update(['password' => $password]);
               return redirect('/admin/configuraciones')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
           } else {
               return redirect('/admin/configuraciones')->with('flash_message_error', 'Contraseña actual incorrecta.');
@@ -109,16 +109,16 @@ class AdminController extends Controller
       }
   }
 
-  private function verificarUsuarioAdministrador(){
+  private function checkIsAdminUser(){
       /*Verifica que haya alguien logueado y si hay alguien, verifica que sea admin*/
-      $user = User::getUsuario();
+      $user = Auth::user();
       if( $user == 'NULL'|| !$user->admin){
           return redirect('/admin')->with('flash_message_error', 'Error acceso denegado.');
       }
   }
 
   public static function avisarErrorAdmin(){
-    $user = User::getUsuario();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
+    $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
     $carritoLen = Carrito::getTamano();
     $total = Carrito::precioTotal();
     return view('cliente.error',['usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);
