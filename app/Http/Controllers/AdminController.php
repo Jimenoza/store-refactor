@@ -112,7 +112,7 @@ class AdminController extends Controller
   private function checkIsAdminUser(){
       /*Verifica que haya alguien logueado y si hay alguien, verifica que sea admin*/
       $user = Auth::user();
-      if( $user == 'NULL'|| !$user->admin){
+      if(!$user->admin){
           return redirect('/admin')->with('flash_message_error', 'Error acceso denegado.');
       }
   }

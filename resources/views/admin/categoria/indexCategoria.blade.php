@@ -38,7 +38,7 @@
                 </tr>
               </thead>
               <tbody>
-              	@foreach($categorias as $cat)
+              	@foreach($categories as $cat)
                 <tr class="gradeX">
                   <td class="idCategoria">{{$cat->idCategoria}}</td>
                   <td class="nombreCategoria">{{$cat->nombre}}</td>

@@ -5,17 +5,18 @@ namespace tiendaVirtual\Http\Controllers;
 use Illuminate\Http\Request;
 use tiendaVirtual\Categoria;
 use Session;
+use Auth;
 
 class CategoriaController extends Controller
 {
-  public function indexCategoria() {
+  public function indexCategory() {
     self::revisarUsuario();//Revisa que haya un usuario logueado y que sea administrador
     // Obtiene una colección con los datos de la tabla categoria
-    $categorias = Categoria::get();
+    $categories = Categoria::get();
     /* La colección se transforma a JSON seguidamente el JSON y convierte los strings en variables
     de PHP */
-  	$categorias = json_decode(json_encode($categorias));
-  	return view('admin.categoria.indexCategoria')->with(compact('categorias'));
+  	$categories = json_decode(json_encode($categories));
+  	return view('admin.categoria.indexCategoria')->with(compact('categories'));
   }
 
   public function agregarCategoria(Request $request) {
@@ -60,9 +61,9 @@ class CategoriaController extends Controller
 
   private function revisarUsuario() {
     // Se verifica que el usuario logueado sea un administrador
-    $user = Session::get('frontSession','NULL');
-    if( $user == 'NULL' || !$user->admin){
-        return redirect('/admin')->with('flash_message_error', 'Error acceso denegado.');
+    $user = Auth::user();
+    if( !$user->admin){
+        return redirect('/cliente')->with('flash_message_error', 'Error acceso denegado.');
     }
   }
 }
