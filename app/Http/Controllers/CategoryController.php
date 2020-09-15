@@ -7,10 +7,9 @@ use tiendaVirtual\Categoria;
 use Session;
 use Auth;
 
-class CategoriaController extends Controller
+class CategoryController extends Controller
 {
   public function indexCategory() {
-    self::revisarUsuario();//Revisa que haya un usuario logueado y que sea administrador
     // Obtiene una colección con los datos de la tabla categoria
     $categories = Categoria::get();
     /* La colección se transforma a JSON seguidamente el JSON y convierte los strings en variables
@@ -19,29 +18,27 @@ class CategoriaController extends Controller
   	return view('admin.categoria.indexCategoria')->with(compact('categories'));
   }
 
-  public function agregarCategoria(Request $request) {
+  public function addCategory(Request $request) {
     /*Agrega una nueva categoría al sistema*/
-    self::revisarUsuario();//Revisa que haya un usuario logueado y que sea administrador
   	if($request->isMethod('post')) {
-  		$datos = $request->all();
+  		$data = $request->all();
       // Agregar categoría a la base de datos
-  		$categoria = new Categoria; //Crea un objeto categoría
-  		$categoria->nombre = $datos['nombre'];
-  		$categoria->descripcion = $datos['descripcion'];
-  		$categoria->condicion = '1';
-  		$categoria->save();//Lo registra en la base de datos
+  		$category = new Categoria; //Crea un objeto categoría
+  		$category->nombre = $data['nombre'];
+  		$category->descripcion = $data['descripcion'];
+  		$category->condicion = '1';
+  		$category->save();//Lo registra en la base de datos
   		return redirect('/admin/indexCategoria')->with('flash_message_success', 'La categoría fue añadida correctamente.');
   	}
   	return view('admin.categoria.agregarCategoria');
   }
 
-  public function editarCategoria(Request $request, $id = null) {
+  public function editCategory(Request $request, $id = null) {
     /*Obtiene una categoría y despliega en pantalla sus datos para editarlos*/
-    self::revisarUsuario();//Revisa que haya un usuario logueado y que sea administrador
   	if ($request->isMethod('post')) {//Si se han hecho cambios
-  		$datos = $request->all();
+  		$data = $request->all();
       // Actualizar categoría en la base de datos
-  		Categoria::where(['idCategoria'=>$id])->update(['nombre'=>$datos['nombre'], 'descripcion'=>$datos['descripcion'], 'condicion'=>$datos['condicion']]);//actualiza los datos
+  		Categoria::where(['idCategoria'=>$id])->update(['nombre'=>$data['nombre'], 'descripcion'=>$data['descripcion'], 'condicion'=>$datos['condicion']]);//actualiza los datos
   		return redirect('/admin/indexCategoria')->with('flash_message_success', '¡La categoría fue actualizada correctamente!');
   	}
     // Obtiene la información relacionada con la categoria
@@ -49,21 +46,12 @@ class CategoriaController extends Controller
   	return view('admin.categoria.editarCategoria')->with(compact('detallesCategoria'));
   }
 
-  public function eliminarCategoria($id = null) {
+  public function deleteCategory($id = null) {
     /*Elimina la categoría de la base (cambia el estado y no se despliega)*/
-    self::revisarUsuario();//Revisa que haya un usuario logueado y que sea administrador
     // Verifica si el id es diferente de nulo
   	if (!empty($id)) {
   		Categoria::where(['idCategoria'=>$id])->update(['condicion'=>'0']);
   		return redirect()->back()->with('flash_message_success', '¡La condición de la Categoría fue actualizada correctamente!');
   	}
-  }
-
-  private function revisarUsuario() {
-    // Se verifica que el usuario logueado sea un administrador
-    $user = Auth::user();
-    if( !$user->admin){
-        return redirect('/cliente')->with('flash_message_error', 'Error acceso denegado.');
-    }
   }
 }

@@ -26,10 +26,10 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::post('/admin/revisarContrasena', 'AdminController@checkPassword');
 	Route::match(['get','post'], '/admin/actualizarContrasena', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías
-	Route::match(['get','post'], '/admin/agregarCategoria', 'CategoriaController@agregarCategoria');
-	Route::get('/admin/indexCategoria', 'CategoriaController@indexCategory');
-	Route::match(['get','post'], '/admin/editarCategoria/{id}', 'CategoriaController@editarCategoria');
-	Route::match(['get','post'], '/admin/eliminarCategoria/{id}', 'CategoriaController@eliminarCategoria');
+	Route::match(['get','post'], '/admin/agregarCategoria', 'CategoryController@addCategory');
+	Route::get('/admin/indexCategoria', 'CategoryController@indexCategory');
+	Route::match(['get','post'], '/admin/editarCategoria/{id}', 'CategoryController@editCategory');
+	Route::match(['get','post'], '/admin/eliminarCategoria/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
 	Route::match(['get','post'], '/admin/agregarProducto', 'ProductoController@agregarProducto');
 	Route::get('/admin/indexProducto', 'ProductoController@indexProducto');
