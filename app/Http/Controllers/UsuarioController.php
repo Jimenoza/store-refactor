@@ -73,7 +73,7 @@ class UsuarioController extends Controller
 
     public function cerrarSesion() {
       //Auth::logot();
-      User::cerrarSesion();
+      User::logout();
       return redirect('/cliente');
     }
 }
