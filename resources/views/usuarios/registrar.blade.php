@@ -33,13 +33,13 @@
 
 	<div class="col-lg-2 col-sm-3 col-3 order-1 ">
 		<div class="logo_container">
-			<div class="logo"><a href="{{URL::action('ClienteController@index')}}">Tienda Virtual</a></div>
+			<div class="logo"><a href="{{URL::action('ClientController@index')}}">Tienda Virtual</a></div>
 		</div>
 	</div>
 	<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right 	">
 		<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 			<ul class="standard_dropdown main_nav_dropdown">
-				<li><a href="{{URL::action('ClienteController@index')}}">Inicio<i class="fas fa-chevron-down"></i></a></li>
+				<li><a href="{{URL::action('ClientController@index')}}">Inicio<i class="fas fa-chevron-down"></i></a></li>
 				<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
 			</ul>
 		</div>

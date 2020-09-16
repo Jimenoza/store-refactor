@@ -14,7 +14,7 @@ use DB;
 use Session;
 use Auth;
 
-class ClienteController extends Controller
+class ClientController extends Controller
 {
     //
     public function __construct(){
@@ -26,15 +26,15 @@ class ClienteController extends Controller
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
       try{
-        $productos = Producto::producosHabilitados();//Obtiene los productos en la base
-    	  $categorias = Categoria::getCategorias(); //Si no hay conexión le avisa al usuario
+        $products = Producto::producosHabilitados();//Obtiene los productos en la base
+    	  $categories = Categoria::getCategorias(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
-        return self::avisarError($e);
+        return handleError($e);
       }
       $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
-      $carritoLen = Carrito::getTamano();
+      $cartSize = Carrito::getTamano();
       $total = Carrito::precioTotal();
-    	return view('cliente.index', ['productos'=> $productos,'categorias' => $categorias,'usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);
+    	return view('cliente.index', ['productos'=> $products,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
 
    	}
 
@@ -42,20 +42,20 @@ class ClienteController extends Controller
       return view('cliente.show', ['producto'=>Producto::findOrFail($id)]);
     }
 
-    public function inicioSesion(Request $request) {//Hay diferencia con el otro login
+    public function login(Request $request) {//Hay diferencia con el otro login
       /*Inicia sesión en la página del carrito si se hace click en proceder con pago y no hay alguien
       logueado. Despliega un pop-up con el aviso. Esta es la diferencia con inicioSesion en UsuarioController*/
       if($request->isMethod('post')) {
-        $datos = $request->all();
+        $data = $request->all();
         try{//revisar la conexión con la base de datos
-          if(Auth::attempt(['email'=>$datos['correo'], 'password'=>$datos['contrasena']])) {
-            User::loguearUsuario($datos['correo']);
+          if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
+            // User::loguearUsuario($data['correo']);
             return redirect('/cliente/cart');
           } else {
             return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
           }
         }catch (\Exception $e){
-          return self::avisarError($e);
+          return handleError($e);
         }
       }
     }

@@ -56,7 +56,7 @@
 			<!-- Logo -->
 			<div class="col-lg-2 col-sm-3 col-3 order-1">
 				<div class="logo_container">
-					<div class="logo"><a href="{{URL::action('ClienteController@index')}}">Tienda Virtual</a></div>
+					<div class="logo"><a href="{{URL::action('ClientController@index')}}">Tienda Virtual</a></div>
 				</div>
 			</div>
 
@@ -144,7 +144,7 @@
 
 					<div class="main_nav_menu ml-auto">
 						<ul class="standard_dropdown main_nav_dropdown">
-							<li><a href="{{URL::action('ClienteController@index')}}">Inicio<i class="fas fa-chevron-down"></i></a></li>
+							<li><a href="{{URL::action('ClientController@index')}}">Inicio<i class="fas fa-chevron-down"></i></a></li>
 						</ul>
 					</div>
 
@@ -187,7 +187,7 @@
 							</ul>
 						</li>
 						<li class="page_menu_item">
-							<a href="{{URL::action('ClienteController@index')}}">Inicio<i class="fa fa-angle-down"></i></a>
+							<a href="{{URL::action('ClientController@index')}}">Inicio<i class="fa fa-angle-down"></i></a>
 						</li>
 					</ul>
 				</div>

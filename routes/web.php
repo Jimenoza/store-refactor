@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth','admin']], function(){
   
 });
 // FrontEnd
-Route::get('cliente','ClienteController@index')->name('home');
+Route::get('cliente','ClientController@index')->name('home');
 Route::get('cliente/categories/{id}','ProductoController@filtrar');
 Route::get('cliente/results','ProductoController@search');
 Route::get('cliente/product/{id}','ProductoController@infoProducto');//<---------------
@@ -47,8 +47,8 @@ try{
 	Route::post('cliente/comentar/{id}','ProductoController@comentarProducto')->middleware('auth');
 	Route::get('cliente/responder/{id}','ProductoController@responderComentario')->middleware('auth');;
 }catch (\Exception $e){
-	Route::get('cliente/comentar/{id}','ClienteController@index');
-	Route::get('cliente/responder/{id}','ClienteController@index');
+	Route::get('cliente/comentar/{id}','ClientController@index');
+	Route::get('cliente/responder/{id}','ClientController@index');
 }
 
 Route::group(['middleware'=>['frontLogin']],function(){
@@ -71,7 +71,7 @@ Route::get('/carrito/quitar/{id}','CartController@removeFromCart');
 
 
 
-Route::post('/cliente/inicioSesion', 'ClienteController@inicioSesion');
+Route::post('/cliente/inicioSesion', 'ClientController@login');
 Route::post('/carrito/pagar', 'CartController@payCart')->middleware('auth');;
 
 Route::get('/cliente/ordenes','OrdenController@verOrdenes')->middleware('auth');
