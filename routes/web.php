@@ -74,5 +74,5 @@ Route::get('/carrito/quitar/{id}','CartController@removeFromCart');
 Route::post('/cliente/inicioSesion', 'ClientController@login');
 Route::post('/carrito/pagar', 'CartController@payCart')->middleware('auth');;
 
-Route::get('/cliente/ordenes','OrdenController@verOrdenes')->middleware('auth');
-Route::get('/cliente/orden/{id}','OrdenController@verOrden')->middleware('auth');
+Route::get('/cliente/ordenes','OrderController@getOrders')->middleware('auth');
+Route::get('/cliente/orden/{id}','OrderController@getOrder')->middleware('auth');
