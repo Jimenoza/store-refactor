@@ -38,7 +38,7 @@
 	            <label class="control-label">Seleccione una Categoría</label>
 	              <div class="controls">
 	              	<select name="categorias" id="categorias"style="width: 220px;">
-	              		<?php echo $listadoCategorias; ?>
+	              		<?php echo $categoriesList; ?>
 	            	</select>
                 <p id="error2" class="demoFont"></p>
 	          	</div>

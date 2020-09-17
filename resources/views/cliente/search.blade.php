@@ -134,7 +134,7 @@
 						<ul class="cat_menu">
 						@foreach($categorias as $cat)
 							@if($cat->condicion != 0)
-								<li><a href="{{URL::action('ProductoController@filtrar',$cat->idCategoria)}}" id="categoria_{{$cat->idCategoria}}">{{$cat->nombre}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
+								<li><a href="{{URL::action('ProductController@filter',$cat->idCategoria)}}" id="categoria_{{$cat->idCategoria}}">{{$cat->nombre}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
 							@endif
 						@endforeach
 						</ul>

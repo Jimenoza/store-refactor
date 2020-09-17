@@ -34,7 +34,7 @@
 											<i class="fas fa-star-half"></i>
 											@endif
 										</div>
-										<div class="button banner_2_button"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductoController@infoProducto',$prod->idProducto)}}">Explorar</a></div>
+										<div class="button banner_2_button"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}">Explorar</a></div>
 									</div>
 
 								</div>
@@ -72,7 +72,7 @@
 								<div class="deals_image"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt="" width="150" height="350"></div>
 								<div class="deals_content">
 									<div class="deals_info_line d-flex flex-row justify-content-start">
-										<div class="deals_item_name"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductoController@infoProducto',$prod->idProducto)}}">{{$prod->nombre}}</a></div>
+										<div class="deals_item_name"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}">{{$prod->nombre}}</a></div>
 										<div class="deals_item_price ml-auto">${{$prod->precio}}</div>
 									</div>
 									<div class="deals_info_line d-flex flex-row justify-content-start">
@@ -113,7 +113,7 @@
 								<!-- Slider Item 1-->
 								@foreach($productos as $prod)
 								<div class="featured_slider_item">
-										<a href="{{URL::action('ProductoController@infoProducto',$prod->idProducto)}}" class="productoSlider_{{$prod->idProducto}}">
+										<a href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}" class="productoSlider_{{$prod->idProducto}}">
 										<div class="border_active"></div>
 											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt="" width="150" height="150"></div>

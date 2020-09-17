@@ -31,21 +31,21 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::match(['get','post'], '/admin/editarCategoria/{id}', 'CategoryController@editCategory');
 	Route::match(['get','post'], '/admin/eliminarCategoria/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
-	Route::match(['get','post'], '/admin/agregarProducto', 'ProductoController@agregarProducto');
-	Route::get('/admin/indexProducto', 'ProductoController@indexProducto');
-	Route::match(['get','post'], '/admin/editarProducto/{id}', 'ProductoController@editarProducto');
-	Route::match(['get','post'], '/admin/eliminarProducto/{id}', 'ProductoController@eliminarProducto');
-	Route::match(['get','post'], '/admin/habilitarProducto/{id}', 'ProductoController@habilitarProducto');
+	Route::match(['get','post'], '/admin/agregarProducto', 'ProductController@newProduct');
+	Route::get('/admin/indexProducto', 'ProductController@index');
+	Route::match(['get','post'], '/admin/editarProducto/{id}', 'ProductController@editProduct');
+	Route::match(['get','post'], '/admin/eliminarProducto/{id}', 'ProductController@removeProduct');
+	Route::match(['get','post'], '/admin/habilitarProducto/{id}', 'ProductController@enableProduct');
   
 });
 // FrontEnd
 Route::get('cliente','ClientController@index')->name('home');
-Route::get('cliente/categories/{id}','ProductoController@filtrar');
-Route::get('cliente/results','ProductoController@search');
-Route::get('cliente/product/{id}','ProductoController@infoProducto');//<---------------
+Route::get('cliente/categories/{id}','ProductController@filter');
+Route::get('cliente/results','ProductController@search');
+Route::get('cliente/product/{id}','ProductController@productDetail');//<---------------
 try{
-	Route::post('cliente/comentar/{id}','ProductoController@comentarProducto')->middleware('auth');
-	Route::get('cliente/responder/{id}','ProductoController@responderComentario')->middleware('auth');;
+	Route::post('cliente/comentar/{id}','ProductController@commentProduct')->middleware('auth');
+	Route::get('cliente/responder/{id}','ProductController@replyComment')->middleware('auth');;
 }catch (\Exception $e){
 	Route::get('cliente/comentar/{id}','ClientController@index');
 	Route::get('cliente/responder/{id}','ClientController@index');
