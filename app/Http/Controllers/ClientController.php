@@ -44,7 +44,7 @@ class ClientController extends Controller
 
     public function login(Request $request) {//Hay diferencia con el otro login
       /*Inicia sesión en la página del carrito si se hace click en proceder con pago y no hay alguien
-      logueado. Despliega un pop-up con el aviso. Esta es la diferencia con inicioSesion en UsuarioController*/
+      logueado. Despliega un pop-up con el aviso. Esta es la diferencia con inicioSesion en UserController*/
       if($request->isMethod('post')) {
         $data = $request->all();
         try{//revisar la conexión con la base de datos

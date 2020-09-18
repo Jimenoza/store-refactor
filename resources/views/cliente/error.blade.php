@@ -37,7 +37,7 @@
                     </li>
                   </ul>
                 </div>
-                <div><a href="{{URL::action('UsuarioController@cerrarSesion')}}">Cerrar Sesión</a></div>
+                <div><a href="{{URL::action('UserController@logout')}}">Cerrar Sesión</a></div>
               @endif
             </div>
           </div>

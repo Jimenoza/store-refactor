@@ -40,7 +40,7 @@ $().ready(function(){
       correo: {
         required: true,
         email: true,
-        remote: "/usuarios/chequearEmail"
+        remote: "/usuarios/checkEmail"
       },
       contrasena: {
         required: true,

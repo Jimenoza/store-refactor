@@ -52,17 +52,17 @@ try{
 }
 
 Route::group(['middleware'=>['frontLogin']],function(){
-  Route::match(['get','post'],'cuenta','UsuarioController@cuenta');
+  Route::match(['get','post'],'cuenta','UserController@account');
 });
-Route::get('/usuarios/inicioSesionRegistro','UsuarioController@inicioSesionRegistro');
-Route::post('/usuarios/registrar','UsuarioController@registrar');
-Route::get('usuarios/cierreSesion','UsuarioController@cerrarSesion')->middleware('auth');
-Route::post('/usuarios/inicioSesion', 'UsuarioController@inicioSesion');
+Route::get('/usuarios/inicioSesionRegistro','UserController@loginPage');
+Route::post('/usuarios/registrar','UserController@register');
+Route::get('usuarios/cierreSesion','UserController@logout')->middleware('auth');
+Route::post('/usuarios/inicioSesion', 'UserController@login');
 
 
-Route::match(['GET','POST'],'/usuarios/chequearEmail','UsuarioController@chequearEmail');
+Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
 
-Route::match(['GET','POST'],'/usuarios/chequearEmail','UsuarioController@chequearEmail');
+Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
 
 Route::get('/carrito/agregar/{id}','CartController@addItem');
 Route::get('/cliente/cart','CartController@seeCart');
