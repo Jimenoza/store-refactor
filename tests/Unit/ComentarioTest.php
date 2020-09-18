@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use tiendaVirtual\Comentario;
 use tiendaVirtual\Producto;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +22,7 @@ class ComentarioTest extends TestCase
 
     public function setUp() {
       parent::setUp();
-      $this->categoria = factory(Categoria::class)->create();
+      $this->categoria = factory(Category::class)->create();
       $this->user = factory(User::class)->create(['admin' => '0']);
       $this->cantidadProductos = count(DB::select('call getProductos()'));
       $this->producto = new Producto('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');

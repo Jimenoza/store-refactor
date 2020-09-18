@@ -4,7 +4,7 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\User;
 use tiendaVirtual\Producto;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -18,7 +18,7 @@ class ProductTest extends DuskTestCase
     public function setUp() {
       parent::setUp();
       $this->user = factory(User::class)->create(['admin' => '1']);
-      $this->categoria = factory(Categoria::class)->create();
+      $this->categoria = factory(Category::class)->create();
     }
 
     /** @test */

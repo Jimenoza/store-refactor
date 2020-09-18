@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use Tests\DuskTestCase;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\User;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -21,14 +21,14 @@ class CategoryTest extends DuskTestCase
     public function setUp() {
       parent::setUp();
       $this->user = factory(User::class)->create(['admin' => '1']);
-      $this->categoria = factory(Categoria::class)->create();
+      $this->categoria = factory(Category::class)->create();
     }
 
 
         /** @test */
         public function IsCategoryEditWorking_GoodEntries_GoToIndexCategoriaPage()
         {
-            $categoria = factory(Categoria::class)->make();
+            $categoria = factory(Category::class)->make();
             $this->browse(function (Browser $browser) use ($categoria){
                 $browser->visit('/admin')
                         ->type('email', $this->user->email)
@@ -51,7 +51,7 @@ class CategoryTest extends DuskTestCase
         /** @test */
         public function IsCategoryEditWorking_ConditionEntryNegativeNumber_StayInEditarCategoriaPage()
         {
-            $categoria = factory(Categoria::class)->make();
+            $categoria = factory(Category::class)->make();
             $this->browse(function (Browser $browser) use ($categoria){
                 $browser->visit('/admin')
                         ->type('email', $this->user->email)
@@ -71,7 +71,7 @@ class CategoryTest extends DuskTestCase
         /** @test */
         public function IsCategoryEditWorking_ConditionEntryUpperLimitNumber_StayInEditarCategoriaPage()
         {
-            $categoria = factory(Categoria::class)->make();
+            $categoria = factory(Category::class)->make();
             $this->browse(function (Browser $browser) use ($categoria){
                 $browser->visit('/admin')
                         ->type('email', $this->user->email)
@@ -122,7 +122,7 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function IsCategoryInsertWorking_GoodEntries_CategoryAddIt()
     {
-        $categoria = factory(Categoria::class)->make();
+        $categoria = factory(Category::class)->make();
         $this->browse(function (Browser $browser) use ($categoria){
             $browser->visit('/admin')
                     ->type('email', $this->user->email)
@@ -155,7 +155,7 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function IsCategoryInsertWorking_EmptyName_StayInAgregarCategoria()
     {
-        $categoria = factory(Categoria::class)->make();
+        $categoria = factory(Category::class)->make();
         $this->browse(function (Browser $browser) use ($categoria){
             $browser->visit('/admin')
                     ->type('email', $this->user->email)
@@ -172,7 +172,7 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function IsCategoryInsertWorking_EmptyDescription_StayInAgregarCategoria()
     {
-        $categoria = factory(Categoria::class)->make();
+        $categoria = factory(Category::class)->make();
         $this->browse(function (Browser $browser) use ($categoria){
             $browser->visit('/admin')
                     ->type('email', $this->user->email)
@@ -189,7 +189,7 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function IsCategoryInsertWorking_UpLimitsEntries_StayInAgregarCategoria()
     {
-        $categoria = factory(Categoria::class)->make(['nombre'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']);
+        $categoria = factory(Category::class)->make(['nombre'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']);
         $this->browse(function (Browser $browser) use ($categoria){
             $browser->visit('/admin')
                     ->type('email', $this->user->email)
@@ -206,7 +206,7 @@ class CategoryTest extends DuskTestCase
     /** @test */
     public function IsCategoryInsertWorking_BottomLimitName_StayInAgregarCategoria()
     {
-        $categoria = factory(Categoria::class)->make(['nombre'=>'a']);
+        $categoria = factory(Category::class)->make(['nombre'=>'a']);
         $this->browse(function (Browser $browser) use ($categoria){
             $browser->visit('/admin')
                     ->type('email', $this->user->email)

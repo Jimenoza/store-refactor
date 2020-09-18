@@ -3,7 +3,7 @@ namespace tiendaVirtual\Http\Controllers;
 use tiendaVirtual\Http\Requests\ProductoFormRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\Producto;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Respuesta;
@@ -42,7 +42,7 @@ class ProductController extends Controller
 
   private function getCategories(){
     /*Obtiene las categorías disponibles*/
-    $categories = Categoria::getCategorias();
+    $categories = Category::getCategories();
     /*Crea el string HTML de las categorías con respecto a un select*/
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {//ciclo para desplegar las categorías
@@ -76,7 +76,7 @@ class ProductController extends Controller
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
     $productCategory = $productDetail->getCategoria();
-    $categories = Categoria::getCategorias();
+    $categories = Category::getCategories();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
         $selected = "";
@@ -115,7 +115,7 @@ class ProductController extends Controller
       $filter = trim($request->get('buscador'));//Obtiene lo que el usuario ingresó
       $catFilter = trim($request->get('catFiltro'));
       $products = Producto::buscar($filter,$catFilter);
-      $categories = Categoria::getCategorias();
+      $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -129,7 +129,7 @@ class ProductController extends Controller
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      $categories = Categoria::getCategorias();
+      $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -152,7 +152,7 @@ class ProductController extends Controller
     /*Retorna toda la información del producto para desplegarse en pantalla*/
     try{
       $product = Producto::productoPorId($id);
-      $categories = Categoria::getCategorias();
+      $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
     }

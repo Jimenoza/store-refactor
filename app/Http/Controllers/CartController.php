@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Illuminate\Support\Facades\Redirect;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Producto;
@@ -41,7 +41,7 @@ class CartController extends Controller
     public function seeCart(){
         /*Llama a los productos en el carrito para desplegar en la ventana del carrito*/
         try{
-    	   $categories = Categoria::getCategorias();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
+    	   $categories = Category::getCategories();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
         }catch (\Exception $e){
             return handleError($e);
         }

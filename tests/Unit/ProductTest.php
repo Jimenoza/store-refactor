@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\Producto;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +19,7 @@ class ProductTest extends TestCase
 
     public function setUp() {
       parent::setUp();
-      $this->categoria = factory(Categoria::class)->create();
+      $this->categoria = factory(Category::class)->create();
       $this->cantidadProductos = count(DB::select('call getProductos()'));
       $this->producto = new Producto('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
       $this->producto->guardar();

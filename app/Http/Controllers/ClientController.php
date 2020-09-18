@@ -4,7 +4,7 @@ namespace tiendaVirtual\Http\Controllers;
 
 use Illuminate\Http\Request;
 use tiendaVirtual\Producto;
-use tiendaVirtual\Categoria;
+use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use Illuminate\Support\Facades\Redirect;
@@ -27,7 +27,7 @@ class ClientController extends Controller
       la sesión*/
       try{
         $products = Producto::producosHabilitados();//Obtiene los productos en la base
-    	  $categories = Categoria::getCategorias(); //Si no hay conexión le avisa al usuario
+    	  $categories = Category::getCategories(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
         return handleError($e);
       }
