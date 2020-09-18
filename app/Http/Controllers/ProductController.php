@@ -120,8 +120,8 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getTamano();
-    $total = Carrito::precioTotal();
+    $cartSize = Carrito::getCartSize();
+    $total = Carrito::totalPrice();
     $pages = self::paginate($products,$filter);
     return view('cliente.results', ['productos'=> $pages,'categorias' => $categories,'filtro' =>$filter,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
   }
@@ -134,9 +134,9 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getTamano();
+    $cartSize = Carrito::getCartSize();
     $total = Session::get('total');
-    $catName = Carrito::precioTotal();
+    $catName = Carrito::totalPrice();
     foreach ($categories as $cat) {
       if($cat->idCategoria == $id){
         $catName = 'Productos de '.$cat->nombre;
@@ -157,7 +157,7 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getTamano();
+    $cartSize = Carrito::getCartSize();
     $total = Session::get('total');
     $comments = $product->getComentarios();
     return view('cliente/product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);

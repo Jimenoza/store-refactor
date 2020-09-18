@@ -28,12 +28,12 @@ class CartController extends Controller
             return handleError($e);
         }
     	if(count($product) != 0){ //Hay stock del producto
-    		$cart = Carrito::getCarrito();
+    		$cart = Carrito::getCart();
     		$cart[] = $product[0];//Inserta el producto en el carrito,
-            Carrito::guardar($cart);//Actualiza el carrito,total,precio
-    		$total = Carrito::precioTotal();
+            Carrito::putCart($cart);//Actualiza el carrito,total,precio
+    		$total = Carrito::totalPrice();
     		$total += $product[0]->precio;
-    		Carrito::actualizarPrecio($total);
+    		Carrito::updatePrice($total);
     	}
     	return redirect()->back();
     }
@@ -46,21 +46,21 @@ class CartController extends Controller
             return handleError($e);
         }
     	$user = Auth::user();
-    	$cartSize = Carrito::getTamano(); //Obitene la cantidad de items en el carrito
-        $cart = Carrito::getCarrito(); //Obtiene una lista (array) de los productos en el carrito
-        $total = Carrito::precioTotal();
+    	$cartSize = Carrito::getCartSize(); //Obitene la cantidad de items en el carrito
+        $cart = Carrito::getCart(); //Obtiene una lista (array) de los productos en el carrito
+        $total = Carrito::totalPrice();
     	return view('cliente.cart',['categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'carrito' => $cart]);
     }
 
     public function deleteCart(){
         /*Borra todo el carrito*/
-    	Carrito::eliminarCarrito();
+    	Carrito::deleteCart();
     	return redirect('cliente');
     }
 
     public function removeFromCart($id){
         /*Borra un elemento del carrito*/
-    	Carrito::quitarProducto($id);
+    	Carrito::removeProduct($id);
     	return redirect()->back();
     }
     public function payCart(Request $request){
@@ -71,12 +71,12 @@ class CartController extends Controller
             $user = Auth::user();//Siempre retorna el usuario que esté logueado
             try{
                 //Si no hay conexión con la base de datos avisa del problema
-                Carrito::registrarCarrito($usuario->email);//Registra el carrito en la base de datos
+                Carrito::registerCart($usuario->email);//Registra el carrito en la base de datos
             }catch (\Exception $e){
                 return handleError($e);
             }
             $address = $data['direccion'];
-            Carrito::registrarCompra($direccion);//Genera una orden con el carrito creado
+            Carrito::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');
             return redirect('cliente')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');

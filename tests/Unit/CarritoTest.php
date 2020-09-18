@@ -23,7 +23,7 @@ class CarritoTest extends TestCase
     /** @test */
     public function testExample()
     {
-        Carrito::registrarCarrito($this->user->email);
+        Carrito::registerCart($this->user->email);
         $idCarrito = DB::select('select idCarrito from Carrito where Usuario_correo = "'.$this->user->email.'"')[0]->idCarrito;
         $this->assertEquals(Carrito::getID(),$idCarrito);
     }
