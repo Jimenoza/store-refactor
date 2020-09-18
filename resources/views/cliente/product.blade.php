@@ -63,7 +63,7 @@
 				</div>
 				
 				<div class = "col-lg-12 order-3 opcionales">
-					@if($usuario != 'NULL')
+					@if($usuario)
 					<form name="formularioCali" id="formularioCali" action="{{url('cliente/comentar/'.$producto->getID())}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
@@ -100,19 +100,19 @@
 				<div class="divTableBody">
 					@foreach($comentarios as $comentario)
 					<div class="divTableRow usuario">
-						<div class="divTableCell">{{$comentario->getUsuario()}}</div>
-						@for($i = 0; $i < $comentario->getCalificacion(); $i++)
+						<div class="divTableCell">{{$comentario->getUser()}}</div>
+						@for($i = 0; $i < $comentario->getCalification(); $i++)
 						<i class="fas fa-star"></i>
 						@endfor
 					</div>
 					<div class="divTableRow coment">
 						<div class="divTableCell" id="responses" name="responses">
-							{{$comentario->getTexto()}}
+							{{$comentario->getText()}}
 							<div class="respuestas">Respuestas:</div>
 							<div style="padding: 0px 30px;">
 								<div class="divTable response">
 									<div class="divTableBody">
-										@foreach($comentario->getRespuestas() as $respuesta)
+										@foreach($comentario->getReplies() as $respuesta)
 										<div class="divTableRow">
 											<div class="divTableCell">
 												<div class="nombre">{{$respuesta->name}}:</div>
@@ -125,7 +125,7 @@
 									</div>
 								</div>
 							</div>
-							@if($usuario != 'NULL')
+							@if($usuario)
 							<a href="#" id="link{{$comentario->getID()}}" name="link{{$comentario->getID()}}"onclick="mostrar('{{$comentario->getID()}}')">
 								<div id="{{$comentario->getID()}}" name="{{$comentario->getID()}}">Dejar una respuesta</div>
 		            		</a>

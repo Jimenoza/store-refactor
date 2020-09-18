@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use tiendaVirtual\Comentario;
+use tiendaVirtual\Comment;
 use tiendaVirtual\Producto;
 use tiendaVirtual\Category;
 use tiendaVirtual\User;
@@ -27,21 +27,21 @@ class ComentarioTest extends TestCase
       $this->cantidadProductos = count(DB::select('call getProductos()'));
       $this->producto = new Producto('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
       $this->producto->guardar();
-      $this->comentario = new Comentario('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 4, $this->producto->getID(), $this->user->email);
+      $this->comentario = new Comment('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 4, $this->producto->getID(), $this->user->email);
     }
 
     /** @test */
     public function IsCommentStoreInDB_CallGuardar_ReturnsTrue()
     {
-        $this->comentario->guardar();
+        $this->comentario->saveComment();
         $getComentarioGuardado = DB::select('select * from calificacion_x_producto where idUsuario = "'.$this->user->email.'"')[0]->comentario;
-        $this->assertEquals($getComentarioGuardado,$this->comentario->getTexto());
+        $this->assertEquals($getComentarioGuardado,$this->comentario->getText());
     }
 
     /** @test */
     public function IsCommentStoreInDB_CallGetComentarios_ReturnsTrue()
     {
-        $this->comentario->guardar();
+        $this->comentario->saveComment();
         $this->assertEquals(1,count($this->comentario->getComentarios($this->producto->getID()) ));
     }
 }

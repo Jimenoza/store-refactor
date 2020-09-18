@@ -110,12 +110,12 @@ class Producto extends Model
     }
 
     public function calificar($usuario,$comentario,$calificacion){
-        $nuevo = new Comentario($comentario,$calificacion,$this->id,$usuario);
-        $nuevo->guardar();
+        $nuevo = new Comment($comentario,$calificacion,$this->id,$usuario);
+        $nuevo->saveComment();
     }
 
     public function cargarComentarios(){
-        $this->comentarios = Comentario::getComentarios($this->id);
+        $this->comentarios = Comment::getComments($this->id);
     }
 
 }
