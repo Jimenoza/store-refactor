@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Session;
 use DB;
 
-class Carrito extends Model
+class Cart extends Model
 {
     //
 

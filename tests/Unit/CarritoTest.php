@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use tiendaVirtual\Carrito;
+use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,8 +23,8 @@ class CarritoTest extends TestCase
     /** @test */
     public function testExample()
     {
-        Carrito::registerCart($this->user->email);
+        Cart::registerCart($this->user->email);
         $idCarrito = DB::select('select idCarrito from Carrito where Usuario_correo = "'.$this->user->email.'"')[0]->idCarrito;
-        $this->assertEquals(Carrito::getID(),$idCarrito);
+        $this->assertEquals(Cart::getID(),$idCarrito);
     }
 }

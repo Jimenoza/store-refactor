@@ -4,7 +4,7 @@ use tiendaVirtual\Http\Requests\ProductoFormRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\Producto;
 use tiendaVirtual\Categoria;
-use tiendaVirtual\Carrito;
+use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Respuesta;
 // use Illuminate\Support\Facades\Input;
@@ -120,8 +120,8 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getCartSize();
-    $total = Carrito::totalPrice();
+    $cartSize = Cart::getCartSize();
+    $total = Cart::totalPrice();
     $pages = self::paginate($products,$filter);
     return view('cliente.results', ['productos'=> $pages,'categorias' => $categories,'filtro' =>$filter,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
   }
@@ -134,9 +134,9 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getCartSize();
+    $cartSize = Cart::getCartSize();
     $total = Session::get('total');
-    $catName = Carrito::totalPrice();
+    $catName = Cart::totalPrice();
     foreach ($categories as $cat) {
       if($cat->idCategoria == $id){
         $catName = 'Productos de '.$cat->nombre;
@@ -157,7 +157,7 @@ class ProductController extends Controller
       return handleError($e);
     }
     $user = Auth::user();
-    $cartSize = Carrito::getCartSize();
+    $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     $comments = $product->getComentarios();
     return view('cliente/product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);

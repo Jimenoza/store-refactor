@@ -7,7 +7,7 @@ use DB;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use tiendaVirtual\Categoria;
-use tiendaVirtual\Carrito;
+use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Producto;
 use Auth;
@@ -28,12 +28,12 @@ class CartController extends Controller
             return handleError($e);
         }
     	if(count($product) != 0){ //Hay stock del producto
-    		$cart = Carrito::getCart();
+    		$cart = Cart::getCart();
     		$cart[] = $product[0];//Inserta el producto en el carrito,
-            Carrito::putCart($cart);//Actualiza el carrito,total,precio
-    		$total = Carrito::totalPrice();
+            Cart::putCart($cart);//Actualiza el carrito,total,precio
+    		$total = Cart::totalPrice();
     		$total += $product[0]->precio;
-    		Carrito::updatePrice($total);
+    		Cart::updatePrice($total);
     	}
     	return redirect()->back();
     }
@@ -46,21 +46,21 @@ class CartController extends Controller
             return handleError($e);
         }
     	$user = Auth::user();
-    	$cartSize = Carrito::getCartSize(); //Obitene la cantidad de items en el carrito
-        $cart = Carrito::getCart(); //Obtiene una lista (array) de los productos en el carrito
-        $total = Carrito::totalPrice();
+    	$cartSize = Cart::getCartSize(); //Obitene la cantidad de items en el carrito
+        $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito
+        $total = Cart::totalPrice();
     	return view('cliente.cart',['categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'carrito' => $cart]);
     }
 
     public function deleteCart(){
         /*Borra todo el carrito*/
-    	Carrito::deleteCart();
+    	Cart::deleteCart();
     	return redirect('cliente');
     }
 
     public function removeFromCart($id){
         /*Borra un elemento del carrito*/
-    	Carrito::removeProduct($id);
+    	Cart::removeProduct($id);
     	return redirect()->back();
     }
     public function payCart(Request $request){
@@ -71,12 +71,12 @@ class CartController extends Controller
             $user = Auth::user();//Siempre retorna el usuario que esté logueado
             try{
                 //Si no hay conexión con la base de datos avisa del problema
-                Carrito::registerCart($usuario->email);//Registra el carrito en la base de datos
+                Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
             }catch (\Exception $e){
                 return handleError($e);
             }
             $address = $data['direccion'];
-            Carrito::registerPurchase($direccion);//Genera una orden con el carrito creado
+            Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');
             return redirect('cliente')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');

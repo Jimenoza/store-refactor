@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use tiendaVirtual\User;
-use tiendaVirtual\Carrito;
+use tiendaVirtual\Cart;
 use DB;
 
 class AdminController extends Controller
@@ -119,8 +119,8 @@ class AdminController extends Controller
 
   public static function avisarErrorAdmin(){
     $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
-    $carritoLen = Carrito::getCartSize();
-    $total = Carrito::totalPrice();
+    $carritoLen = Cart::getCartSize();
+    $total = Cart::totalPrice();
     return view('cliente.error',['usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);
   }
 }
