@@ -33,7 +33,7 @@ class ProductController extends Controller
     	$product = new Product($data['nombre'],$data['descripcion'],$image,$data['precio'],
       $data['categorias'],$data['disponibles']);
       $product->saveProduct();
-      return redirect('/admin/indexProducto')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
+      return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
     }
     $categoriesList = self::getCategories();
     return view('admin.producto.agregarProducto')->with(compact('categoriesList'));
@@ -70,7 +70,7 @@ class ProductController extends Controller
       $productDetail->setStock($datos['disponibles']);
       $productDetail->updateProduct();
       $productDetail = null;
-      return redirect('/admin/indexProducto')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
+      return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
     }
     if ($productDetail == NULL) {
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
@@ -86,7 +86,7 @@ class ProductController extends Controller
         }
         $categoriesList .= "<option value='".$cat->idCategoria."' ".$selected." >".$cat->nombre."</option>";
     }
-    return view('admin.producto.editarProducto')->with(compact('detallesProducto','listadoCategorias'));
+    return view('admin.producto.editarProducto')->with(compact('productDetail','categoriesList'));
   }
 
   private function addImage(){

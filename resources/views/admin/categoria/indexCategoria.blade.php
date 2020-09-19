@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/inicio')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Categoría</a> <a href="{{url('/admin/indexCategoria')}}" class="current">Ver Categorías</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Categoría</a> <a href="{{url('/admin/category/index')}}" class="current">Ver Categorías</a> </div>
     <h1>Categorías</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">
@@ -44,8 +44,8 @@
                   <td class="nombreCategoria">{{$cat->nombre}}</td>
                   <td class="descripcionCategoria">{{$cat->descripcion}}</td>
                   <td class="condicionCategoria">{{$cat->condicion}}</td>
-                  <td class="center"><a href="{{url('/admin/editarCategoria/'.$cat->idCategoria)}}" class="btn btn-primary btn-mini" id="edit_{{$cat->nombre}}">Editar</a>
-                    <a href="{{url('/admin/eliminarCategoria/'.$cat->idCategoria)}}" class="btn btn-danger btn-mini elimiarCategoria" id="eliminar_{{$cat->idCategoria}}">Eliminar</a></td>
+                  <td class="center"><a href="{{url('/admin/category/edit/'.$cat->idCategoria)}}" class="btn btn-primary btn-mini" id="edit_{{$cat->nombre}}">Editar</a>
+                    <a href="{{url('/admin/category/delete/'.$cat->idCategoria)}}" class="btn btn-danger btn-mini elimiarCategoria" id="eliminar_{{$cat->idCategoria}}">Eliminar</a></td>
                 </tr>
                 @endforeach
               </tbody>

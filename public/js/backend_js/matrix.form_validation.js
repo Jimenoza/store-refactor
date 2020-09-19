@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var ctr_actual = $('ctr_actual').val();
 		$.ajax({
 			type: 'get',
-			url:'admin/revisarContrasena',
+			url:'admin/password/check',
 			data:{ctr_actual:ctr_actual},
 			success:function(resp){
 				if(resp=="false"){

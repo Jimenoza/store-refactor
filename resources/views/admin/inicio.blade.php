@@ -5,7 +5,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/inicio')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a></div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a></div>
   </div>
 <!--End-breadcrumbs-->
 

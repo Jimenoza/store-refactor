@@ -20,22 +20,22 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth','admin']], function(){
   //Admin - Manejo de cuentas
-	Route::get('/admin/inicio','AdminController@index');
-	Route::match(['get', 'post'], '/admin/configuraciones', 'AdminController@configurations');
-  Route::match(['get', 'post'], '/admin/crearAdmin', 'AdminController@createAdminUser');
-	Route::post('/admin/revisarContrasena', 'AdminController@checkPassword');
-	Route::match(['get','post'], '/admin/actualizarContrasena', 'AdminController@updatePassword');
+	Route::get('/admin/index','AdminController@index');
+	Route::match(['get', 'post'], '/admin/configs', 'AdminController@configurations');
+  Route::match(['get', 'post'], '/admin/new/admin', 'AdminController@createAdminUser');
+	Route::post('/admin/password/check', 'AdminController@checkPassword');
+	Route::match(['get','post'], '/admin/password/change', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías
-	Route::match(['get','post'], '/admin/agregarCategoria', 'CategoryController@addCategory');
-	Route::get('/admin/indexCategoria', 'CategoryController@indexCategory');
-	Route::match(['get','post'], '/admin/editarCategoria/{id}', 'CategoryController@editCategory');
-	Route::match(['get','post'], '/admin/eliminarCategoria/{id}', 'CategoryController@deleteCategory');
+	Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
+	Route::get('/admin/category/index', 'CategoryController@indexCategory');
+	Route::match(['get','post'], '/admin/category/edit/{id}', 'CategoryController@editCategory');
+	Route::match(['get','post'], '/admin/category/delete/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
-	Route::match(['get','post'], '/admin/agregarProducto', 'ProductController@newProduct');
-	Route::get('/admin/indexProducto', 'ProductController@index');
-	Route::match(['get','post'], '/admin/editarProducto/{id}', 'ProductController@editProduct');
-	Route::match(['get','post'], '/admin/eliminarProducto/{id}', 'ProductController@removeProduct');
-	Route::match(['get','post'], '/admin/habilitarProducto/{id}', 'ProductController@enableProduct');
+	Route::match(['get','post'], '/admin/product/new', 'ProductController@newProduct');
+	Route::get('/admin/product/index', 'ProductController@index');
+	Route::match(['get','post'], '/admin/product/edit/{id}', 'ProductController@editProduct');
+	Route::match(['get','post'], '/admin/product/delete/{id}', 'ProductController@removeProduct');
+	Route::match(['get','post'], '/admin/product/enable/{id}', 'ProductController@enableProduct');
   
 });
 // FrontEnd

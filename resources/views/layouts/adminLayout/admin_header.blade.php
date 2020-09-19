@@ -17,8 +17,8 @@
     </li>
     <li class="dropdown" id="configuracionesAdmins" ><a title="" href="#" data-toggle="dropdown" data-target="#configuracionesAdmins" class="dropdown-toggle"><i class="icon icon-cog"></i> <span class="text">Configuraciones</span><b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li> <a href="{{url('/admin/configuraciones')}}"><i class="icon-lock"></i> Actualizar Contraseña</a></li>
-        <li> <a href="{{url('/admin/crearAdmin')}}"><i class="icon-user"></i> Crear Administrador</a></li>
+        <li> <a href="{{url('/admin/configs')}}"><i class="icon-lock"></i> Actualizar Contraseña</a></li>
+        <li> <a href="{{url('/admin/new/admin')}}"><i class="icon-user"></i> Crear Administrador</a></li>
       </ul>
     </li>
     <li class=""><a title="" href="{{url('/logout')}}" id="logOut"><i class="icon icon-share-alt"></i> <span class="text">Cerrar Sesión</span></a></li>

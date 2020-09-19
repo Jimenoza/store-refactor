@@ -13,7 +13,7 @@ class indexProducto extends Page
      */
     public function url()
     {
-        return '/admin/indexProducto';
+        return '/admin/product/index';
     }
 
     /**

@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/inicio')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Categoría</a> <a href="{{url('/admin/editarCategoria/'.$detallesCategoria->idCategoria)}}" class="current">Editar Categoría</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Categoría</a> <a href="{{url('/admin/category/edit/'.$detallesCategoria->idCategoria)}}" class="current">Editar Categoría</a> </div>
     <h1>Editar Categoría</h1>
   </div>
   <div class="container-fluid"><hr>
@@ -14,7 +14,7 @@
             <h5>Formulario de Editar Categoría</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{url('/admin/editarCategoria/'.$detallesCategoria->idCategoria)}}" name="editarCategoria" id="editarCategoria" novalidate="novalidate"> {{csrf_field()}}
+            <form class="form-horizontal" method="post" action="{{url('/admin/category/edit/'.$detallesCategoria->idCategoria)}}" name="editarCategoria" id="editarCategoria" novalidate="novalidate"> {{csrf_field()}}
               <div class="control-group">
                 <label class="control-label">Nombre de la Categoría</label>
                 <div class="controls">

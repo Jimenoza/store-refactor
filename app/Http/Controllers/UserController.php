@@ -21,7 +21,7 @@ class UserController extends Controller
           if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
             // User::loginUser($data['correo']);
             if(Auth::user()->admin){
-              return redirect('admin/indexProducto');
+              return redirect('admin/product/index');
             }
             else{
               return redirect('/cliente');

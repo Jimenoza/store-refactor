@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/inicio')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/configuraciones')}}" class="current">Configuraciones</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/configs')}}" class="current">Configuraciones</a> </div>
     <h1>Configuraciones de Administrador</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">
@@ -27,7 +27,7 @@
               <h5>Actualizar Contraseña</h5>
             </div>
             <div class="widget-content nopadding">
-              <form class="form-horizontal" method="post" action="{{url('/admin/actualizarContrasena')}}" name="validarContrasena" id="validarContrasena" novalidate="novalidate">
+              <form class="form-horizontal" method="post" action="{{url('/admin/password/change')}}" name="validarContrasena" id="validarContrasena" novalidate="novalidate">
                 {{ csrf_field()}}
                 <div class="control-group">
                   <label class="control-label">Contraseña Actual</label>

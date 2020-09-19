@@ -28,7 +28,7 @@ class CategoryController extends Controller
   		$category->descripcion = $data['descripcion'];
   		$category->condicion = '1';
   		$category->save();//Lo registra en la base de datos
-  		return redirect('/admin/indexCategoria')->with('flash_message_success', 'La categoría fue añadida correctamente.');
+  		return redirect('/admin/category/index')->with('flash_message_success', 'La categoría fue añadida correctamente.');
   	}
   	return view('admin.categoria.agregarCategoria');
   }
@@ -39,7 +39,7 @@ class CategoryController extends Controller
   		$data = $request->all();
       // Actualizar categoría en la base de datos
   		Category::where(['idCategoria'=>$id])->update(['nombre'=>$data['nombre'], 'descripcion'=>$data['descripcion'], 'condicion'=>$datos['condicion']]);//actualiza los datos
-  		return redirect('/admin/indexCategoria')->with('flash_message_success', '¡La categoría fue actualizada correctamente!');
+  		return redirect('/admin/category/index')->with('flash_message_success', '¡La categoría fue actualizada correctamente!');
   	}
     // Obtiene la información relacionada con la categoria
   	$detallesCategoria = Category::where(['idCategoria'=>$id])->first();//Obtiene los datos de la base

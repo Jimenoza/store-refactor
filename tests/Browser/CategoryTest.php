@@ -34,7 +34,7 @@ class CategoryTest extends DuskTestCase
                         ->type('email', $this->user->email)
                         ->type('password', 'secret')
                         ->press('Login')
-                        ->visit('/admin/indexCategoria')
+                        ->visit('/admin/category/index')
                         ->type('#searchVar', $this->categoria->descripcion)
                         ->click('#edit_'.$this->categoria->nombre)
                         ->type('nombre', $categoria->nombre)
@@ -57,14 +57,14 @@ class CategoryTest extends DuskTestCase
                         ->type('email', $this->user->email)
                         ->type('password', 'secret')
                         ->press('Login')
-                        ->visit('/admin/indexCategoria')
+                        ->visit('/admin/category/index')
                         ->type('searchVar', $this->categoria->descripcion)
                         ->click('#edit_'.$this->categoria->nombre)
                         ->type('nombre', $categoria->nombre)
                         ->type('descripcion', $categoria->descripcion)
                         ->type('condicion', '-1')
                         ->press('Editar Categoría')
-                        ->assertPathIs('/admin/editarCategoria/'.$this->categoria->idCategoria);
+                        ->assertPathIs('/admin/category/edit/'.$this->categoria->idCategoria);
             });
         }
 
@@ -77,14 +77,14 @@ class CategoryTest extends DuskTestCase
                         ->type('email', $this->user->email)
                         ->type('password', 'secret')
                         ->press('Login')
-                        ->visit('/admin/indexCategoria')
+                        ->visit('/admin/category/index')
                         ->type('searchVar', $this->categoria->descripcion)
                         ->click('#edit_'.$this->categoria->nombre)
                         ->type('nombre', $categoria->nombre)
                         ->type('descripcion', $categoria->descripcion)
                         ->type('condicion', '2')
                         ->press('Editar Categoría')
-                        ->assertPathIs('/admin/editarCategoria/'.$this->categoria->idCategoria);
+                        ->assertPathIs('/admin/category/edit/'.$this->categoria->idCategoria);
             });
         }
 
@@ -96,10 +96,10 @@ class CategoryTest extends DuskTestCase
                       ->type('email', $this->user->email)
                       ->type('password', 'secret')
                       ->press('Login')
-                      ->visit('/admin/indexCategoria')
+                      ->visit('/admin/category/index')
                       ->type('searchVar', $this->categoria->descripcion)
                       ->click('#edit_'.$this->categoria->nombre)
-                      ->assertPathIs('/admin/editarCategoria/'.$this->categoria->idCategoria);
+                      ->assertPathIs('/admin/category/edit/'.$this->categoria->idCategoria);
             });
         }
 
@@ -111,7 +111,7 @@ class CategoryTest extends DuskTestCase
                       ->type('email', $this->user->email)
                       ->type('password', 'secret')
                       ->press('Login')
-                      ->visit('/admin/indexCategoria')
+                      ->visit('/admin/category/index')
                       ->type('searchVar', $this->categoria->descripcion)
                       ->click('#eliminar_'.$this->categoria->idCategoria)
                       ->acceptDialog()
@@ -128,11 +128,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', $categoria->nombre)
                     ->type('descripcion', $categoria->descripcion)
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/indexCategoria');
+                    ->assertPathIs('/admin/category/index');
         });
     }
 
@@ -144,11 +144,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', '')
                     ->type('descripcion', '')
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/agregarCategoria');
+                    ->assertPathIs('/admin/category/new');
         });
     }
 
@@ -161,11 +161,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', '')
                     ->type('descripcion', $categoria->descripcion)
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/agregarCategoria');
+                    ->assertPathIs('/admin/category/new');
         });
     }
 
@@ -178,11 +178,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', $categoria->nombre)
                     ->type('descripcion', '')
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/agregarCategoria');
+                    ->assertPathIs('/admin/category/new');
         });
     }
 
@@ -195,11 +195,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', $categoria->nombre)
                     ->type('descripcion', $categoria->descripcion)
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/agregarCategoria');
+                    ->assertPathIs('/admin/category/new');
         });
     }
 
@@ -212,11 +212,11 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/agregarCategoria')
+                    ->visit('/admin/category/new')
                     ->type('nombre', $categoria->nombre)
                     ->type('descripcion', $categoria->descripcion)
                     ->press('Agregar Categoría')
-                    ->assertPathIs('/admin/agregarCategoria');
+                    ->assertPathIs('/admin/category/new');
         });
     }
 
@@ -228,7 +228,7 @@ class CategoryTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->visit('/admin/indexCategoria')
+                    ->visit('/admin/category/index')
                     ->type('searchVar', $this->categoria->descripcion)
                     ->assertSee($this->categoria->nombre);
         });

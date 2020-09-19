@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/inicio')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/configuraciones')}}" class="current">Configuraciones</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/configs')}}" class="current">Configuraciones</a> </div>
     <h1>Crear Administrador</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">
@@ -27,7 +27,7 @@
               <h5>Crear Nuevo Administrador</h5>
             </div>
             <div class="widget-content nopadding">
-              <form class="form-horizontal" method="post" action="{{url('/admin/crearAdmin')}}" name="crearAdmin" id="crearAdmin" novalidate="novalidate">
+              <form class="form-horizontal" method="post" action="{{url('/admin/new/admin')}}" name="crearAdmin" id="crearAdmin" novalidate="novalidate">
                 {{ csrf_field()}}
                 <div class="control-group">
                   <label class="control-label">Nombre del Nuevo Administrador</label>

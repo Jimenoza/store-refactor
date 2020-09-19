@@ -22,7 +22,7 @@ class AdminLoginTest extends DuskTestCase
                     ->type('email', $this->user->email)
                     ->type('password', 'secret')
                     ->press('Login')
-                    ->assertPathIs('/admin/indexProducto');
+                    ->assertPathIs('/admin/product/index');
         });
     }
     /** @test */

@@ -8,7 +8,7 @@ class AgregarCategoria extends Page
 {
     public function url()
     {
-        return '/admin/agregarCategoria';
+        return '/admin/category/new';
     }
 
     public function assert(Browser $browser)

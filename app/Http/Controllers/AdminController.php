@@ -19,7 +19,7 @@ class AdminController extends Controller
   		$data = $request->input(); //Son las etiquetas del html, obitene lo que están en ellos
   		if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'1'])){
         //User::loginUser($datos['email']);//Hace el login, llamando a la clase User
-  			return redirect('admin/indexProducto');
+  			return redirect('admin/product/index');
   		} else {
         // Volver a página principal con mensaje de error
   			return redirect('/admin')->with('flash_message_error', 'Usuario o Contraseña incorrectos.');
@@ -74,7 +74,7 @@ class AdminController extends Controller
       $userCount = User::where('email', $datos['correo'])->count();
       if ($userCount > 0) {
         // El correo ingresado ya existe
-        return redirect('/admin/crearAdmin')->with('flash_message_error', '¡El correo introducido ya existe!');
+        return redirect('/admin/new/admin')->with('flash_message_error', '¡El correo introducido ya existe!');
       } else {
         // Creación de nuevo usuario administrador
         $user = new User;
@@ -83,7 +83,7 @@ class AdminController extends Controller
         $user->password = bcrypt($data['ctr_nueva']);
         $data->admin = '1';
         $user->save();
-        return redirect('/admin/crearAdmin')->with('flash_message_success', '¡Se ha creado un nuevo Administrador!');
+        return redirect('/admin/new/admin')->with('flash_message_success', '¡Se ha creado un nuevo Administrador!');
         }
       }
     return view('admin.crearAdmin');
@@ -102,9 +102,9 @@ class AdminController extends Controller
               $password = bcrypt($data['ctr_nueva']);
               // Actualización de la contraseña en la base de datos
               User::where('id','1')->update(['password' => $password]);
-              return redirect('/admin/configuraciones')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
+              return redirect('/admin/configs')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
           } else {
-              return redirect('/admin/configuraciones')->with('flash_message_error', 'Contraseña actual incorrecta.');
+              return redirect('/admin/configs')->with('flash_message_error', 'Contraseña actual incorrecta.');
           }
       }
   }
