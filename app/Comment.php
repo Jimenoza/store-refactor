@@ -45,6 +45,6 @@ class Comment extends Model
     }
 
     public function getReplies(){
-    	return Respuesta::getRespuestas($this->id);
+    	return Reply::getReplies($this->id);
     }
 }

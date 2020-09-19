@@ -5,7 +5,7 @@ namespace tiendaVirtual;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class Respuesta extends Model
+class Reply extends Model
 {
     private $id;
     private $idCalificacion;
@@ -20,16 +20,16 @@ class Respuesta extends Model
 
     public function setID($id){$this->id = $id;}
 
-    public function getTexto(){return $this->texto;}
-    public function getCalificacion(){return $this->calificacion;}
-    public function getUsuario(){return $this->usuario;}
+    public function getText(){return $this->texto;}
+    public function getCalification(){return $this->calificacion;}
+    public function getUser(){return $this->usuario;}
     public function getID(){return $this->id;}
 
-    public static function getRespuestas($comentario){
+    public static function getReplies($comentario){
     	return DB::select("call getRespuestas(".$comentario.");");
     }
 
-    public function guardar(){
+    public function saveReply(){
     	DB::insert('call insertarRespuesta('.$this->idCalificacion.',"'.$this->texto.'","'.$this->usuario.'");');
     }
 }

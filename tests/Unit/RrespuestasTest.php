@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use tiendaVirtual\Category;
 use tiendaVirtual\Product;
-use tiendaVirtual\Respuesta;
+use tiendaVirtual\Reply;
 use tiendaVirtual\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,7 +27,7 @@ class RrespuestasTest extends TestCase
     /** @test */
     public function testExample()
     {
-        $this->respuesta->guardar();
+        $this->respuesta->saveReply();
         $this->assertTrue(DB::select('select * from respuestas where idUsuario = "'.$this->user->email.'"'));
     }
 }

@@ -6,7 +6,7 @@ use tiendaVirtual\Product;
 use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
-use tiendaVirtual\Respuesta;
+use tiendaVirtual\Reply;
 // use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
@@ -175,7 +175,7 @@ class ProductController extends Controller
     $data = $request->all();
     $userEmail = Auth::user()->email;
     $reply = new Respuesta($data['respuestaText'],$id,$userEmail);
-    $reply->guardar();
+    $reply->saveReply();
     return redirect()->back();
   }
 
