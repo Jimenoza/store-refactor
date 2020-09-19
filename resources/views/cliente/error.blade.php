@@ -84,13 +84,13 @@
             <div class="cart">
               <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                 <div class="cart_icon">
-                  <a href="{{url('/cliente/cart')}}">
+                  <a href="{{url('/cart')}}">
                     <img src="{{asset('images/cart.png')}}" alt="">
                   </a>
                   <div class="cart_count"><span>{{$carritoLen}}</span></div>
                 </div>
                 <div class="cart_content">
-                  <div class="cart_text"><a href="{{url('/cliente/cart')}}">Carrito</a></div>
+                  <div class="cart_text"><a href="{{url('/cart')}}">Carrito</a></div>
                   <div class="cart_price">${{$total}}</div>
                 </div>
               </div>

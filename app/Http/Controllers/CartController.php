@@ -55,7 +55,7 @@ class CartController extends Controller
     public function deleteCart(){
         /*Borra todo el carrito*/
     	Cart::deleteCart();
-    	return redirect('cliente');
+    	return redirect('/');
     }
 
     public function removeFromCart($id){
@@ -79,7 +79,7 @@ class CartController extends Controller
             Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');
-            return redirect('cliente')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');
+            return redirect('/')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');
         } else {
           return Redirect::back()->with('address_error', 'Por favor, ingrese una dirección de envío');
         }

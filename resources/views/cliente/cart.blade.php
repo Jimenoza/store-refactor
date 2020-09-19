@@ -45,7 +45,7 @@
 										</div>
 										<div class="cart_item_name cart_info_col">
 											<div class="cart_item_text">
-												<a href="{{url('/carrito/quitar/'.$producto->idProducto)}}">
+												<a href="{{url('/cart/remove/'.$producto->idProducto)}}">
 													<button type="button" class="button cart_button_clear">Quitar</button>
 												</a>
 											</div>
@@ -65,7 +65,7 @@
 						</div>
 
 						<div class="cart_buttons">
-							<a href="{{url('/carrito/eliminar')}}">
+							<a href="{{url('/cart/delete')}}">
 								<button type="button" class="button cart_button_clear">Eliminar carrito</button>
 							</a>
 							<!--<a href="{{url('/carrito/verificar')}}">-->

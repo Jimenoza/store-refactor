@@ -29,7 +29,7 @@
 					<div class="product_price">${{$producto->getPrice()}}</div>
 					<div class="button_container">
 					@if($producto->getStock() > 0)
-						<a href="{{url('/carrito/agregar/'.$producto->getID())}}">
+						<a href="{{url('/cart/add/'.$producto->getID())}}">
 						<button type="button" class="button cart_button">Agregar a carrito</button></a>
 					@else
 						<button type="button" class="button cart_button" data-toggle="modal" data-target="#exampleModalCenter">Agregar a carrito</button>

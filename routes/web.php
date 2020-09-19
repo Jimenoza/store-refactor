@@ -64,10 +64,10 @@ Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail
 
 Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
 
-Route::get('/carrito/agregar/{id}','CartController@addItem');
-Route::get('/cliente/cart','CartController@seeCart');
-Route::get('/carrito/eliminar','CartController@deleteCart');
-Route::get('/carrito/quitar/{id}','CartController@removeFromCart');
+Route::get('/cart/add/{id}','CartController@addItem');
+Route::get('/cart','CartController@seeCart');
+Route::get('/cart/delete','CartController@deleteCart');
+Route::get('/cart/remove/{id}','CartController@removeFromCart');
 
 
 

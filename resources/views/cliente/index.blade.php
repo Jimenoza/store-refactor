@@ -122,7 +122,7 @@
 													<div class="product_name"><div>{{$prod->nombre}}</div></div>
 													<div class="product_extras">
 													@if($prod->stock > 0)
-													<a href="{{url('/carrito/agregar/'.$prod->idProducto)}}" id="addCart_{{$prod->idProducto}}">
+													<a href="{{url('/cart/add/'.$prod->idProducto)}}" id="addCart_{{$prod->idProducto}}">
 														<button class="product_cart_button" > Añadir al carrito</button>
 														</a>
 													@else

@@ -50,7 +50,7 @@ class ClientController extends Controller
         try{//revisar la conexión con la base de datos
           if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
             // User::loginUser($data['correo']);
-            return redirect('/cliente/cart');
+            return redirect('/cart');
           } else {
             return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
           }

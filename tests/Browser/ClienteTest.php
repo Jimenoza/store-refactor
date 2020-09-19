@@ -69,7 +69,7 @@ class ClienteTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/cliente')
                     ->click('#carrito')
-                    ->assertPathIs('/cliente/cart');
+                    ->assertPathIs('/cart');
         });
     }
 
