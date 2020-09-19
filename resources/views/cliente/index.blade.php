@@ -154,4 +154,4 @@
 </div>
 
 @include('cliente.popups.modal')
-@stop
+@endsection

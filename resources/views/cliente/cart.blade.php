@@ -4,8 +4,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/cart_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/cart_responsive.css')}}">
 @endpush
-<div class="super_container">
-
 	<!-- Header -->
 
 	<!-- Banner -->
@@ -87,7 +85,6 @@
 
 	<!-- Copyright -->
 
-</div>
 
 
 @if(Session::has('address_error'))
