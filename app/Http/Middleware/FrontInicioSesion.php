@@ -17,7 +17,7 @@ class FrontInicioSesion
     public function handle($request, Closure $next)
     {
         if (empty(Session::has('frontSession'))) {
-          return redirect('/usuarios/registrar');
+          return redirect('/register');
         }
         return $next($request);
     }

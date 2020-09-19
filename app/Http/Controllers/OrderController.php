@@ -28,7 +28,7 @@ class OrderController extends Controller
 	      	$total = Session::get('total');
 	    	return view('cliente.ordenes',['categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'ordenes' => $orders]);
     	/*}else{
-    		return redirect('/usuarios/inicioSesionRegistro');
+    		return redirect('/login/page');
     	}*/
     }
 

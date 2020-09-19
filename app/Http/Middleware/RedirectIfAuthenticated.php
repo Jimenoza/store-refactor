@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
             return redirect('/home');
         }
         else{
-            return redirect('/usuarios/inicioSesionRegistro');
+            return redirect('/login/page');
         }
 
         // return $next($request);

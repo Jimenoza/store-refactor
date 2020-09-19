@@ -71,7 +71,7 @@
 					        </div>
 					    @endif
 						<h2>Iniciar Sesión</h2>
-						<form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/usuarios/inicioSesion')}}" method="POST"> {{csrf_field()}}
+						<form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/login')}}" method="POST"> {{csrf_field()}}
 							<input name="correo" id="correo" type="email" placeholder="Correo" />
 							<input name="contrasena" id="contrasena" type="password" placeholder="Contraseña" />
 							<button type="submit" class="btn btn-default">Iniciar Sesión</button>
@@ -83,7 +83,7 @@
 				<div class="col-sm-4">
 					<div class="login-form"><!--sign up form-->
 						<h2>¡Registrarte!</h2>
-						<form name="formularioRegistro" id="formularioRegistro" action="{{url('/usuarios/registrar')}}" method="POST"> {{csrf_field()}}
+						<form name="formularioRegistro" id="formularioRegistro" action="{{url('/register')}}" method="POST"> {{csrf_field()}}
 							<input name="nombreRegistrar" id="nombreRegistrar" type="text" placeholder="Nombre"/>
 							<input name="correoRegistrar" id="correoRegistrar" type="email" placeholder="Correo"/>
 							<input name="contrasenaRegistrar" id="contrasenaRegistrar" type="password" placeholder="Contraseña"/>

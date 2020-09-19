@@ -105,7 +105,7 @@
 								<div id="{{$comentario->getID()}}" name="{{$comentario->getID()}}">Dejar una respuesta</div>
 		            		</a>
 		            		@else
-		            		<a href="{{url('/usuarios/inicioSesionRegistro')}}">
+		            		<a href="{{url('/login/page')}}">
 								Inicie sesión para responder
 		            		</a>
 		            		@endif

@@ -54,10 +54,10 @@ try{
 Route::group(['middleware'=>['frontLogin']],function(){
   Route::match(['get','post'],'cuenta','UserController@account');
 });
-Route::get('/usuarios/inicioSesionRegistro','UserController@loginPage');
-Route::post('/usuarios/registrar','UserController@register');
-Route::get('usuarios/cierreSesion','UserController@logout')->middleware('auth');
-Route::post('/usuarios/inicioSesion', 'UserController@login');
+Route::get('/login/page','UserController@loginPage');
+Route::post('/register','UserController@register');
+Route::get('logout','UserController@logout')->middleware('auth');
+Route::post('/login', 'UserController@login');
 
 
 Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');

@@ -14,10 +14,10 @@ class RoutesTest extends TestCase
      * @return void
      */
     public function testRoutes() {
-      $urlsInApp = ['/admin', '/cliente/','/usuarios/inicioSesionRegistro','/carrito/orden',];
+      $urlsInApp = ['/admin', '/cliente/','/login/page','/carrito/orden',];
       $urlsRedirect = ['/','logout', '/adminInicio', '/admin/configs','/cliente/vermetodos', '/admin/new/admin','/admin/password/change','/admin/category/new','/admin/category/edit',
       '/admin/category/index','/admin/category/delete','/admin/product/new','/admin/product/index',
-      '/admin/product/edit','/admin/product/delete','/cuenta','/usuarios/cierreSesion','/carrito/agregar/1',
+      '/admin/product/edit','/admin/product/delete','/cuenta','/logout','/carrito/agregar/1',
       '/carrito/cart','/carrito/eliminar','/cliente/pagar','/cliente/ordenes'];
       $urlsNotSupportMethod = ['/admin/password/check'];
        foreach($urlsInApp as $url){

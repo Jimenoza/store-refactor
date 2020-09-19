@@ -22,7 +22,7 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Iniciar Sesión</h2>
-						<!-- <form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/usuarios/registrar')}}" method="POST"> {{csrf_field()}}
+						<!-- <form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/register')}}" method="POST"> {{csrf_field()}}
 							<input name="correo" id="correo" type="email" placeholder="Correo" />
 							<input name="contrasena" id="contrasena" type="password" placeholder="Contraseña" />
 							<button type="submit" class="btn btn-default">Login</button>
@@ -34,7 +34,7 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>¡Registrarte!</h2>
-						<!-- <form name="formularioRegistro" id="formularioRegistro" action="{{url('/usuarios/registrar')}}" method="POST"> {{csrf_field()}}
+						<!-- <form name="formularioRegistro" id="formularioRegistro" action="{{url('/register')}}" method="POST"> {{csrf_field()}}
 							<input name="nombre" id="nombre" type="text" placeholder="Nombre"/>
 							<input name="correo" id="correo" type="email" placeholder="Correo"/>
 							<input name="contrasena" id="contrasena" type="password" placeholder="Contraseña"/>

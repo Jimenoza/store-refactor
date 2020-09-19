@@ -17,8 +17,8 @@
             <div class="top_bar_user">
               @if($usuario == 'NULL')
                 <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
-                <div><a href="{{url('/usuarios/inicioSesionRegistro')}}" id="register">Registrarse</a></div>
-                <div><a href="{{url('/usuarios/inicioSesionRegistro')}}" id="iniciarSesion">Iniciar Sesión</a></div>
+                <div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
+                <div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
               @else
                 <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
                 <div class="top_bar_menu">
