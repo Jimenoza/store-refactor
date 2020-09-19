@@ -97,3 +97,4 @@
 	});
 </script>
 @endif
+@endsection

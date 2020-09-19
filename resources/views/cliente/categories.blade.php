@@ -1,8 +1,10 @@
 @extends('layouts.cliente')
 @section('contenidoCliente')
-	<!-- Home -->
+@push('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('css/shop_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/shop_responsive.css')}}">
+@endpush
+	<!-- Home -->
 <header class="header">
 	@include('cliente.search')
 </header>
@@ -82,4 +84,4 @@
 		</div>
 	</div>
 </div>
-@stop
+@endsection
