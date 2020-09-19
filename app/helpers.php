@@ -1,8 +1,8 @@
 <?php
-use tiendaVirtual\User;
+use tiendaVirtual\Auth;
 use tiendaVirtual\Cart;
 function handleError($error){
-      $user = User::getUsuario();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
+      $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       $carritoLen = Cart::getCartSize();
       $total = Cart::totalPrice();
       error_log($error);

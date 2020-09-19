@@ -18,7 +18,7 @@ class AdminController extends Controller
     if($request->isMethod('post')){
   		$data = $request->input(); //Son las etiquetas del html, obitene lo que están en ellos
   		if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'1'])){
-        //User::loguearUsuario($datos['email']);//Hace el login, llamando a la clase User
+        //User::loginUser($datos['email']);//Hace el login, llamando a la clase User
   			return redirect('admin/indexProducto');
   		} else {
         // Volver a página principal con mensaje de error
@@ -41,7 +41,7 @@ class AdminController extends Controller
   }
   public function logout() {
     /*Cierra la sesión actual, en este caso, de la sesión del administrador*/
-    User::logout();
+    Auth::logout();
     return redirect('/cliente')->with('flash_message_success', '¡Cierre de sesión completo!');
   }
   public function configurations() {

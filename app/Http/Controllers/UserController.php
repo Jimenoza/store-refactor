@@ -19,7 +19,7 @@ class UserController extends Controller
         $data = $request->all();
         try{
           if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
-            // User::loguearUsuario($data['correo']);
+            // User::loginUser($data['correo']);
             if(Auth::user()->admin){
               return redirect('admin/indexProducto');
             }

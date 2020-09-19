@@ -30,25 +30,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function loguearUsuario($correo){
+    public static function loginUser($correo){
         $usuario = DB::select("call getUsuario('".$correo."');");
         Session::put('frontSession', $usuario[0]);//las sesiones se guardan en storage/framework/sessions
-    }
-
-    public static function hayUsuarioLogueado(){
-        return Session::has('frontSession');
-    }
-
-    public static function getUsuario(){
-        return Session::get('frontSession','NULL');
-    }
-
-    public static function esAdmin(){
-        return Session::get('frontSession')->admin;
-    }
-
-    public static function logout(){
-        Auth::logout();
-        Session::forget('frontSession');
     }
 }
