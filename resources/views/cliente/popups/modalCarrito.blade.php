@@ -16,7 +16,7 @@
                 <strong>{!! session('address_error') !!}</strong>
             </div>
             @endif
-            <form name="formularioOrden" id="formularioOrden" action="{{url('/carrito/pagar')}}" method="POST"> {{csrf_field()}}
+            <form name="formularioOrden" id="formularioOrden" action="{{url('/purchase')}}" method="POST"> {{csrf_field()}}
               <div class="form-group">
                 <label for="direccion" class="col-form-label">Enviar a:</label>
                 <textarea class="form-control" id="direccion" name="direccion"></textarea>

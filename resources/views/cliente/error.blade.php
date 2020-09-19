@@ -26,7 +26,7 @@
                     <li>
                       <a href="#">Bienvenido {{$usuario->name}}<i class="fas fa-chevron-down"></i></a>
                       <ul>
-                        <li><a href="{{url('/cliente/ordenes')}}">Mis órdenes</a></li>
+                        <li><a href="{{url('/orders')}}">Mis órdenes</a></li>
                         <!-- <li><a href="">Métodos de pago</a>
                           <ul>
                             <li><a href="/cliente/vermetodos">Ver métodos<i class="fas fa-chevron-right"></i></a></li>

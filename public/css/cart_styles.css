@@ -51,7 +51,7 @@ div
 	position: relative;
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 ul
 {
@@ -1250,13 +1250,14 @@ select option
 }
 .cart_item_info
 {
-	width: calc(100% - 133px);
+	width: calc(100%);
 	float: left;
 	padding-top: 18px;
 }
 .cart_item_name
 {
 	margin-left: 7.53%;
+	width: 100%;
 }
 .cart_item_title
 {

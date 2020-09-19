@@ -18,7 +18,7 @@ class RoutesTest extends TestCase
       $urlsRedirect = ['/','logout', '/adminInicio', '/admin/configs','/cliente/vermetodos', '/admin/new/admin','/admin/password/change','/admin/category/new','/admin/category/edit',
       '/admin/category/index','/admin/category/delete','/admin/product/new','/admin/product/index',
       '/admin/product/edit','/admin/product/delete','/cuenta','/logout','/cart/add/1',
-      '/carrito/cart','/cart/delete','/cliente/pagar','/cliente/ordenes'];
+      '/carrito/cart','/cart/delete','/cliente/pagar','/orders'];
       $urlsNotSupportMethod = ['/admin/password/check'];
        foreach($urlsInApp as $url){
          $this->IsValidRoute_GoodRoute_ReturnsTrue($url);
