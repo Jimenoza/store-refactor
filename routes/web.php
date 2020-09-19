@@ -10,7 +10,7 @@
 |
 */
 Route::get('/', function () {
-    return redirect('/cliente/');
+    return redirect('/');
 });
 
 //Admin - Inicio y Ciere de Sesión
@@ -39,16 +39,16 @@ Route::group(['middleware' => ['auth','admin']], function(){
   
 });
 // FrontEnd
-Route::get('cliente','ClientController@index')->name('home');
-Route::get('cliente/categories/{id}','ProductController@filter');
-Route::get('cliente/results','ProductController@search');
-Route::get('cliente/product/{id}','ProductController@productDetail');//<---------------
+Route::get('/','ClientController@index')->name('home');
+Route::get('categories/{id}','ProductController@filter');
+Route::get('results','ProductController@search');
+Route::get('product/{id}','ProductController@productDetail');//<---------------
 try{
-	Route::post('cliente/comentar/{id}','ProductController@commentProduct')->middleware('auth');
-	Route::get('cliente/responder/{id}','ProductController@replyComment')->middleware('auth');;
+	Route::post('comment/{id}','ProductController@commentProduct')->middleware('auth');
+	Route::get('reply/{id}','ProductController@replyComment')->middleware('auth');;
 }catch (\Exception $e){
-	Route::get('cliente/comentar/{id}','ClientController@index');
-	Route::get('cliente/responder/{id}','ClientController@index');
+	Route::get('comment/{id}','ClientController@index');
+	Route::get('reply/{id}','ClientController@index');
 }
 
 Route::group(['middleware'=>['frontLogin']],function(){

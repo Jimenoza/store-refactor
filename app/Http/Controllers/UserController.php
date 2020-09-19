@@ -24,7 +24,7 @@ class UserController extends Controller
               return redirect('admin/product/index');
             }
             else{
-              return redirect('/cliente');
+              return redirect('/');
             }
           }else {
             return redirect()->back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
@@ -74,6 +74,6 @@ class UserController extends Controller
     public function logout() {
       Auth::logout();
       // User::logout();
-      return redirect('/cliente');
+      return redirect('/');
     }
 }

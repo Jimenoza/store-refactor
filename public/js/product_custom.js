@@ -432,7 +432,7 @@ $("a div").click(function(e){
 
 function mostrar(e){
 	var formulario = '<form id="respuesta" class="answer" onsubmit="return respuesta()" ' + 
-	                    'action="http://localhost:8000/cliente/responder/' + e + '"' +' >'+
+	                    'action="http://localhost:8000/reply/' + e + '"' +' >'+
 						'<div class="form-group row">'+
 						'<div class="col-sm-6">'+
 						'<textarea type="text" class="form-control" id="respuestaText">'+

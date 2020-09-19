@@ -160,7 +160,7 @@ class ProductController extends Controller
     $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     $comments = $product->getComments();
-    return view('cliente/product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
+    return view('cliente.product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
   }
 
   public function commentProduct(Request $request, $id){
@@ -174,7 +174,7 @@ class ProductController extends Controller
   public function replyComment(Request $request, $id){
     $data = $request->all();
     $userEmail = Auth::user()->email;
-    $reply = new Respuesta($data['respuestaText'],$id,$userEmail);
+    $reply = new Reply($data['respuestaText'],$id,$userEmail);
     $reply->saveReply();
     return redirect()->back();
   }

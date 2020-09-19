@@ -61,7 +61,7 @@
           <div class="header_search">
             <div class="header_search_content">
               <div class="header_search_form_container">
-              {!! Form::open(array('url' => 'cliente/results/0', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
+              {!! Form::open(array('url' => 'results/0', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
                   <input type="search" name="buscador" required="required" class="header_search_input" placeholder="Buscar..." >
                   <div class="custom_dropdown" hidden="false">
                     <div class="custom_dropdown_list">

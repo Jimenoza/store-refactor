@@ -21,7 +21,7 @@ class RrespuestasTest extends TestCase
     public function setUp() {
       parent::setUp();
       $this->user = factory(User::class)->create(['admin' => '0']);
-      $this->respuesta = new Respuesta('Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 1, $this->user->email);
+      $this->respuesta = new Reply('Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 1, $this->user->email);
     }
 
     /** @test */

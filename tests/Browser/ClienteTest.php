@@ -59,7 +59,7 @@ class ClienteTest extends DuskTestCase
             $browser->visit('/cliente')
                     ->mouseover('.cat_menu_text')
                     ->click('#categoria_'.$this->categoria->idCategoria)
-                    ->assertPathIs('/cliente/categories/'.$this->categoria->idCategoria);
+                    ->assertPathIs('/categories/'.$this->categoria->idCategoria);
         });
     }
 
@@ -95,7 +95,7 @@ class ClienteTest extends DuskTestCase
             $browser->visit('/cliente');
             // Se utiliza el script de click en elemento debido a que el scrollTo no funcionaba como se debía
             $browser->script('document.getElementsByClassName("productoSlider_'.$countProductos.'")[0].click();');
-            $browser->assertPathIs('/cliente/product/'.$countProductos);
+            $browser->assertPathIs('/product/'.$countProductos);
         });
     }
 

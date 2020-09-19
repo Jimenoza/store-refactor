@@ -39,7 +39,7 @@
 				
 				<div class = "col-lg-12 order-3 opcionales">
 					@if($usuario)
-					<form name="formularioCali" id="formularioCali" action="{{url('cliente/comentar/'.$producto->getID())}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
+					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->getID())}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
 							<label for="tarjetas" class="col-form-label">Califique este producto</label>
@@ -109,7 +109,7 @@
 								Inicie sesión para responder
 		            		</a>
 		            		@endif
-							<form id="respuesta{{$comentario->getID()}}" class="answer" action="{{url('cliente/responder/'.$comentario->getID())}}" style="display: none;">
+							<form id="respuesta{{$comentario->getID()}}" class="answer" action="{{url('reply/'.$comentario->getID())}}" style="display: none;">
 								 <div class="form-group row">
     								<div class="col-sm-6">
       									<textarea type="text" class="form-control" id="respuestaText" name="respuestaText"></textarea> 
