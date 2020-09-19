@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use tiendaVirtual\Category;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -21,8 +21,8 @@ class ProductTest extends TestCase
       parent::setUp();
       $this->categoria = factory(Category::class)->create();
       $this->cantidadProductos = count(DB::select('call getProductos()'));
-      $this->producto = new Producto('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
-      $this->producto->guardar();
+      $this->producto = new Product('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
+      $this->producto->saveProduct();
     }
 
     /** @test */
@@ -46,15 +46,15 @@ class ProductTest extends TestCase
     /** @test */
     public function UpdateProductName_CallActualizar_ReturnsTrue() {
       $nuevoNombre = 'Play Station';
-      $this->producto->setNombre($nuevoNombre);
-      $this->producto->actualizar();
+      $this->producto->setName($nuevoNombre);
+      $this->producto->updateProduct();
       $this->assertEquals($nuevoNombre, DB::select('call verificarProducto('.$this->producto->getID().')')[0]->nombre);
     }
 
     /** @test */
     public function DeleteProduct_CallDeleteProducto_ReturnsTrue() {
-      $this->producto->eliminar();
-      $this->assertEquals($this->producto->getEstado(), DB::select('call verificarProducto('.$this->producto->getID().')')[0]->estado);
+      $this->producto->deleteProduct();
+      $this->assertEquals($this->producto->getState(), DB::select('call verificarProducto('.$this->producto->getID().')')[0]->estado);
     }
 
     /** @test */
@@ -66,7 +66,7 @@ class ProductTest extends TestCase
     /** @test */
     public function ProbarHayInventario_CallVerificarProducto_ReturnsFalse() {
       $this->producto->setStock('0');
-      $this->producto->actualizar();
+      $this->producto->updateProduct();
       // Lista vacía ya que el producto no tiene suficientes ejemplares para vender
       $this->assertEquals([],$this->producto->hayEnInventario($this->producto->getID()));
     }

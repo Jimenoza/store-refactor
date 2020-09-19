@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(tiendaVirtual\Producto::class, function (Faker $faker) {
+$factory->define(tiendaVirtual\Product::class, function (Faker $faker) {
     return [
       'nombre' => $faker->unique()->word,
       'descripcion' => $faker->text,

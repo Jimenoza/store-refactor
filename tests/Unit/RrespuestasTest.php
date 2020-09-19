@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use tiendaVirtual\Category;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use tiendaVirtual\Respuesta;
 use tiendaVirtual\User;
 use Illuminate\Foundation\Testing\WithFaker;

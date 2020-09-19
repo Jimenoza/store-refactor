@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use tiendaVirtual\Comment;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use tiendaVirtual\Category;
 use tiendaVirtual\User;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -25,8 +25,8 @@ class ComentarioTest extends TestCase
       $this->categoria = factory(Category::class)->create();
       $this->user = factory(User::class)->create(['admin' => '0']);
       $this->cantidadProductos = count(DB::select('call getProductos()'));
-      $this->producto = new Producto('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
-      $this->producto->guardar();
+      $this->producto = new Product('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
+      $this->producto->saveProduct();
       $this->comentario = new Comment('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 4, $this->producto->getID(), $this->user->email);
     }
 

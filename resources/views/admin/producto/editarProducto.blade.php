@@ -30,7 +30,7 @@
               <div class="control-group">
                 <label class="control-label">Nombre del Producto</label>
                 <div class="controls">
-                  <input type="text" name="nombre" id="nombre" value="{{$detallesProducto->getNombre()}}">
+                  <input type="text" name="nombre" id="nombre" value="{{$detallesProducto->getName()}}">
                 </div>
               </div>
               <div class="control-group">
@@ -44,7 +44,7 @@
               <div class="control-group">
                 <label class="control-label">Descripción del Producto</label>
                 <div class="controls">
-                  <textarea name="descripcion" id="descripcion">{{$detallesProducto->getDescripcion()}}</textarea>
+                  <textarea name="descripcion" id="descripcion">{{$detallesProducto->getDescription()}}</textarea>
                 </div>
               </div>
               <div class="control-group">
@@ -56,7 +56,7 @@
               <div class="control-group">
                 <label class="control-label">Precio del Producto</label>
                 <div class="controls">
-                  <input type="number" name="precio" id="precio" value="{{$detallesProducto->getPrecio()}}">
+                  <input type="number" name="precio" id="precio" value="{{$detallesProducto->getPrice()}}">
                 </div>
               </div>
               <div class="control-group">

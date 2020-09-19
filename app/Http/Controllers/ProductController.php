@@ -2,7 +2,7 @@
 namespace tiendaVirtual\Http\Controllers;
 use tiendaVirtual\Http\Requests\ProductoFormRequest;
 use Illuminate\Http\Request;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
@@ -18,7 +18,7 @@ class ProductController extends Controller
   public function index(Request $request) {
     /*Verifica que haya alguien logueado como admin y despliega todos los productos de la
     base de datos*/
-    $products = Producto::getProductos();
+    $products = Product::getProducts();
     return view('admin.producto.indexProducto',['productos' => $products]);
   }
   public function newProduct(Request $request)
@@ -30,9 +30,9 @@ class ProductController extends Controller
         $image = self::addImage();
       }
       // Agregar el producto a la Base
-    	$product = new Producto($data['nombre'],$data['descripcion'],$image,$data['precio'],
+    	$product = new Product($data['nombre'],$data['descripcion'],$image,$data['precio'],
       $data['categorias'],$data['disponibles']);
-      $product->guardar();
+      $product->saveProduct();
       return redirect('/admin/indexProducto')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
     }
     $categoriesList = self::getCategories();
@@ -55,27 +55,27 @@ class ProductController extends Controller
   public function editProduct(Request $request, $id) {
     /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
     editar*/
-    $productDetail = Producto::productoPorID($id);
+    $productDetail = Product::productById($id);
     if ($request->isMethod('post')) {
       $datos = $request->all();
       if($request->hasFile('imageInput')){
           $imageName = self::addImage();
       }
 
-      $productDetail->setNombre($datos['nombre']);
-      $productDetail->setDescripcion($datos['descripcion']);
-      $productDetail->setImagen($imageName);
-      $productDetail->setPrecio($datos['precio']);
-      $productDetail->setCategoria($datos['categorias']);
+      $productDetail->setName($datos['nombre']);
+      $productDetail->setDescription($datos['descripcion']);
+      $productDetail->setImage($imageName);
+      $productDetail->setPrice($datos['precio']);
+      $productDetail->setCategory($datos['categorias']);
       $productDetail->setStock($datos['disponibles']);
-      $productDetail->actualizar();
+      $productDetail->updateProduct();
       $productDetail = null;
       return redirect('/admin/indexProducto')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
     }
     if ($productDetail == NULL) {
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
-    $productCategory = $productDetail->getCategoria();
+    $productCategory = $productDetail->getCategory();
     $categories = Category::getCategories();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
@@ -97,8 +97,8 @@ class ProductController extends Controller
 
   public function removeProduct($id) {
     if (!empty($id)) {
-      $product = Producto::productoPorID($id);
-      $product->eliminar();
+      $product = Product::productById($id);
+      $product->deleteProduct();
       return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
     }
   }
@@ -114,7 +114,7 @@ class ProductController extends Controller
     try{
       $filter = trim($request->get('buscador'));//Obtiene lo que el usuario ingresó
       $catFilter = trim($request->get('catFiltro'));
-      $products = Producto::buscar($filter,$catFilter);
+      $products = Product::search($filter,$catFilter);
       $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
@@ -143,7 +143,7 @@ class ProductController extends Controller
         break;
       }
     }
-    $products = Producto::productosPorCategoria($id);
+    $products = Product::productsByCategory($id);
     $pages = self::paginate($products);
     return view('cliente.categories',['productos'=> $pages,'categorias' => $categories,'nombreCat' => $catName,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
   }
@@ -151,7 +151,7 @@ class ProductController extends Controller
   public function productDetail($id){
     /*Retorna toda la información del producto para desplegarse en pantalla*/
     try{
-      $product = Producto::productoPorId($id);
+      $product = Product::productById($id);
       $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
@@ -159,15 +159,15 @@ class ProductController extends Controller
     $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Session::get('total');
-    $comments = $product->getComentarios();
+    $comments = $product->getComments();
     return view('cliente/product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
   }
 
   public function commentProduct(Request $request, $id){
     $data = $request->all();
-    $product = Producto::productoPorId($id);
+    $product = Product::productById($id);
     $userEmail = Auth::user()->email;
-    $product->calificar($userEmail,$data['comentario'],$data['quantity_input']);
+    $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();
   }
 

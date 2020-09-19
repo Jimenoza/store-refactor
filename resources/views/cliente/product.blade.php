@@ -37,21 +37,21 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-5 order-lg-2 order-1">
-				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->getImagen())}}" alt=""></div>
+				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->getImage())}}" alt=""></div>
 			</div>
 
 			<div class="col-lg-5 order-3">
 				<div class="product_description">
 					<div class="product_category"></div>
-					<div class="product_name">{{$producto->getNombre()}}</div>
-					@for($i = 0; $i < intval($producto->getPromedio()); $i++)
+					<div class="product_name">{{$producto->getName()}}</div>
+					@for($i = 0; $i < intval($producto->getAverage()); $i++)
 						<i class="fas fa-star"></i>
 					@endfor
-					@if($producto->getPromedio() - intval($producto->getPromedio()) > 0.5)
+					@if($producto->getAverage() - intval($producto->getAverage()) > 0.5)
 						<i class="fas fa-star-half"></i>
 					@endif
-					<div class="product_text"><p>{{$producto->getDescripcion()}}</p></div>
-					<div class="product_price">${{$producto->getPrecio()}}</div>
+					<div class="product_text"><p>{{$producto->getDescription()}}</p></div>
+					<div class="product_price">${{$producto->getPrice()}}</div>
 					<div class="button_container">
 					@if($producto->getStock() > 0)
 						<a href="{{url('/carrito/agregar/'.$producto->getID())}}">

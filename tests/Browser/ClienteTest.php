@@ -6,7 +6,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use tiendaVirtual\User;
 use tiendaVirtual\Category;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use DB;
 

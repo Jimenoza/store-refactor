@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use Auth;
 
 
@@ -23,7 +23,7 @@ class CartController extends Controller
     public function addItem($id){
         /*Agrega productos al carrito*/
         try{//El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
-    	   $product = Producto::hayEnInventario($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
+    	   $product = Product::productInStock($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
         }catch (\Exception $e){
             return handleError($e);
         }

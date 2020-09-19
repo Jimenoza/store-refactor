@@ -3,7 +3,7 @@
 namespace tiendaVirtual\Http\Controllers;
 
 use Illuminate\Http\Request;
-use tiendaVirtual\Producto;
+use tiendaVirtual\Product;
 use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
@@ -26,7 +26,7 @@ class ClientController extends Controller
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
       try{
-        $products = Producto::producosHabilitados();//Obtiene los productos en la base
+        $products = Product::enabledProducts();//Obtiene los productos en la base
     	  $categories = Category::getCategories(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
         return handleError($e);
@@ -39,7 +39,7 @@ class ClientController extends Controller
    	}
 
     public function show($id){
-      return view('cliente.show', ['producto'=>Producto::findOrFail($id)]);
+      return view('cliente.show', ['producto'=>Product::findOrFail($id)]);
     }
 
     public function login(Request $request) {//Hay diferencia con el otro login
