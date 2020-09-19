@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.css')}}">
+@stack('styles')
 </head>
 
 <body>
