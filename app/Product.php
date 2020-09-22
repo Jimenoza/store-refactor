@@ -15,28 +15,10 @@ class Product extends Model
     'precio',
     'categoria',
     'stock',
-    'estado'];
-
-    private $nombre;
-    private $descripcion;
-    private $imagen;
-    private $precio;
-    private $categoria;
-    private $stock;
-    private $estado;
-    private $id;
-    private $promedio;
-    private $comentarios;
-
-    public function __construct($nombre,$descripcion,$imagen,$precio,$categoria,$stock){
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->imagen = $imagen;
-        $this->precio = $precio;
-        $this->categoria = $categoria;
-        $this->stock = $stock;
-        $this->estado = 1;
-    }
+    'estado',
+    'calificaciones',
+    'promedio',
+    'idCategoria'];
 
     public function getName(){return $this->nombre;}
     public function getDescription(){return $this->descripcion;}

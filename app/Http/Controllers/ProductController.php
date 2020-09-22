@@ -18,7 +18,7 @@ class ProductController extends Controller
   public function index(Request $request) {
     /*Verifica que haya alguien logueado como admin y despliega todos los productos de la
     base de datos*/
-    $products = Product::getProducts();
+    $products = Product::all();
     return view('admin.producto.indexProducto',['productos' => $products]);
   }
   public function newProduct(Request $request)
@@ -30,9 +30,14 @@ class ProductController extends Controller
         $image = self::addImage();
       }
       // Agregar el producto a la Base
-    	$product = new Product($data['nombre'],$data['descripcion'],$image,$data['precio'],
-      $data['categorias'],$data['disponibles']);
-      $product->saveProduct();
+      $product = new Product;
+      $product->nombre = $data['nombre'];
+      $product->descripcion = $data['descripcion'];
+      $product->imagen = $image;
+      $product->precio = $data['precio'];
+      $product->idCategoria = $data['categorias'];
+      $product->stock = $data['disponibles'];
+      $product->save();
       return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
     }
     $categoriesList = self::getCategories();

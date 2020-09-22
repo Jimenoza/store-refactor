@@ -26,7 +26,7 @@ class ClientController extends Controller
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
       try{
-        $products = Product::enabledProducts();//Obtiene los productos en la base
+        $products = Product::where('estado',1)->orderBy('idProducto', 'desc')->get();//Obtiene los productos en la base
     	  $categories = Category::getCategories(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
         return handleError($e);
