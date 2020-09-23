@@ -27,7 +27,7 @@ class ComentarioTest extends TestCase
       $this->cantidadProductos = count(DB::select('call getProductos()'));
       $this->producto = new Product('Figura', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor', 'play1.jpg', '2000', $this->categoria->idCategoria, '10');
       $this->producto->saveProduct();
-      $this->comentario = new Comment('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 4, $this->producto->getID(), $this->user->email);
+      $this->comentario = new Comment('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 4, $this->producto->idProducto, $this->user->email);
     }
 
     /** @test */

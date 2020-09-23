@@ -7,17 +7,22 @@ use DB;
 
 class Comment extends Model
 {
+    protected $table = 'calificacion_x_producto';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'comentario',
+        'calificacion',
+        'idProducto',
+        'idUsuario'];
+
     private $id;
     private $texto;
     private $calificacion;
     private $producto;
     private $usuario;
 
-    public function __construct($text,$calification,$product,$user){
-        $this->texto = $text;
-        $this->calificacion = $calification;
-        $this->producto = $product;
-        $this->usuario = $user;
+    public function __construct(){
+        
     }
 
     public function setID($id){$this->id = $id;}
@@ -44,7 +49,7 @@ class Comment extends Model
     	DB::insert("call nuevoComentario('".$this->texto."',".$this->calificacion.",".$this->producto.",'".$this->usuario."');");
     }
 
-    public function getReplies(){
-    	return Reply::getReplies($this->id);
+    public static function getReplies($comment){
+    	return Reply::getReplies($comment);
     }
 }

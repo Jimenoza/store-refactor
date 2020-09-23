@@ -39,8 +39,8 @@ class ProductTest extends TestCase
 
     /** @test */
     public function GetProductPorIdIsWorking_CallBuscarProducto_ReturnsTrue() {
-        $retorno = DB::select("call buscarProductoxID(".$this->producto->getID().")");
-        $this->assertEquals($retorno[0]->idProducto, $this->producto->getID());
+        $retorno = DB::select("call buscarProductoxID(".$this->producto->idProducto.")");
+        $this->assertEquals($retorno[0]->idProducto, $this->producto->idProducto);
     }
 
     /** @test */
@@ -48,13 +48,13 @@ class ProductTest extends TestCase
       $nuevoNombre = 'Play Station';
       $this->producto->setName($nuevoNombre);
       $this->producto->updateProduct();
-      $this->assertEquals($nuevoNombre, DB::select('call verificarProducto('.$this->producto->getID().')')[0]->nombre);
+      $this->assertEquals($nuevoNombre, DB::select('call verificarProducto('.$this->producto->idProducto.')')[0]->nombre);
     }
 
     /** @test */
     public function DeleteProduct_CallDeleteProducto_ReturnsTrue() {
       $this->producto->deleteProduct();
-      $this->assertEquals($this->producto->getState(), DB::select('call verificarProducto('.$this->producto->getID().')')[0]->estado);
+      $this->assertEquals($this->producto->getState(), DB::select('call verificarProducto('.$this->producto->idProducto.')')[0]->estado);
     }
 
     /** @test */
@@ -68,6 +68,6 @@ class ProductTest extends TestCase
       $this->producto->setStock('0');
       $this->producto->updateProduct();
       // Lista vacía ya que el producto no tiene suficientes ejemplares para vender
-      $this->assertEquals([],$this->producto->hayEnInventario($this->producto->getID()));
+      $this->assertEquals([],$this->producto->hayEnInventario($this->producto->idProducto));
     }
 }

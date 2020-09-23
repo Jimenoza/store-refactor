@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Producto</a> <a href="{{url('/admin/product/edit/'.$productDetail->getID())}}" class="current">Editar Producto</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Producto</a> <a href="{{url('/admin/product/edit/'.$productDetail->idProducto)}}" class="current">Editar Producto</a> </div>
     <h1>Editar Producto</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">
@@ -26,7 +26,7 @@
             <h5>Formulario para Editar Producto</h5>
           </div>
           <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('/admin/product/edit/'.$productDetail->getID())}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
+            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('/admin/product/edit/'.$productDetail->idProducto)}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
               <div class="control-group">
                 <label class="control-label">Nombre del Producto</label>
                 <div class="controls">

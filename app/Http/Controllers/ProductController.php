@@ -7,6 +7,7 @@ use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Reply;
+use tiendaVirtual\Comment;
 // use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
@@ -60,21 +61,27 @@ class ProductController extends Controller
   public function editProduct(Request $request, $id) {
     /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
     editar*/
-    $productDetail = Product::productById($id);
+    $productDetail = Product::find($id);//Product::productById($id);
     if ($request->isMethod('post')) {
-      $datos = $request->all();
+      $data = $request->all();
       if($request->hasFile('imageInput')){
           $imageName = self::addImage();
       }
 
-      $productDetail->setName($datos['nombre']);
-      $productDetail->setDescription($datos['descripcion']);
-      $productDetail->setImage($imageName);
-      $productDetail->setPrice($datos['precio']);
-      $productDetail->setCategory($datos['categorias']);
-      $productDetail->setStock($datos['disponibles']);
-      $productDetail->updateProduct();
-      $productDetail = null;
+      // $productDetail->setName($datos['nombre']);
+      // $productDetail->setDescription($datos['descripcion']);
+      // $productDetail->setImage($imageName);
+      // $productDetail->setPrice($datos['precio']);
+      // $productDetail->setCategory($datos['categorias']);
+      // $productDetail->setStock($datos['disponibles']);
+      // $productDetail->updateProduct();
+      $productDetail->nombre = $data['nombre'];
+      $productDetail->descripcion = $data['descripcion'];
+      $productDetail->imagen = $imageName;
+      $productDetail->precio = $data['precio'];
+      $productDetail->idCategoria = $data['categorias'];
+      $productDetail->stock = $data['disponibles'];
+      $productDetail->save();
       return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
     }
     if ($productDetail == NULL) {
@@ -156,7 +163,7 @@ class ProductController extends Controller
   public function productDetail($id){
     /*Retorna toda la información del producto para desplegarse en pantalla*/
     try{
-      $product = Product::productById($id);
+      $product = Product::find($id);
       $categories = Category::getCategories();
     }catch (\Exception $e){
       return handleError($e);
@@ -164,7 +171,9 @@ class ProductController extends Controller
     $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Session::get('total');
-    $comments = $product->getComments();
+    // DB::enableQueryLog();
+    $comments = Comment::where('idProducto',$id)->get();
+    // dd(DB::getQueryLog());
     return view('cliente.product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
   }
 

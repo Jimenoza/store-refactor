@@ -1,5 +1,6 @@
 @extends('layouts.cliente')
 @section('contenidoCliente')
+@inject('Comment', 'tiendaVirtual\Comment')
 @push('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('css/product_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/product_responsive.css')}}">
@@ -29,7 +30,7 @@
 					<div class="product_price">${{$producto->getPrice()}}</div>
 					<div class="button_container">
 					@if($producto->getStock() > 0)
-						<a href="{{url('/cart/add/'.$producto->getID())}}">
+						<a href="{{url('/cart/add/'.$producto->idProducto)}}">
 						<button type="button" class="button cart_button">Agregar a carrito</button></a>
 					@else
 						<button type="button" class="button cart_button" data-toggle="modal" data-target="#exampleModalCenter">Agregar a carrito</button>
@@ -39,7 +40,7 @@
 				
 				<div class = "col-lg-12 order-3 opcionales">
 					@if($usuario)
-					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->getID())}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
+					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->idProducto)}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
 							<label for="tarjetas" class="col-form-label">Califique este producto</label>
@@ -75,19 +76,19 @@
 				<div class="divTableBody">
 					@foreach($comentarios as $comentario)
 					<div class="divTableRow usuario">
-						<div class="divTableCell">{{$comentario->getUser()}}</div>
-						@for($i = 0; $i < $comentario->getCalification(); $i++)
+						<div class="divTableCell">{{$comentario->idUsuario}}</div>
+						@for($i = 0; $i < $comentario->calificacion; $i++)
 						<i class="fas fa-star"></i>
 						@endfor
 					</div>
 					<div class="divTableRow coment">
 						<div class="divTableCell" id="responses" name="responses">
-							{{$comentario->getText()}}
+							{{$comentario->comentario}}
 							<div class="respuestas">Respuestas:</div>
 							<div style="padding: 0px 30px;">
 								<div class="divTable response">
 									<div class="divTableBody">
-										@foreach($comentario->getReplies() as $respuesta)
+										@foreach($Comment::getReplies($comentario->id) as $respuesta)
 										<div class="divTableRow">
 											<div class="divTableCell">
 												<div class="nombre">{{$respuesta->name}}:</div>
