@@ -109,14 +109,18 @@ class ProductController extends Controller
 
   public function removeProduct($id) {
     if (!empty($id)) {
-      $product = Product::productById($id);
-      $product->deleteProduct();
+      $product = Product::find($id);
+      $product->estado = 0;
+      $product->save();
       return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
     }
   }
 
   public function enableProduct($id){
-    DB::update("update producto set estado = 1 where idProducto = ".$id);
+    $product = Product::find($id);
+    $product->estado = 1;
+    $product->save();
+    // DB::update("update producto set estado = 1 where idProducto = ".$id);
     return redirect()->back()->with('flash_message_success', '¡Producto habilitado para la compra!');
   }
 
