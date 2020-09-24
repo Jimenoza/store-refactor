@@ -80,7 +80,14 @@ class Product extends Model
     }
 
     public static function search($filtro,$catID){
-        return DB::select("call busqueda_producto('".$filtro."',".$catID.");");
+        if($catID == 0){
+            $response = DB::select('select * from producto where nombre LIKE "%'.$filtro.'%" and estado = 1;');
+        }
+        else{
+            $response = DB::select('select * from producto where nombre LIKE "%'.$filtro.'%" and estado = 1 and idCategoria = '.$catID.';');
+        }
+        return $response;
+        // return DB::select("call busqueda_producto('".$filtro."',".$catID.");");
     }
 
     public static function productsByCategory($categoria){

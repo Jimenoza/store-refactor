@@ -138,8 +138,10 @@ class ProductController extends Controller
     $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Cart::totalPrice();
-    $pages = self::paginate($products,$filter);
-    return view('cliente.results', ['productos'=> $pages,'categorias' => $categories,'filtro' =>$filter,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
+    if($products){
+      $products = self::paginate($products,$filter);
+    }
+    return view('cliente.results', ['productos'=> $products,'categorias' => $categories,'filtro' =>$filter,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
   }
 
   public function filter($id){

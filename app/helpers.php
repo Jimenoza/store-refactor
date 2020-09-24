@@ -1,5 +1,5 @@
 <?php
-use tiendaVirtual\Auth;
+use Auth;
 use tiendaVirtual\Cart;
 function handleError($error){
       $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'

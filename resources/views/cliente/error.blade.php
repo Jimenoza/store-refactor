@@ -15,7 +15,7 @@
               </ul>
             </div>
             <div class="top_bar_user">
-              @if($usuario == 'NULL')
+              @if(!$usuario)
                 <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
                 <div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
                 <div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
