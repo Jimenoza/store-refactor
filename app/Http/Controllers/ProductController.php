@@ -48,7 +48,7 @@ class ProductController extends Controller
 
   private function getCategories(){
     /*Obtiene las categorías disponibles*/
-    $categories = Category::getCategories();
+    $categories = Category::where('condicion',1)->get();
     /*Crea el string HTML de las categorías con respecto a un select*/
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {//ciclo para desplegar las categorías
@@ -88,7 +88,7 @@ class ProductController extends Controller
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
     $productCategory = $productDetail->getCategory();
-    $categories = Category::getCategories();
+    $categories = Category::where('condicion',1)->get();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
         $selected = "";
@@ -131,7 +131,7 @@ class ProductController extends Controller
       $filter = trim($request->get('buscador'));//Obtiene lo que el usuario ingresó
       $catFilter = trim($request->get('catFiltro'));
       $products = Product::search($filter,$catFilter);
-      $categories = Category::getCategories();
+      $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -147,7 +147,7 @@ class ProductController extends Controller
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      $categories = Category::getCategories();
+      $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -161,8 +161,9 @@ class ProductController extends Controller
         break;
       }
     }
-    $products = Product::productsByCategory($id);
-    $pages = self::paginate($products);
+    $products = Product::where('idCategoria',$id)->get();
+    $pages = self::paginate($products->toArray());
+    // dd($pages);
     return view('cliente.categories',['productos'=> $pages,'categorias' => $categories,'nombreCat' => $catName,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
   }
   
