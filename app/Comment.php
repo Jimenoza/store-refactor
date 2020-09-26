@@ -13,7 +13,9 @@ class Comment extends Model
         'comentario',
         'calificacion',
         'idProducto',
-        'idUsuario'];
+        'idUsuario'
+    ];
+    public $timestamps = false;
 
     private $id;
     private $texto;

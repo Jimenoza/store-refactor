@@ -171,7 +171,7 @@ class ProductController extends Controller
     /*Retorna toda la información del producto para desplegarse en pantalla*/
     try{
       $product = Product::find($id);
-      $categories = Category::getCategories();
+      $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -186,9 +186,15 @@ class ProductController extends Controller
 
   public function commentProduct(Request $request, $id){
     $data = $request->all();
-    $product = Product::productById($id);
+    $product = Product::find($id);
     $userEmail = Auth::user()->email;
-    $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
+    $comment = new Comment;
+    $comment->idUsuario = $userEmail;
+    $comment->comentario = $data['comentario'];
+    $comment->calificacion = $data['quantity_input'];
+    $comment->idProducto = $product->idProducto;
+    $comment->save();
+    // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();
   }
 
