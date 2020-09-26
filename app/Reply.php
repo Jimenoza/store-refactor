@@ -7,15 +7,21 @@ use DB;
 
 class Reply extends Model
 {
+    protected $table = 'respuestas';
+    protected $primaryKey = 'idRespuesta';
+    protected $fillable = [
+        'idCalificacion',
+        'respuesta',
+        'idUsuario'
+    ];
+    public $timestamps = false;
     private $id;
     private $idCalificacion;
     private $texto;
     private $usuario;
 
-    public function __construct($texto,$calificacion,$usuario){
-        $this->texto = $texto;
-        $this->idCalificacion = $calificacion;
-        $this->usuario = $usuario;
+    public function __construct(){
+        
     }
 
     public function setID($id){$this->id = $id;}

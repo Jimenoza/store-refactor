@@ -201,8 +201,12 @@ class ProductController extends Controller
   public function replyComment(Request $request, $id){
     $data = $request->all();
     $userEmail = Auth::user()->email;
-    $reply = new Reply($data['respuestaText'],$id,$userEmail);
-    $reply->saveReply();
+    // $reply = new Reply($data['respuestaText'],$id,$userEmail);
+    $reply = new Reply;
+    $reply->idCalificacion = $id;
+    $reply->respuesta = $data['respuestaText'];
+    $reply->idUsuario = $userEmail;
+    $reply->save();
     return redirect()->back();
   }
 

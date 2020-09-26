@@ -52,6 +52,7 @@ class Comment extends Model
     }
 
     public static function getReplies($comment){
-    	return Reply::getReplies($comment);
+        return Reply::where('idCalificacion',$comment)->get();
+    	// return Reply::getReplies($comment);
     }
 }

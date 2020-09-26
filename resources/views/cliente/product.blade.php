@@ -91,7 +91,7 @@
 										@foreach($Comment::getReplies($comentario->id) as $respuesta)
 										<div class="divTableRow">
 											<div class="divTableCell">
-												<div class="nombre">{{$respuesta->name}}:</div>
+												<div class="nombre">{{$respuesta->idUsuario}}:</div>
 												<div class="respuesta" align="justify">	
 													{{$respuesta->respuesta}}
 												</div>
@@ -102,15 +102,15 @@
 								</div>
 							</div>
 							@if($usuario)
-							<a href="#" id="link{{$comentario->getID()}}" name="link{{$comentario->getID()}}"onclick="mostrar('{{$comentario->getID()}}')">
-								<div id="{{$comentario->getID()}}" name="{{$comentario->getID()}}">Dejar una respuesta</div>
+							<a href="#" id="link{{$comentario->id}}" name="link{{$comentario->id}}" onclick="mostrar('{{$comentario->id}}')">
+								<div id="{{$comentario->id}}" name="{{$comentario->id}}">Dejar una respuesta</div>
 		            		</a>
 		            		@else
 		            		<a href="{{url('/login/page')}}">
 								Inicie sesión para responder
 		            		</a>
 		            		@endif
-							<form id="respuesta{{$comentario->getID()}}" class="answer" action="{{url('reply/'.$comentario->getID())}}" style="display: none;">
+							<form id="respuesta{{$comentario->id}}" class="answer" action="{{url('reply/'.$comentario->id)}}" style="display: none;">
 								 <div class="form-group row">
     								<div class="col-sm-6">
       									<textarea type="text" class="form-control" id="respuestaText" name="respuestaText"></textarea> 
@@ -128,7 +128,7 @@
 	</div>
 </div>
 @include('cliente.popups.modal')
-@endsection
 @push('scripts')
 <script src="{{asset('js/product_custom.js')}}"></script>
 @endpush
+@endsection
