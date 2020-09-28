@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Session;
 use DB;
 
-class Cart extends Model
+class Cart
 {
     //
 
@@ -76,7 +76,7 @@ class Cart extends Model
     }
 
     public static function registerPurchase($dir){
-        $cart = self::getCart();
+        $cart = self::getCart();// get array of products from cart
         $cartID = self::getID();
         $total = self::precioTotal();
         foreach ($cart as $producto) {

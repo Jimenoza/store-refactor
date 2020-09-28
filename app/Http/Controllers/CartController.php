@@ -11,6 +11,7 @@ use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Product;
 use Auth;
+use Carbon\Carbon;
 
 
 class CartController extends Controller
@@ -23,7 +24,9 @@ class CartController extends Controller
     public function addItem($id){
         /*Agrega productos al carrito*/
         try{//El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
-    	   $product = Product::productInStock($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
+           $product = Product::where('idProducto',$id)
+                                ->where('stock','>',0)
+                                ->get();//productInStock($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
         }catch (\Exception $e){
             return handleError($e);
         }
@@ -41,7 +44,7 @@ class CartController extends Controller
     public function seeCart(){
         /*Llama a los productos en el carrito para desplegar en la ventana del carrito*/
         try{
-    	   $categories = Category::getCategories();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
+    	   $categories = Category::where('condicion',1)->get();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
         }catch (\Exception $e){
             return handleError($e);
         }
@@ -69,12 +72,17 @@ class CartController extends Controller
         $data = $request->all();
         if($data['direccion']) {
             $user = Auth::user();//Siempre retorna el usuario que esté logueado
-            try{
-                //Si no hay conexión con la base de datos avisa del problema
-                Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
-            }catch (\Exception $e){
-                return handleError($e);
-            }
+            // try{
+            //     //Si no hay conexión con la base de datos avisa del problema
+            //     // dd(Carbon::now()->toDateTimeString());  
+            //     $cart = new Cart;
+            //     $cart->fecha = Carbon::now()->toDateTimeString();
+            //     $cart->Usuario_correo = $user->email;
+            //     $cart->save();
+            //     //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
+            // }catch (\Exception $e){
+            //     return handleError($e);
+            // }
             $address = $data['direccion'];
             Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
