@@ -24,7 +24,7 @@ class CategoryTest extends TestCase
     /** @test */
     public function IsGetCategoriasWorkin_CallGetCategorias_ReturnTrue()
     {
-      $todasLasCategorias = count(Category::getCategories());
+      $todasLasCategorias = count(Category::where('condicion',1)->get());
       $this->assertEquals($todasLasCategorias, $this->categorias);
     }
 

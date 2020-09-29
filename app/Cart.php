@@ -66,23 +66,4 @@ class Cart
         Session::put('total',$total);
         Session::put('carrito',$cart);
     }
-
-    public static function registerCart($userID){
-        DB::insert("call insertarCarrito(CURDATE(),'".$userID."');");//Crea un carrito en la base de datos
-    }
-
-    public static function getID(){
-        return DB::select("call ultimoCarrito();")[0]->idCarrito;//Obtiene el idCarrito del último carrito insertado en la base
-    }
-
-    public static function registerPurchase($dir){
-        $cart = self::getCart();// get array of products from cart
-        $cartID = self::getID();
-        $total = self::precioTotal();
-        foreach ($cart as $producto) {
-            DB::insert("call insertarCarritoXProducto(".$cartID.",".$producto->idProducto.",1);");//Inserta todos los productos en el nuevo carrito asociado al usuario
-        }
-        DB::insert("call insertarOrden('".$dir."',".$cartID.",".$total.");");
-
-    }
 }

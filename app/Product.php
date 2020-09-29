@@ -29,7 +29,6 @@ class Product extends Model
     public function getState(){return $this->estado;}
     public function getID(){return $this->id;}
     public function getAverage(){return $this->promedio;}
-    public function getComments(){return $this->comentarios;}
 
     public function setName($nombre){$this->nombre = $nombre;}
     public function setDescription($descripcion){$this->descripcion = $descripcion;}
@@ -101,10 +100,6 @@ class Product extends Model
     public function rate($user,$comment,$rating){
         $nuevo = new Comment($comment,$rating,$this->id,$user);
         $nuevo->saveComment();
-    }
-
-    public function loadComments(){
-        $this->comentarios = Comment::getComments($this->id);
     }
 
 }

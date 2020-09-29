@@ -14,8 +14,4 @@ class Category extends Model
       'nombre',
       'descripcion',
       'condicion'];
-
-    public static function getCategories(){
-    	return DB::select("call getCategorias()");
-    }
 }

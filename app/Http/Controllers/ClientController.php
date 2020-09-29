@@ -27,7 +27,7 @@ class ClientController extends Controller
       la sesión*/
       try{
         $products = Product::where('estado',1)->orderBy('idProducto', 'desc')->get();//Obtiene los productos en la base
-    	  $categories = Category::getCategories(); //Si no hay conexión le avisa al usuario
+    	  $categories = Category::where('condicion',1)->get(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
         return handleError($e);
       }

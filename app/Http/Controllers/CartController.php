@@ -11,7 +11,6 @@ use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Product;
 use Auth;
-use Carbon\Carbon;
 
 
 class CartController extends Controller
