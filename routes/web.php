@@ -72,7 +72,7 @@ Route::get('/cart/remove/{id}','CartController@removeFromCart');
 
 
 Route::post('/cliente/inicioSesion', 'ClientController@login');
-Route::post('/purchase', 'OrderController@payCart')->middleware('auth');;
+Route::post('/purchase', 'OrderController@payOrder')->middleware('auth');;
 
 Route::get('/orders','OrderController@getOrders')->middleware('auth');
 Route::get('/order/{id}','OrderController@getOrder')->middleware('auth');

@@ -11,6 +11,7 @@ use tiendaVirtual\Category;
 use tiendaVirtual\Cart;
 use tiendaVirtual\Order;
 use Carbon\Carbon;
+use tiendaVirtual\Product;
 
 class OrderController extends Controller
 {
@@ -46,25 +47,37 @@ class OrderController extends Controller
         }
     }
 
-    public function payCart(Request $request){
+    public function payOrder(Request $request){
         /*Genera una orden en la base de datos. Obtiene todo lo necesario para ello*/
         if($request->isMethod('post')) {
         $data = $request->all();
         if($data['direccion']) {
             $user = Auth::user();//Siempre retorna el usuario que esté logueado
-            // try{
-            //     //Si no hay conexión con la base de datos avisa del problema
-            //     // dd(Carbon::now()->toDateTimeString());  
-            //     $cart = new Cart;
-            //     $cart->fecha = Carbon::now()->toDateTimeString();
-            //     $cart->Usuario_correo = $user->email;
-            //     $cart->save();
-            //     //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
-            // }catch (\Exception $e){
-            //     return handleError($e);
-            // }
-            $address = $data['direccion'];
-            Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
+            try{
+                //Si no hay conexión con la base de datos avisa del problema
+                // dd(Carbon::now()->toDateTimeString());  
+                $order = new Order;
+                $order->total = Cart::totalPrice();
+                $order->fecha = Carbon::now()->toDateTimeString();
+                $order->direccion = $data['direccion'];
+                $order->email = $user->email;
+                $order->save();
+                //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
+            }catch (\Exception $e){
+                return handleError($e);
+            }
+            $products = Cart::getCart();// get array of products from cart
+            $total = Cart::totalPrice();
+            $body = [];
+            foreach ($products as $producto) {
+                array_push($body,['idOrden' => $order->idOrden, 'idProducto' => $producto->idProducto]);
+                $prod = Product::find($producto->idProducto);
+                $prod->stock = ($prod->stock - 1);
+                $prod->save();
+            };
+            // DB::insert("call insertarOrden('".$dir."',".$cartID.",".$total.");");
+            DB::table('producto_x_orden')->insert($body);
+            //Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');
             return redirect('/')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');
