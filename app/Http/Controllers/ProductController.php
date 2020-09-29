@@ -87,7 +87,7 @@ class ProductController extends Controller
     if ($productDetail == NULL) {
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
-    $productCategory = $productDetail->getCategory();
+    $productCategory = $productDetail->idCategoria;
     $categories = Category::where('condicion',1)->get();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
