@@ -17,16 +17,6 @@ class Comment extends Model
     ];
     public $timestamps = false;
 
-    private $id;
-    private $texto;
-    private $calificacion;
-    private $producto;
-    private $usuario;
-
-    public function __construct(){
-        
-    }
-
     public static function getReplies($comment){
         return Reply::where('idCalificacion',$comment)->get();
     	// return Reply::getReplies($comment);
