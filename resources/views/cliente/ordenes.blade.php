@@ -45,7 +45,7 @@
 									</div>
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_text">
-											<button type="button" class="button cart_button_clear" onclick="abrir({{$orden->Carrito_idCarrito}})">Ver</button>
+											<button type="button" class="button cart_button_clear" onclick="abrir({{$orden->idOrden}})">Ver</button>
 											
 										</div>
 									</div>

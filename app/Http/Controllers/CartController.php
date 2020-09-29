@@ -66,32 +66,5 @@ class CartController extends Controller
     	Cart::removeProduct($id);
     	return redirect()->back();
     }
-    public function payCart(Request $request){
-        /*Genera una orden en la base de datos. Obtiene todo lo necesario para ello*/
-        if($request->isMethod('post')) {
-        $data = $request->all();
-        if($data['direccion']) {
-            $user = Auth::user();//Siempre retorna el usuario que esté logueado
-            // try{
-            //     //Si no hay conexión con la base de datos avisa del problema
-            //     // dd(Carbon::now()->toDateTimeString());  
-            //     $cart = new Cart;
-            //     $cart->fecha = Carbon::now()->toDateTimeString();
-            //     $cart->Usuario_correo = $user->email;
-            //     $cart->save();
-            //     //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
-            // }catch (\Exception $e){
-            //     return handleError($e);
-            // }
-            $address = $data['direccion'];
-            Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
-            Session::forget('carrito');//Olvida el carrito que había
-            Session::forget('total');
-            return redirect('/')->with('success_msg', 'La orden ha sido generada, gracias por comprar con nosotros');
-        } else {
-          return Redirect::back()->with('address_error', 'Por favor, ingrese una dirección de envío');
-        }
-      }
-    }
 }
 
