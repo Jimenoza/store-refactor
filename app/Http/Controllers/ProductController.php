@@ -103,8 +103,16 @@ class ProductController extends Controller
 
   private function addImage(){
     $image = \Input::file('imageInput');
-    $image->move(public_path().'/images/productos/',$image->getClientOriginalName());//guarda la imagen en: \qa-grupo7\Tienda_Virtual\storage\app\images
-    return $image->getClientOriginalName();
+    $extension = $image->getClientOriginalExtension();
+    $name = time().'.'.$extension;
+    // $photo->move(public_path().'\photos\\',$name);
+    // $photo = new Photo();
+    // $photo->route = 'photos/'.$name;
+    // error_log($name);
+    // $photo->report = $report->id;
+    // $photo->save();
+    $image->move(public_path().'/images/productos/',$name);//guarda la imagen en: \qa-grupo7\Tienda_Virtual\storage\app\images
+    return $name;
   }
 
   public function removeProduct($id) {

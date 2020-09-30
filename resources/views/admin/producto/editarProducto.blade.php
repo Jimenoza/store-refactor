@@ -50,7 +50,7 @@
               <div class="control-group">
                 <label class="control-label">Imagen del Producto</label>
                 <div class="controls">
-                  <input type="file" name="imageInput" id="imageInput"/>
+                  <input type="file" name="imageInput" id="imageInput" accept="image/*"/>
                 </div>
               </div>
               <div class="control-group">
@@ -62,7 +62,7 @@
               <div class="control-group">
                 <label class="control-label">Stock del Producto</label>
                 <div class="controls">
-                  <input type="number" name="disponibles" id="disponibles" value="{{$productDetail->stock()}}">
+                  <input type="number" name="disponibles" id="disponibles" value="{{$productDetail->stock}}">
                 </div>
               </div>
               <div class="form-actions">
