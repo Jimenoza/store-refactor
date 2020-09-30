@@ -41,21 +41,21 @@
             <div class="cart_items">
               <ul class="cart_list">
               @foreach($productos as $producto)
-                <li class="cart_item clearfix">
-                  <div class="cart_item_image">
-                    <img src="{{asset('images/productos/'.$producto->imagen)}}" width="150" height="150">
-                  </div>
-                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                    <div class="cart_item_name cart_info_col">
-                      <div class="cart_item_title">Nombre</div>
-                      <div class="cart_item_text">{{$producto->nombre}}</div>
-                    </div>
-                    <div class="cart_item_price cart_info_col">
-                      <div class="cart_item_title">Precio</div>
-                      <div class="cart_item_text">${{$producto->precio}}</div>
-                    </div>
-                  </div>
-                </li>
+              <li class="cart_item clearfix">
+									<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+										<div class="cart_item_image cart_info_col">
+											<img src="{{asset('images/productos/'.$producto->imagen)}}" alt="">
+										</div>
+										<div class="cart_item_name cart_info_col">
+											<div class="cart_item_title">Nombre</div>
+											<div class="cart_item_text">{{$producto->nombre}}</div>
+										</div>
+										<div class="cart_item_price cart_info_col">
+											<div class="cart_item_title">Precio</div>
+											<div class="cart_item_text">${{$producto->precio}}</div>
+										</div>
+									</div>
+								</li>
                 @endforeach
               </ul>
             </div>
