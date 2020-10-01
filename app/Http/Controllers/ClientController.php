@@ -31,10 +31,10 @@ class ClientController extends Controller
       }catch (\Exception $e){
         return handleError($e);
       }
-      $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
+      // $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       $cartSize = Cart::getCartSize();
       $total = Cart::totalPrice();
-    	return view('cliente.index', ['productos'=> $products,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
+    	return view('cliente.index', ['productos'=> $products,'categorias' => $categories,'carritoLen' => $cartSize,'total' => $total]);
 
    	}
 

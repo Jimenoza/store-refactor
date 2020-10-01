@@ -43,15 +43,15 @@ class CartController extends Controller
     public function seeCart(){
         /*Llama a los productos en el carrito para desplegar en la ventana del carrito*/
         try{
-    	   $categories = Category::where('condicion',1)->get();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
+    	//    $categories = Category::where('condicion',1)->get();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
         }catch (\Exception $e){
             return handleError($e);
         }
-    	$user = Auth::user();
+    	// $user = Auth::user();
     	$cartSize = Cart::getCartSize(); //Obitene la cantidad de items en el carrito
         $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito
         $total = Cart::totalPrice();
-    	return view('cliente.cart',['categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'carrito' => $cart]);
+    	return view('cliente.cart',['carritoLen' => $cartSize,'total' => $total,'carrito' => $cart]);
     }
 
     public function deleteCart(){

@@ -27,12 +27,12 @@ class OrderController extends Controller
             }catch (\Exception $e){
                 return handleError($e);
             }
-	    	$user = Auth::user();//Obtiene el usuario logueado
+	    	// $user = Auth::user();//Obtiene el usuario logueado
 	    	$cartSize = Cart::getCartSize();
             $orders = Order::where('email',$user->email)->get();//self::getUserOrders();
             // dd($orders);
 	      	$total = Session::get('total');
-	    	return view('cliente.ordenes',['categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'ordenes' => $orders]);
+	    	return view('cliente.ordenes',['carritoLen' => $cartSize,'total' => $total,'ordenes' => $orders]);
     	/*}else{
     		return redirect('/login/page');
     	}*/

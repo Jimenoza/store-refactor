@@ -61,20 +61,12 @@ class ProductController extends Controller
   public function editProduct(Request $request, $id) {
     /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
     editar*/
-    $productDetail = Product::find($id);//Product::productById($id);
+    $productDetail = Product::find($id);
     if ($request->isMethod('post')) {
       $data = $request->all();
       if($request->hasFile('imageInput')){
           $imageName = self::addImage();
       }
-
-      // $productDetail->setName($datos['nombre']);
-      // $productDetail->setDescription($datos['descripcion']);
-      // $productDetail->setImage($imageName);
-      // $productDetail->setPrice($datos['precio']);
-      // $productDetail->setCategory($datos['categorias']);
-      // $productDetail->setStock($datos['disponibles']);
-      // $productDetail->updateProduct();
       $productDetail->nombre = $data['nombre'];
       $productDetail->descripcion = $data['descripcion'];
       $productDetail->imagen = $imageName;
@@ -139,27 +131,27 @@ class ProductController extends Controller
       $filter = trim($request->get('buscador'));//Obtiene lo que el usuario ingresó
       $catFilter = trim($request->get('catFiltro'));
       $products = Product::search($filter,$catFilter);
-      $categories = Category::where('condicion',1)->get();
+      // $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
-    $user = Auth::user();
+    // $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Cart::totalPrice();
     if($products){
       $products = self::paginate($products,$filter);
     }
-    return view('cliente.results', ['productos'=> $products,'categorias' => $categories,'filtro' =>$filter,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
+    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter,'carritoLen' => $cartSize,'total' => $total]);
   }
 
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      $categories = Category::where('condicion',1)->get();
+      // $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
-    $user = Auth::user();
+    // $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     $catName = Cart::totalPrice();
@@ -172,24 +164,24 @@ class ProductController extends Controller
     $products = Product::where('idCategoria',$id)->get();
     $pages = self::paginate($products->toArray());
     // dd($pages);
-    return view('cliente.categories',['productos'=> $pages,'categorias' => $categories,'nombreCat' => $catName,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total]);
+    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName,'carritoLen' => $cartSize,'total' => $total]);
   }
   
   public function productDetail($id){
     /*Retorna toda la información del producto para desplegarse en pantalla*/
     try{
       $product = Product::find($id);
-      $categories = Category::where('condicion',1)->get();
+      // $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
-    $user = Auth::user();
+    // $user = Auth::user();
     $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     // DB::enableQueryLog();
     $comments = Comment::where('idProducto',$id)->get();
     // dd(DB::getQueryLog());
-    return view('cliente.product',['producto' => $product,'categorias' => $categories,'usuario'=>$user,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
+    return view('cliente.product',['producto' => $product,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
   }
 
   public function commentProduct(Request $request, $id){

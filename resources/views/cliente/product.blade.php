@@ -13,17 +13,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-5 order-lg-2 order-1">
-				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->imagen}}" alt=""></div>
+				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->imagen)}}" alt=""></div>
 			</div>
 
 			<div class="col-lg-5 order-3">
 				<div class="product_description">
 					<div class="product_category"></div>
 					<div class="product_name">{{$producto->nombre}}</div>
-					@for($i = 0; $i < intval($producto->promedio; $i++)
+					@for($i = 0; $i < intval($producto->promedio); $i++)
 						<i class="fas fa-star"></i>
 					@endfor
-					@if($producto->promedio - intval($producto->promedio > 0.5)
+					@if($producto->promedio - intval($producto->promedio) > 0.5)
 						<i class="fas fa-star-half"></i>
 					@endif
 					<div class="product_text"><p>{{$producto->descripcion}}</p></div>
@@ -39,7 +39,7 @@
 				</div>
 				
 				<div class = "col-lg-12 order-3 opcionales">
-					@if($usuario)
+					@if(Auth::user())
 					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->idProducto)}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
@@ -101,7 +101,7 @@
 									</div>
 								</div>
 							</div>
-							@if($usuario)
+							@if(Auth::user())
 							<a href="#" id="link{{$comentario->id}}" name="link{{$comentario->id}}" onclick="mostrar('{{$comentario->id}}')">
 								<div id="{{$comentario->id}}" name="{{$comentario->id}}">Dejar una respuesta</div>
 		            		</a>

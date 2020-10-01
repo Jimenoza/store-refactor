@@ -19,7 +19,7 @@
 						</ul>
 					</div>
 					<div class="top_bar_user">
-						@if(!$usuario)
+						@if(!Auth::user())
 							<div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
 							<div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
 							<div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
@@ -28,7 +28,7 @@
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
 									<li>
-										<a href="#" id="welcomeUser">Bienvenido {{$usuario->name}}<i class="fas fa-chevron-down"></i></a>
+										<a href="#" id="welcomeUser">Bienvenido {{Auth::user()->name}}<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="{{url('/orders')}}">Mis órdenes</a></li>
 											<!-- <li><a href="">Métodos de pago</a>
@@ -73,12 +73,12 @@
 										<i class="fas fa-chevron-down"></i>
 										<select name="catFiltro" id="catFiltro" class="custom_list clc form-control">
 											<option value="0" class="clc" label="Todas las categorías">Todas las categorías</option>
-											@foreach($categorias as $cat)
-											@if($cat->condicion != 0)
-											<option value="{{$cat->idCategoria}}" class="clc" label="{{$cat->nombre}}">
-												{{$cat->nombre}}
-											</option>
-											@endif
+											@foreach($data['categorias'] as $cat)
+												@if($cat->condicion != 0)
+												<option value="{{$cat->idCategoria}}" class="clc" label="{{$cat->nombre}}">
+													{{$cat->nombre}}
+												</option>
+												@endif
 											@endforeach
 										</select>
 									</div>
@@ -132,7 +132,7 @@
 						</div>
 
 						<ul class="cat_menu">
-						@foreach($categorias as $cat)
+						@foreach($data['categorias'] as $cat)
 							@if($cat->condicion != 0)
 								<li><a href="{{URL::action('ProductController@filter',$cat->idCategoria)}}" id="categoria_{{$cat->idCategoria}}">{{$cat->nombre}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
 							@endif

@@ -1,4 +1,4 @@
-@if($usuario)
+@if(Auth::user())
   @if($total > 0)<!--Verifica que haya productos en el carrito-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

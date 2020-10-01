@@ -1,6 +1,6 @@
 <script>
 	function abrir(id) {
-	open('/order/' + id,'','top=100,left=300,width=800,height=300') ;
+		open(`/order/${id}`,'','top=100,left=300,width=800,height=300') ;
 	}
 </script>
 @push('styles')

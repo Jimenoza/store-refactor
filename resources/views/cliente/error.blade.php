@@ -15,7 +15,7 @@
               </ul>
             </div>
             <div class="top_bar_user">
-              @if(!$usuario)
+              @if(Auth::user())
                 <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
                 <div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
                 <div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
@@ -24,7 +24,7 @@
                 <div class="top_bar_menu">
                   <ul class="standard_dropdown top_bar_dropdown">
                     <li>
-                      <a href="#">Bienvenido {{$usuario->name}}<i class="fas fa-chevron-down"></i></a>
+                      <a href="#">Bienvenido {{Auth::user()->name}}<i class="fas fa-chevron-down"></i></a>
                       <ul>
                         <li><a href="{{url('/orders')}}">Mis órdenes</a></li>
                         <!-- <li><a href="">Métodos de pago</a>
