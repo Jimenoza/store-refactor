@@ -17,9 +17,9 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->float('total',8,2);
             $table->dateTime('date', 0);
-            $table->text('adress');
+            $table->text('address');
             // Foreing key to users
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

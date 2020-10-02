@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('image',200);
             $table->float('price',8,2);
-            $table->integer('sotck');
+            $table->integer('stock');
             $table->boolean('available')->default(true);
             $table->integer('califications')->default(0);
             $table->float('average')->default(0);

@@ -31,7 +31,6 @@ class ClientController extends Controller
         return handleError($e);
       }
       Cart::createCart();
-      $total = Cart::totalPrice();
     	return view('cliente.index', ['productos'=> $products]);
 
    	}

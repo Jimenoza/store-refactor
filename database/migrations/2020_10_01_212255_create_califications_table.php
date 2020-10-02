@@ -20,8 +20,8 @@ class CreateCalificationsTable extends Migration
             // Foreing key to products
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            // Foreing key to products
-            $table->unsignedBigInteger('user_id');
+            // Foreing key to users
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
