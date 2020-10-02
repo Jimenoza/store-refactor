@@ -38,7 +38,7 @@ class CategoryController extends Controller
   	if ($request->isMethod('post')) {//Si se han hecho cambios
   		$data = $request->all();
       // Actualizar categoría en la base de datos
-  		Category::where(['id'=>$id])->update(['name'=>$data['nombre'], 'description'=>$data['descripcion'], 'enable'=>$datos['condicion']]);//actualiza los datos
+  		Category::where(['id'=>$id])->update(['name'=>$data['nombre'], 'description'=>$data['descripcion'], 'enable'=>$data['condicion']]);//actualiza los datos
   		return redirect('/admin/category/index')->with('flash_message_success', '¡La categoría fue actualizada correctamente!');
   	}
     // Obtiene la información relacionada con la categoria

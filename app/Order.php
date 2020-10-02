@@ -21,8 +21,8 @@ class Order extends Model
     public static function products($id){
         // DB::enableQueryLog();
         $products = DB::table('products')
-                        ->join('products_per_order','products_per_order.product_id','=','products.product_id')
-                        ->where('orden_id','=',$id)
+                        ->join('products_per_order','products_per_order.product_id','=','products.id')
+                        ->where('order_id','=',$id)
                         ->select('name','image','price')->get();
         // dd(DB::getQueryLog());
         return $products;//DB::select('select * from users where active = ?', [1])

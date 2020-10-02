@@ -52,7 +52,7 @@ class ProductController extends Controller
     /*Crea el string HTML de las categorías con respecto a un select*/
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {//ciclo para desplegar las categorías
-      $categoriesList .= "<option value='".$cat->idCategoria."'>".$cat->nombre."</option>";
+      $categoriesList .= "<option value='".$cat->id."'>".$cat->name."</option>";
     }
     return $categoriesList;
   }
@@ -153,8 +153,8 @@ class ProductController extends Controller
     $total = Session::get('total');
     $catName = 'Productos de ';
     foreach ($categories as $cat) {
-      if($cat->idCategoria == $id){
-        $catName = $catName.$cat->nombre;
+      if($cat->id == $id){
+        $catName = $catName.$cat->name;
         break;
       }
     }
@@ -186,7 +186,7 @@ class ProductController extends Controller
     $comment->user_id = $userEmail;
     $comment->comment = $data['comentario'];
     $comment->calification = $data['quantity_input'];
-    $comment->product_id = $product->idProducto;
+    $comment->product_id = $product->id;
     $comment->save();
     // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();

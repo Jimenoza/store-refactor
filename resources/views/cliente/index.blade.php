@@ -20,23 +20,23 @@
 								<div class="col-lg-4 col-md-6 fill_height">
 									<div class="banner_2_content">
 										<div class="banner_2_category"></div>
-										<div class="banner_2_title">{{$prod->nombre}}</div>
-										<div class="banner_2_text">{{$prod->descripcion}}</div>
+										<div class="banner_2_title">{{$prod->name}}</div>
+										<div class="banner_2_text">{{$prod->description}}</div>
 										<div class="banner_2_rating">
-											@for($i = 0; $i < intval($prod->promedio); $i++)
+											@for($i = 0; $i < intval($prod->average); $i++)
 											<i class="fas fa-star"></i>
 											@endfor
-											@if($prod->promedio - intval($prod->promedio) > 0.5)
+											@if($prod->average - intval($prod->average) > 0.5)
 											<i class="fas fa-star-half"></i>
 											@endif
 										</div>
-										<div class="button banner_2_button"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}">Explorar</a></div>
+										<div class="button banner_2_button"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('ProductController@productDetail',$prod->id)}}">Explorar</a></div>
 									</div>
 
 								</div>
 								<div class="col-lg-8 col-md-6 fill_height">
 									<div class="banner_2_image_container">
-										<div class="banner_2_image"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt=""></div>
+										<div class="banner_2_image"><img src="{{asset('images/productos/'.$prod->image)}}" alt=""></div>
 									</div>
 								</div>
 							</div>
@@ -65,14 +65,14 @@
 							<!-- Deals Item 1-->
 							@foreach($productos as $prod)
 							<div class="owl-item deals_item">
-								<div class="deals_image"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt="" width="150" height="350"></div>
+								<div class="deals_image"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="350"></div>
 								<div class="deals_content">
 									<div class="deals_info_line d-flex flex-row justify-content-start">
-										<div class="deals_item_name"><a class="productoSlider_{{$prod->idProducto}}"  href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}">{{$prod->nombre}}</a></div>
-										<div class="deals_item_price ml-auto">${{$prod->precio}}</div>
+										<div class="deals_item_name"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('ProductController@productDetail',$prod->id)}}">{{$prod->name}}</a></div>
+										<div class="deals_item_price ml-auto">${{$prod->price}}</div>
 									</div>
 									<div class="deals_info_line d-flex flex-row justify-content-start">
-										<div class="deals_item_category ">{{$prod->descripcion}}</div>
+										<div class="deals_item_category ">{{$prod->description}}</div>
 									</div>
 									<div class="available">
 										<div class="available_line d-flex flex-row justify-content-start">
@@ -109,16 +109,16 @@
 								<!-- Slider Item 1-->
 								@foreach($productos as $prod)
 								<div class="featured_slider_item">
-										<a href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}" class="productoSlider_{{$prod->idProducto}}">
+										<a href="{{URL::action('ProductController@productDetail',$prod->id)}}" class="productoSlider_{{$prod->id}}">
 										<div class="border_active"></div>
 											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt="" width="150" height="150"></div>
+												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="150"></div>
 												<div class="product_content">
-													<div class="product_price discount">${{$prod->precio}}</div>
-													<div class="product_name"><div>{{$prod->nombre}}</div></div>
+													<div class="product_price discount">${{$prod->price}}</div>
+													<div class="product_name"><div>{{$prod->name}}</div></div>
 													<div class="product_extras">
 													@if($prod->stock > 0)
-													<a href="{{url('/cart/add/'.$prod->idProducto)}}" id="addCart_{{$prod->idProducto}}">
+													<a href="{{url('/cart/add/'.$prod->id)}}" id="addCart_{{$prod->id}}">
 														<button class="product_cart_button" > Añadir al carrito</button>
 														</a>
 													@else

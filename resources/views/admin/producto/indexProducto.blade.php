@@ -43,18 +43,18 @@
               <tbody>
               	@foreach($productos as $prod)
                 <tr class="gradeX">
-                  <td>{{$prod->idProducto}}</td>
-                  <td>{{$prod->nombre}}</td>
-                  <td>{{$prod->descripcion}}</td>
-                  <td> <img src="{{asset('/images/productos/'.$prod->imagen)}}"></td>
-                  <td>{{$prod->precio}}</td>
+                  <td>{{$prod->id}}</td>
+                  <td>{{$prod->name}}</td>
+                  <td>{{$prod->description}}</td>
+                  <td> <img src="{{asset('/images/productos/'.$prod->image)}}"></td>
+                  <td>{{$prod->price}}</td>
                   <td>{{$prod->stock}}</td>
-									<td>{{$prod->estado}}</td>
-                  <td class="center"><a href="{{url('/admin/product/edit/'.$prod->idProducto)}}" class="btn btn-primary btn-mini" method="get">Editar</a>
-                  @if($prod->estado == 1)
-                    <a href="{{url('/admin/product/delete/'.$prod->idProducto)}}" class="btn btn-danger btn-mini delProd">Inhabilitar</a></td>
+									<td>{{$prod->available}}</td>
+                  <td class="center"><a href="{{url('/admin/product/edit/'.$prod->id)}}" class="btn btn-primary btn-mini" method="get">Editar</a>
+                  @if($prod->available == 1)
+                    <a href="{{url('/admin/product/delete/'.$prod->id)}}" class="btn btn-danger btn-mini delProd">Inhabilitar</a></td>
                   @else
-                    <a href="{{url('/admin/product/enable/'.$prod->idProducto)}}" class="btn btn-danger btn-mini">habilitar</a></td>
+                    <a href="{{url('/admin/product/enable/'.$prod->id)}}" class="btn btn-danger btn-mini">habilitar</a></td>
                   @endif
                 </tr>
                 @endforeach

@@ -34,7 +34,7 @@ class CartController extends Controller
     		$cart[] = $product[0];//Inserta el producto en el carrito,
             Cart::putCart($cart);//Actualiza el carrito,total,precio
     		$total = Cart::totalPrice();
-    		$total += $product[0]->precio;
+    		$total += $product[0]->price;
     		Cart::updatePrice($total);
     	}
     	return redirect()->back();

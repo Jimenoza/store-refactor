@@ -10,24 +10,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-5 order-lg-2 order-1">
-				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->imagen)}}" alt=""></div>
+				<div class="image_selected"><img src="{{asset('images/productos/'.$producto->image)}}" alt=""></div>
 			</div>
 
 			<div class="col-lg-5 order-3">
 				<div class="product_description">
 					<div class="product_category"></div>
-					<div class="product_name">{{$producto->nombre}}</div>
-					@for($i = 0; $i < intval($producto->promedio); $i++)
+					<div class="product_name">{{$producto->name}}</div>
+					@for($i = 0; $i < intval($producto->average); $i++)
 						<i class="fas fa-star"></i>
 					@endfor
-					@if($producto->promedio - intval($producto->promedio) > 0.5)
+					@if($producto->average - intval($producto->average) > 0.5)
 						<i class="fas fa-star-half"></i>
 					@endif
-					<div class="product_text"><p>{{$producto->descripcion}}</p></div>
-					<div class="product_price">${{$producto->precio}}</div>
+					<div class="product_text"><p>{{$producto->description}}</p></div>
+					<div class="product_price">${{$producto->price}}</div>
 					<div class="button_container">
 					@if($producto->stock > 0)
-						<a href="{{url('/cart/add/'.$producto->idProducto)}}">
+						<a href="{{url('/cart/add/'.$producto->id)}}">
 						<button type="button" class="button cart_button">Agregar a carrito</button></a>
 					@else
 						<button type="button" class="button cart_button" data-toggle="modal" data-target="#exampleModalCenter">Agregar a carrito</button>
@@ -37,7 +37,7 @@
 				
 				<div class = "col-lg-12 order-3 opcionales">
 					@if(Auth::user())
-					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->idProducto)}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
+					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->id)}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
 							<label for="tarjetas" class="col-form-label">Califique este producto</label>
@@ -73,14 +73,14 @@
 				<div class="divTableBody">
 					@foreach($comentarios as $comentario)
 					<div class="divTableRow usuario">
-						<div class="divTableCell">{{$comentario->idUsuario}}</div>
-						@for($i = 0; $i < $comentario->calificacion; $i++)
+						<div class="divTableCell">{{$comentario->user_id}}</div>
+						@for($i = 0; $i < $comentario->calification; $i++)
 						<i class="fas fa-star"></i>
 						@endfor
 					</div>
 					<div class="divTableRow coment">
 						<div class="divTableCell" id="responses" name="responses">
-							{{$comentario->comentario}}
+							{{$comentario->comment}}
 							<div class="respuestas">Respuestas:</div>
 							<div style="padding: 0px 30px;">
 								<div class="divTable response">
@@ -88,9 +88,9 @@
 										@foreach($Comment::getReplies($comentario->id) as $respuesta)
 										<div class="divTableRow">
 											<div class="divTableCell">
-												<div class="nombre">{{$respuesta->idUsuario}}:</div>
+												<div class="nombre">{{$respuesta->user_id}}:</div>
 												<div class="respuesta" align="justify">	
-													{{$respuesta->respuesta}}
+													{{$respuesta->reply}}
 												</div>
 											</div>
 										</div>

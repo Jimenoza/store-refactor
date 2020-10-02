@@ -26,11 +26,11 @@
 								<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_title">Factura número</div>
-										<div class="cart_item_text">{{sprintf("%09d",$orden->idOrden)}}</div>
+										<div class="cart_item_text">{{sprintf("%09d",$orden->id)}}</div>
 									</div>
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_title">Fecha</div>
-										<div class="cart_item_text">{{$orden->fecha}}</div>
+										<div class="cart_item_text">{{$orden->date}}</div>
 									</div>
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_title">Total</div>
@@ -38,11 +38,11 @@
 									</div>
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_title">Enviar a</div>
-										<div class="cart_item_text">{{$orden->direccion}}</div>
+										<div class="cart_item_text">{{$orden->address}}</div>
 									</div>
 									<div class="cart_item_name cart_info_col">
 										<div class="cart_item_text">
-											<button type="button" class="button cart_button_clear" onclick="abrir({{$orden->idOrden}})">Ver</button>
+											<button type="button" class="button cart_button_clear" onclick="abrir({{$orden->id}})">Ver</button>
 											
 										</div>
 									</div>
