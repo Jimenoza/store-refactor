@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       $categories = Category::where('condicion',1)->get();
-      $cartSize = Cart::getCartSize();
       $data = [
         'categorias' => $categories
       ];

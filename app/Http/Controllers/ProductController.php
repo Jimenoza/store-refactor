@@ -135,36 +135,33 @@ class ProductController extends Controller
     }catch (\Exception $e){
       return handleError($e);
     }
-    // $user = Auth::user();
-    // $cartSize = Cart::getCartSize();
-    $total = Cart::totalPrice();
     if($products){
       $products = self::paginate($products,$filter);
     }
-    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter,'total' => $total]);
+    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter]);
   }
 
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      // $categories = Category::where('condicion',1)->get();
+      $categories = Category::where('condicion',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
     // $user = Auth::user();
     // $cartSize = Cart::getCartSize();
     $total = Session::get('total');
-    $catName = Cart::totalPrice();
+    $catName = 'Productos de ';
     foreach ($categories as $cat) {
       if($cat->idCategoria == $id){
-        $catName = 'Productos de '.$cat->nombre;
+        $catName = $catName.$cat->nombre;
         break;
       }
     }
     $products = Product::where('idCategoria',$id)->get();
     $pages = self::paginate($products->toArray());
     // dd($pages);
-    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName,'total' => $total]);
+    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName]);
   }
   
   public function productDetail($id){
