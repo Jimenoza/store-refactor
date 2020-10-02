@@ -9,22 +9,21 @@ use DB;
 class Order extends Model
 {
     use HasFactory;
-    protected $table = 'orden';
-    protected $primaryKey = 'idOrden';
+    protected $table = 'orders';
     protected $fillable = [
         'total',
-        'fecha',
-        'direccion',
-        'email'
+        'date',
+        'address',
+        'user_id'
     ];
     public $timestamps = false;
 
     public static function products($id){
         // DB::enableQueryLog();
-        $products = DB::table('producto')
-                        ->join('producto_x_orden','producto_x_orden.idProducto','=','producto.idProducto')
-                        ->where('idOrden','=',$id)
-                        ->select('nombre','imagen','precio')->get();
+        $products = DB::table('products')
+                        ->join('products_per_order','products_per_order.product_id','=','products.product_id')
+                        ->where('orden_id','=',$id)
+                        ->select('name','image','price')->get();
         // dd(DB::getQueryLog());
         return $products;//DB::select('select * from users where active = ?', [1])
     }

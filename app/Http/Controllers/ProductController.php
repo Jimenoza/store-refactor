@@ -48,7 +48,7 @@ class ProductController extends Controller
 
   private function getCategories(){
     /*Obtiene las categorías disponibles*/
-    $categories = Category::where('condicion',1)->get();
+    $categories = Category::where('enable',1)->get();
     /*Crea el string HTML de las categorías con respecto a un select*/
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {//ciclo para desplegar las categorías
@@ -80,7 +80,7 @@ class ProductController extends Controller
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
     $productCategory = $productDetail->idCategoria;
-    $categories = Category::where('condicion',1)->get();
+    $categories = Category::where('enable',1)->get();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
         $selected = "";
@@ -144,7 +144,7 @@ class ProductController extends Controller
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      $categories = Category::where('condicion',1)->get();
+      $categories = Category::where('enable',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -173,7 +173,7 @@ class ProductController extends Controller
       return handleError($e);
     }
     // DB::enableQueryLog();
-    $comments = Comment::where('idProducto',$id)->get();
+    $comments = Comment::where('product_id',$id)->get();
     // dd(DB::getQueryLog());
     return view('cliente.product',['producto' => $product,'comentarios' => $comments]);
   }
@@ -181,12 +181,12 @@ class ProductController extends Controller
   public function commentProduct(Request $request, $id){
     $data = $request->all();
     $product = Product::find($id);
-    $userEmail = Auth::user()->email;
+    $userId = Auth::user()->id;
     $comment = new Comment;
-    $comment->idUsuario = $userEmail;
-    $comment->comentario = $data['comentario'];
-    $comment->calificacion = $data['quantity_input'];
-    $comment->idProducto = $product->idProducto;
+    $comment->user_id = $userEmail;
+    $comment->comment = $data['comentario'];
+    $comment->calification = $data['quantity_input'];
+    $comment->product_id = $product->idProducto;
     $comment->save();
     // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();

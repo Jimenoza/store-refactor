@@ -23,10 +23,10 @@ class CategoryController extends Controller
   	if($request->isMethod('post')) {
   		$data = $request->all();
       // Agregar categoría a la base de datos
-  		$category = new Categoria; //Crea un objeto categoría
-  		$category->nombre = $data['nombre'];
-  		$category->descripcion = $data['descripcion'];
-  		$category->condicion = '1';
+  		$category = new Category; //Crea un objeto categoría
+  		$category->name = $data['nombre'];
+  		$category->description = $data['descripcion'];
+  		$category->enable = '1';
   		$category->save();//Lo registra en la base de datos
   		return redirect('/admin/category/index')->with('flash_message_success', 'La categoría fue añadida correctamente.');
   	}
@@ -38,11 +38,11 @@ class CategoryController extends Controller
   	if ($request->isMethod('post')) {//Si se han hecho cambios
   		$data = $request->all();
       // Actualizar categoría en la base de datos
-  		Category::where(['idCategoria'=>$id])->update(['nombre'=>$data['nombre'], 'descripcion'=>$data['descripcion'], 'condicion'=>$datos['condicion']]);//actualiza los datos
+  		Category::where(['id'=>$id])->update(['name'=>$data['nombre'], 'description'=>$data['descripcion'], 'enable'=>$datos['condicion']]);//actualiza los datos
   		return redirect('/admin/category/index')->with('flash_message_success', '¡La categoría fue actualizada correctamente!');
   	}
     // Obtiene la información relacionada con la categoria
-  	$detallesCategoria = Category::where(['idCategoria'=>$id])->first();//Obtiene los datos de la base
+  	$detallesCategoria = Category::where(['id'=>$id])->first();//Obtiene los datos de la base
   	return view('admin.categoria.editarCategoria')->with(compact('detallesCategoria'));
   }
 
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     /*Elimina la categoría de la base (cambia el estado y no se despliega)*/
     // Verifica si el id es diferente de nulo
   	if (!empty($id)) {
-  		Category::where(['idCategoria'=>$id])->update(['condicion'=>'0']);
+  		Category::where(['id'=>$id])->update(['enable'=>'0']);
   		return redirect()->back()->with('flash_message_success', '¡La condición de la Categoría fue actualizada correctamente!');
   	}
   }

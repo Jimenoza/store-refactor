@@ -7,13 +7,12 @@ use DB;
 
 class Comment extends Model
 {
-    protected $table = 'calificacion_x_producto';
-    protected $primaryKey = 'id';
+    protected $table = 'califications';
     protected $fillable = [
-        'comentario',
-        'calificacion',
-        'idProducto',
-        'idUsuario'
+        'comment',
+        'calification',
+        'product_id',
+        'user_id'
     ];
     public $timestamps = false;
 

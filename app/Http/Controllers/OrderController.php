@@ -23,13 +23,13 @@ class OrderController extends Controller
         /*Despliega las órdenes por usuario, si hay alguien logueado*/
     	//if(User::hayUsuarioLogueado()){//Pregunta que haya algún usuario logueado
             try{
-    		  $categories = Category::where('condicion',1)->get();//DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
+    		  $categories = Category::where('enable',1)->get();//DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
             }catch (\Exception $e){
                 return handleError($e);
             }
 	    	// $user = Auth::user();//Obtiene el usuario logueado
 	    	// $cartSize = Cart::getCartSize();
-            $orders = Order::where('email',Auth::user()->email)->get();//self::getUserOrders();
+            $orders = Order::where('user_id',Auth::user()->id)->get();//self::getUserOrders();
             // dd($orders);
 	    	return view('cliente.ordenes',['ordenes' => $orders]);
     	/*}else{
@@ -57,9 +57,9 @@ class OrderController extends Controller
                 // dd(Carbon::now()->toDateTimeString());  
                 $order = new Order;
                 $order->total = Cart::totalPrice();
-                $order->fecha = Carbon::now()->toDateTimeString();
-                $order->direccion = $data['direccion'];
-                $order->email = $user->email;
+                $order->date = Carbon::now()->toDateTimeString();
+                $order->address = $data['direccion'];
+                $order->user_id = $user->id;
                 $order->save();
                 //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
             }catch (\Exception $e){
