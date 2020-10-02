@@ -69,13 +69,13 @@ class OrderController extends Controller
             $total = Cart::totalPrice();
             $body = [];
             foreach ($products as $producto) {
-                array_push($body,['idOrden' => $order->idOrden, 'idProducto' => $producto->idProducto]);
-                $prod = Product::find($producto->idProducto);
+                array_push($body,['order_id' => $order->id, 'product_id' => $producto->id]);
+                $prod = Product::find($producto->id);
                 $prod->stock = ($prod->stock - 1);
                 $prod->save();
             };
             // DB::insert("call insertarOrden('".$dir."',".$cartID.",".$total.");");
-            DB::table('producto_x_orden')->insert($body);
+            DB::table('products_per_order')->insert($body);
             //Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');

@@ -7,12 +7,11 @@ use DB;
 
 class Reply extends Model
 {
-    protected $table = 'respuestas';
-    protected $primaryKey = 'idRespuesta';
+    protected $table = 'replies';
     protected $fillable = [
-        'idCalificacion',
-        'respuesta',
-        'idUsuario'
+        'calification_id',
+        'reply',
+        'user_id'
     ];
     public $timestamps = false;
 

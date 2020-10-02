@@ -17,7 +17,7 @@ class Comment extends Model
     public $timestamps = false;
 
     public static function getReplies($comment){
-        return Reply::where('idCalificacion',$comment)->get();
+        return Reply::where('calification_id',$comment)->get();
     	// return Reply::getReplies($comment);
     }
 }
