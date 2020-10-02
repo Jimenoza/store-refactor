@@ -31,8 +31,7 @@ class OrderController extends Controller
 	    	// $cartSize = Cart::getCartSize();
             $orders = Order::where('email',Auth::user()->email)->get();//self::getUserOrders();
             // dd($orders);
-	      	$total = Session::get('total');
-	    	return view('cliente.ordenes',['total' => $total,'ordenes' => $orders]);
+	    	return view('cliente.ordenes',['ordenes' => $orders]);
     	/*}else{
     		return redirect('/login/page');
     	}*/
