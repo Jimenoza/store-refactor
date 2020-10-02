@@ -175,13 +175,10 @@ class ProductController extends Controller
     }catch (\Exception $e){
       return handleError($e);
     }
-    // $user = Auth::user();
-    // $cartSize = Cart::getCartSize();
-    $total = Session::get('total');
     // DB::enableQueryLog();
     $comments = Comment::where('idProducto',$id)->get();
     // dd(DB::getQueryLog());
-    return view('cliente.product',['producto' => $product,'total' => $total,'comentarios' => $comments]);
+    return view('cliente.product',['producto' => $product,'comentarios' => $comments]);
   }
 
   public function commentProduct(Request $request, $id){

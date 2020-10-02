@@ -10,7 +10,7 @@ class Cart
 {
     //
 
-    private static function createCart(){
+    public static function createCart(){
     	if(!Session::has('carrito')){ //Pregunta si hay un carrito creado
         	Session::put('carrito',array()); //Crea un carrito en la sesión
         	Session::put('total',0);

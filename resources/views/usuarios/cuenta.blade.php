@@ -1,8 +1,5 @@
 @extends('layouts.cliente')
 @section('contenidoCliente')
-<!-- <header class="header">
-	@include('cliente.search')
-</header> -->
 
 <section id="form"><!--form-->
 		<div class="container">

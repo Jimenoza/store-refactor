@@ -100,11 +100,11 @@
 								<a href="{{url('/cart')}}">
 									<img src="{{asset('images/cart.png')}}" alt="">
 								</a>
-								<div class="cart_count"><span>0</span></div>
+								<div class="cart_count"><span>{{count(Session::get('carrito'))}}</span></div>
 							</div>
 							<div class="cart_content">
 								<div class="cart_text"><a href="{{url('/cart')}}" id="carrito">Carrito</a></div>
-								<div class="cart_price">${{$total}}</div>
+								<div class="cart_price">${{Session::get('total')}}</div>
 							</div>
 						</div>
 					</div>

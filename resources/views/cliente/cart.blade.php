@@ -12,9 +12,7 @@
 
 	<!-- Characteristics -->
 
-	<!-- <header class="header">
-	@include('cliente.search')
-	</header> -->
+	
 	<!-- Cart -->
 
 	<div class="cart_section">

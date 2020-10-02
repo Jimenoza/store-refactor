@@ -32,6 +32,7 @@ class ClientController extends Controller
       }
       // $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
       // $cartSize = Cart::getCartSize();
+      Cart::createCart();
       $total = Cart::totalPrice();
     	return view('cliente.index', ['productos'=> $products,'total' => $total]);
 
