@@ -11,9 +11,9 @@
 <!-- Characteristics -->
 @extends('layouts.cliente')
 @section('contenidoCliente')
-<header class="header">
+<!-- <header class="header">
 @include('cliente.search')
-</header>
+</header> -->
 <!-- Cart -->
 
 <div class="cart_section">

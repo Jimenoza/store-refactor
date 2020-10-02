@@ -136,12 +136,12 @@ class ProductController extends Controller
       return handleError($e);
     }
     // $user = Auth::user();
-    $cartSize = Cart::getCartSize();
+    // $cartSize = Cart::getCartSize();
     $total = Cart::totalPrice();
     if($products){
       $products = self::paginate($products,$filter);
     }
-    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter,'carritoLen' => $cartSize,'total' => $total]);
+    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter,'total' => $total]);
   }
 
   public function filter($id){
@@ -152,7 +152,7 @@ class ProductController extends Controller
       return handleError($e);
     }
     // $user = Auth::user();
-    $cartSize = Cart::getCartSize();
+    // $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     $catName = Cart::totalPrice();
     foreach ($categories as $cat) {
@@ -164,7 +164,7 @@ class ProductController extends Controller
     $products = Product::where('idCategoria',$id)->get();
     $pages = self::paginate($products->toArray());
     // dd($pages);
-    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName,'carritoLen' => $cartSize,'total' => $total]);
+    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName,'total' => $total]);
   }
   
   public function productDetail($id){
@@ -176,12 +176,12 @@ class ProductController extends Controller
       return handleError($e);
     }
     // $user = Auth::user();
-    $cartSize = Cart::getCartSize();
+    // $cartSize = Cart::getCartSize();
     $total = Session::get('total');
     // DB::enableQueryLog();
     $comments = Comment::where('idProducto',$id)->get();
     // dd(DB::getQueryLog());
-    return view('cliente.product',['producto' => $product,'carritoLen' => $cartSize,'total' => $total,'comentarios' => $comments]);
+    return view('cliente.product',['producto' => $product,'total' => $total,'comentarios' => $comments]);
   }
 
   public function commentProduct(Request $request, $id){

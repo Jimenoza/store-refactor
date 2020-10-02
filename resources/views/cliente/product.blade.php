@@ -5,9 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/product_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/product_responsive.css')}}">
 @endpush
-<header class="header">
+<!-- <header class="header">
 	@include('cliente.search')
-</header>
+</header> -->
 
 <div class="single_product">
 	<div class="container">

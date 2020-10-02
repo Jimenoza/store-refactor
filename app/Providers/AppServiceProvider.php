@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Dusk\DuskServiceProvider;
 use tiendaVirtual\Category;
+use tiendaVirtual\Cart;
 use Auth;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,11 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $user = Auth::user();
       $categories = Category::where('condicion',1)->get();
+      $cartSize = Cart::getCartSize();
       $data = [
-        'categorias' => $categories,
-        'usuario'=>$user
+        'categorias' => $categories
       ];
       view()->share('data', $data);
         //

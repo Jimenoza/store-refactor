@@ -30,6 +30,10 @@
 
 	<!-- Characteristics -->
 
+	<header class="header">
+		@include('cliente.search')
+	</header>
+
 	@yield('contenidoCliente')
 	@if(Session::has('success_msg'))
 		@include('cliente.popups.thanks')

@@ -1,9 +1,8 @@
 @extends('layouts.cliente')
 @section('contenidoCliente')
-<header class="header">
-	<!-- Top Bar -->
+<!-- <header class="header">
 	@include('cliente.search')
-</header>
+</header> -->
 <!-- Banner -->
 
 <div class="banner_2">

@@ -48,10 +48,10 @@ class CartController extends Controller
             return handleError($e);
         }
     	// $user = Auth::user();
-    	$cartSize = Cart::getCartSize(); //Obitene la cantidad de items en el carrito
+    	// $cartSize = Cart::getCartSize(); //Obitene la cantidad de items en el carrito
         $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito
         $total = Cart::totalPrice();
-    	return view('cliente.cart',['carritoLen' => $cartSize,'total' => $total,'carrito' => $cart]);
+    	return view('cliente.cart',['total' => $total,'carrito' => $cart]);
     }
 
     public function deleteCart(){

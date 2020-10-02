@@ -46,6 +46,7 @@ class Cart
     public static function deleteCart(){
         Session::forget('carrito');
         Session::forget('total');
+        self::createCart();
     }
 
     public static function removeProduct($idProducto){

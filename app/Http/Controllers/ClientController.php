@@ -22,19 +22,18 @@ class ClientController extends Controller
     }
 
     public function index(Request $request){
-      /*Función principal de la página de inicio: http://localhost:8000/cliente
+      /*Función principal de la página de inicio: http://localhost:8000
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
       try{
         $products = Product::where('estado',1)->orderBy('idProducto', 'desc')->get();//Obtiene los productos en la base
-    	  $categories = Category::where('condicion',1)->get(); //Si no hay conexión le avisa al usuario
       }catch (\Exception $e){
         return handleError($e);
       }
       // $user = Auth::user();//Busca si hay un usuario logeado en el sistema, sino, user tiene el valor 'NULL'
-      $cartSize = Cart::getCartSize();
+      // $cartSize = Cart::getCartSize();
       $total = Cart::totalPrice();
-    	return view('cliente.index', ['productos'=> $products,'categorias' => $categories,'carritoLen' => $cartSize,'total' => $total]);
+    	return view('cliente.index', ['productos'=> $products,'total' => $total]);
 
    	}
 

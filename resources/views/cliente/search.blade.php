@@ -100,7 +100,7 @@
 								<a href="{{url('/cart')}}">
 									<img src="{{asset('images/cart.png')}}" alt="">
 								</a>
-								<div class="cart_count"><span>{{$carritoLen}}</span></div>
+								<div class="cart_count"><span>0</span></div>
 							</div>
 							<div class="cart_content">
 								<div class="cart_text"><a href="{{url('/cart')}}" id="carrito">Carrito</a></div>
