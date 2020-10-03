@@ -68,7 +68,7 @@
 						{!! Form::open(array('url' => 'results', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
 								<input type="search" name="buscador" required="required" class="header_search_input" placeholder="Buscar...">
 								<div class="custom_dropdown">
-									<div class="custom_dropdown_list">
+									<!-- <div class="custom_dropdown_list">
 										<span class="custom_dropdown_placeholder clc">Todas las categorías</span>
 										<i class="fas fa-chevron-down"></i>
 										<select name="catFiltro" id="catFiltro" class="custom_list clc form-control">
@@ -81,6 +81,19 @@
 												@endif
 											@endforeach
 										</select>
+									</div> -->
+									<div class="custom_dropdown_list">
+										<span class="custom_dropdown_placeholder clc">Todas las categoria</span>
+										<i class="fas fa-chevron-down"></i>
+										<input type="hidden" id="catFiltro" name="catFiltro" />
+										<ul class="custom_list clc">
+											<li><a class="clc" href="#">Todas las categorias</a></li>
+											@foreach($data['categorias'] as $cat)
+												@if($cat->condicion != 0)
+												<li><a class="clc" href="#" data-value="{{$cat->idCategoria}}">{{$cat->nombre}}</a></li>
+												@endif
+											@endforeach
+										</ul>
 									</div>
 								</div>
 								<button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{asset('images/search.png')}}" alt=""></button>

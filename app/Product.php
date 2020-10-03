@@ -20,8 +20,8 @@ class Product extends Model
     'promedio',
     'idCategoria'];
 
-    public static function search($filtro,$catID){
-        if($catID == 0){
+    public static function search($filtro,$catID=NULL){
+        if(!$catID){
             $response = DB::select('select * from producto where nombre LIKE "%'.$filtro.'%" and estado = 1;');
         }
         else{

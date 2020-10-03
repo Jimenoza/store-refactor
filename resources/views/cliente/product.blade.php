@@ -125,7 +125,4 @@
 	</div>
 </div>
 @include('cliente.popups.modal')
-@push('scripts')
-<script src="{{asset('js/product_custom.js')}}"></script>
-@endpush
 @endsection

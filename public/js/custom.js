@@ -139,12 +139,14 @@ $(document).ready(function()
 
 		});
 
-		$('.custom_list select').on('click', function (ev)
+		$('.custom_list a').on('click', function (ev)
 		{
 			ev.preventDefault();
 			var index = $(this).parent().index();
 
 			placeholder.text( $(this).text() ).css('opacity', '1');
+			$('#catFiltro').val($(this).data("value"));
+			console.log(this);
 
 			if(list.hasClass('active'))
 			{
@@ -159,8 +161,13 @@ $(document).ready(function()
 
 		$('select').on('change', function (e)
 		{
+			placeholder.text(this.value);
+			$(this).animate({width: placeholder.width() + 'px' });
 			//alert(this.options[this.selectedIndex].text);
-			placeholder.text(this.options[this.selectedIndex].text);
+			// placeholder.text(this.options[this.selectedIndex].text);
+			// placeholder.text(this.value);
+
+			// $(this).animate({width: placeholder.width() + 'px' });
 
 			//$(this).animate({width: placeholder.width() + 'px' });
 		});

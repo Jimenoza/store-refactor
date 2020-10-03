@@ -27,7 +27,7 @@ $(document).ready(function()
 
 	setHeader();
 
-	initCustomDropdown();
+	// initCustomDropdown();
 	initPageMenu();
 
 	$(window).on('resize', function()

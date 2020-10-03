@@ -692,14 +692,14 @@ section
 	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
 }
-.custom_list option
+.custom_list li
 {
 	height: 35px;
 	padding-left: 15px;
 	padding-right: 15px;
 	background: #FFFFFF;
 }
-.custom_list option
+.custom_list li a
 {
 	display: block;
 	color: #a3a3a3;
@@ -711,7 +711,7 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.custom_list option:hover
+.custom_list li a:hover
 {
 	color: #0e8ce4;
 }

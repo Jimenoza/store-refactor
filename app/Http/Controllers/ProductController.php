@@ -126,18 +126,20 @@ class ProductController extends Controller
 
 
   public function search(Request $request){
+    $data = $request->all();
     /*Busca productos por una frase ingresada por el usuario*/
-    try{
-      $filter = trim($request->get('buscador'));//Obtiene lo que el usuario ingresó
-      $catFilter = trim($request->get('catFiltro'));
+    $filter = trim($data['buscador']);//Obtiene lo que el usuario ingresó
+    if($data['catFiltro']){
+      $catFilter = trim($data['catFiltro']);
       $products = Product::search($filter,$catFilter);
+    }
+    else{
+      $products = Product::search($filter);
+    }
       // $categories = Category::where('condicion',1)->get();
-    }catch (\Exception $e){
-      return handleError($e);
-    }
-    if($products){
-      $products = self::paginate($products,$filter);
-    }
+    
+    $products = self::paginate($products,$filter);
+    
     return view('cliente.results', ['productos'=> $products,'filtro' =>$filter]);
   }
 
