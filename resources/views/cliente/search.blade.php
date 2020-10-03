@@ -74,9 +74,9 @@
 										<select name="catFiltro" id="catFiltro" class="custom_list clc form-control">
 											<option value="0" class="clc" label="Todas las categorías">Todas las categorías</option>
 											@foreach($data['categorias'] as $cat)
-												@if($cat->enable != 0)
-												<option value="{{$cat->id}}" class="clc" label="{{$cat->name}}">
-													{{$cat->name}}
+												@if($cat->condicion != 0)
+												<option value="{{$cat->idCategoria}}" class="clc" label="{{$cat->nombre}}">
+													{{$cat->nombre}}
 												</option>
 												@endif
 											@endforeach
@@ -89,8 +89,8 @@
 										<ul class="custom_list clc">
 											<li><a class="clc" href="#">Todas las categorias</a></li>
 											@foreach($data['categorias'] as $cat)
-												@if($cat->condicion != 0)
-												<li><a class="clc" href="#" data-value="{{$cat->idCategoria}}">{{$cat->nombre}}</a></li>
+												@if($cat->enable != 0)
+												<li><a class="clc" href="#" data-value="{{$cat->id}}">{{$cat->name}}</a></li>
 												@endif
 											@endforeach
 										</ul>
