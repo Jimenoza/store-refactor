@@ -54,8 +54,8 @@ class Cart
         $total = Session::get('total');
         for($i = 0; $i < count($cart); $i++){
             //dd($cart);
-            if($cart[$i]->idProducto == $idProducto){//Encuentra el item a quitar del carrito
-                $total -= $cart[$i]->precio;
+            if($cart[$i]->id == $idProducto){//Encuentra el item a quitar del carrito
+                $total -= $cart[$i]->price;
                 array_splice($cart,$i,1);//Lo quita de la lista(array)
                 //unset($cart[$i]);
                 break;

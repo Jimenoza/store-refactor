@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Producto</a> <a href="{{url('/admin/product/edit/'.$productDetail->idProducto)}}" class="current">Editar Producto</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Producto</a> <a href="{{url('/admin/product/edit/'.$productDetail->id)}}" class="current">Editar Producto</a> </div>
     <h1>Editar Producto</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">
@@ -26,11 +26,11 @@
             <h5>Formulario para Editar Producto</h5>
           </div>
           <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('/admin/product/edit/'.$productDetail->idProducto)}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
+            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('/admin/product/edit/'.$productDetail->id)}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
               <div class="control-group">
                 <label class="control-label">Nombre del Producto</label>
                 <div class="controls">
-                  <input type="text" name="nombre" id="nombre" value="{{$productDetail->nombre}}">
+                  <input type="text" name="nombre" id="nombre" value="{{$productDetail->name}}">
                 </div>
               </div>
               <div class="control-group">
@@ -44,7 +44,7 @@
               <div class="control-group">
                 <label class="control-label">Descripción del Producto</label>
                 <div class="controls">
-                  <textarea name="descripcion" id="descripcion">{{$productDetail->descripcion}}</textarea>
+                  <textarea name="descripcion" id="descripcion">{{$productDetail->description}}</textarea>
                 </div>
               </div>
               <div class="control-group">
@@ -56,7 +56,7 @@
               <div class="control-group">
                 <label class="control-label">Precio del Producto</label>
                 <div class="controls">
-                  <input type="number" name="precio" id="precio" value="{{$productDetail->precio}}">
+                  <input type="number" name="precio" id="precio" value="{{$productDetail->price}}">
                 </div>
               </div>
               <div class="control-group">

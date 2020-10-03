@@ -23,13 +23,13 @@ class OrderController extends Controller
         /*Despliega las órdenes por usuario, si hay alguien logueado*/
     	//if(User::hayUsuarioLogueado()){//Pregunta que haya algún usuario logueado
             try{
-    		  $categories = Category::where('condicion',1)->get();//DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
+    		  $categories = Category::where('enable',1)->get();//DB::select("call getCategorias()"); //Obtiene las categorías y revisa que haya conexión con la vase de datos
             }catch (\Exception $e){
                 return handleError($e);
             }
 	    	// $user = Auth::user();//Obtiene el usuario logueado
 	    	// $cartSize = Cart::getCartSize();
-            $orders = Order::where('email',Auth::user()->email)->get();//self::getUserOrders();
+            $orders = Order::where('user_id',Auth::user()->id)->get();//self::getUserOrders();
             // dd($orders);
 	    	return view('cliente.ordenes',['ordenes' => $orders]);
     	/*}else{
@@ -57,9 +57,9 @@ class OrderController extends Controller
                 // dd(Carbon::now()->toDateTimeString());  
                 $order = new Order;
                 $order->total = Cart::totalPrice();
-                $order->fecha = Carbon::now()->toDateTimeString();
-                $order->direccion = $data['direccion'];
-                $order->email = $user->email;
+                $order->date = Carbon::now()->toDateTimeString();
+                $order->address = $data['direccion'];
+                $order->user_id = $user->id;
                 $order->save();
                 //Cart::registerCart($usuario->email);//Registra el carrito en la base de datos
             }catch (\Exception $e){
@@ -69,13 +69,13 @@ class OrderController extends Controller
             $total = Cart::totalPrice();
             $body = [];
             foreach ($products as $producto) {
-                array_push($body,['idOrden' => $order->idOrden, 'idProducto' => $producto->idProducto]);
-                $prod = Product::find($producto->idProducto);
+                array_push($body,['order_id' => $order->id, 'product_id' => $producto->id]);
+                $prod = Product::find($producto->id);
                 $prod->stock = ($prod->stock - 1);
                 $prod->save();
             };
             // DB::insert("call insertarOrden('".$dir."',".$cartID.",".$total.");");
-            DB::table('producto_x_orden')->insert($body);
+            DB::table('products_per_order')->insert($body);
             //Cart::registerPurchase($direccion);//Genera una orden con el carrito creado
             Session::forget('carrito');//Olvida el carrito que había
             Session::forget('total');

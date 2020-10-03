@@ -7,18 +7,17 @@ use DB;
 
 class Comment extends Model
 {
-    protected $table = 'calificacion_x_producto';
-    protected $primaryKey = 'id';
+    protected $table = 'califications';
     protected $fillable = [
-        'comentario',
-        'calificacion',
-        'idProducto',
-        'idUsuario'
+        'comment',
+        'calification',
+        'product_id',
+        'user_id'
     ];
     public $timestamps = false;
 
     public static function getReplies($comment){
-        return Reply::where('idCalificacion',$comment)->get();
+        return Reply::where('calification_id',$comment)->get();
     	// return Reply::getReplies($comment);
     }
 }

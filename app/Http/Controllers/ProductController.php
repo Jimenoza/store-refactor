@@ -32,11 +32,11 @@ class ProductController extends Controller
       }
       // Agregar el producto a la Base
       $product = new Product;
-      $product->nombre = $data['nombre'];
-      $product->descripcion = $data['descripcion'];
-      $product->imagen = $image;
-      $product->precio = $data['precio'];
-      $product->idCategoria = $data['categorias'];
+      $product->name = $data['nombre'];
+      $product->description = $data['descripcion'];
+      $product->image = $image;
+      $product->price = $data['precio'];
+      $product->category_id = $data['categorias'];
       $product->stock = $data['disponibles'];
       $product->save();
       return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
@@ -48,11 +48,11 @@ class ProductController extends Controller
 
   private function getCategories(){
     /*Obtiene las categorías disponibles*/
-    $categories = Category::where('condicion',1)->get();
+    $categories = Category::where('enable',1)->get();
     /*Crea el string HTML de las categorías con respecto a un select*/
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {//ciclo para desplegar las categorías
-      $categoriesList .= "<option value='".$cat->idCategoria."'>".$cat->nombre."</option>";
+      $categoriesList .= "<option value='".$cat->id."'>".$cat->name."</option>";
     }
     return $categoriesList;
   }
@@ -67,11 +67,11 @@ class ProductController extends Controller
       if($request->hasFile('imageInput')){
           $imageName = self::addImage();
       }
-      $productDetail->nombre = $data['nombre'];
-      $productDetail->descripcion = $data['descripcion'];
-      $productDetail->imagen = $imageName;
-      $productDetail->precio = $data['precio'];
-      $productDetail->idCategoria = $data['categorias'];
+      $productDetail->name = $data['nombre'];
+      $productDetail->description = $data['descripcion'];
+      $productDetail->image = $imageName;
+      $productDetail->price = $data['precio'];
+      $productDetail->category_id = $data['categorias'];
       $productDetail->stock = $data['disponibles'];
       $productDetail->save();
       return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
@@ -79,16 +79,16 @@ class ProductController extends Controller
     if ($productDetail == NULL) {
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
-    $productCategory = $productDetail->idCategoria;
-    $categories = Category::where('condicion',1)->get();
+    $productCategory = $productDetail->category_id;
+    $categories = Category::where('enable',1)->get();
     $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
     foreach ($categories as $cat) {
         $selected = "";
-        error_log($cat->idCategoria." == ".$productCategory);
-        if ($cat->idCategoria == $productCategory) {
+        error_log($cat->id." == ".$productCategory);
+        if ($cat->id == $productCategory) {
             $selected = "selected";
         }
-        $categoriesList .= "<option value='".$cat->idCategoria."' ".$selected." >".$cat->nombre."</option>";
+        $categoriesList .= "<option value='".$cat->id."' ".$selected." >".$cat->name."</option>";
     }
     return view('admin.producto.editarProducto')->with(compact('productDetail','categoriesList'));
   }
@@ -110,7 +110,7 @@ class ProductController extends Controller
   public function removeProduct($id) {
     if (!empty($id)) {
       $product = Product::find($id);
-      $product->estado = 0;
+      $product->available = 0;
       $product->save();
       return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
     }
@@ -118,7 +118,7 @@ class ProductController extends Controller
 
   public function enableProduct($id){
     $product = Product::find($id);
-    $product->estado = 1;
+    $product->available = 1;
     $product->save();
     // DB::update("update producto set estado = 1 where idProducto = ".$id);
     return redirect()->back()->with('flash_message_success', '¡Producto habilitado para la compra!');
@@ -146,7 +146,7 @@ class ProductController extends Controller
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
     try{
-      $categories = Category::where('condicion',1)->get();
+      $categories = Category::where('enable',1)->get();
     }catch (\Exception $e){
       return handleError($e);
     }
@@ -155,12 +155,12 @@ class ProductController extends Controller
     $total = Session::get('total');
     $catName = 'Productos de ';
     foreach ($categories as $cat) {
-      if($cat->idCategoria == $id){
-        $catName = $catName.$cat->nombre;
+      if($cat->id == $id){
+        $catName = $catName.$cat->name;
         break;
       }
     }
-    $products = Product::where('idCategoria',$id)->get();
+    $products = Product::where('category_id',$id)->get();
     $pages = self::paginate($products->toArray());
     // dd($pages);
     return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName]);
@@ -175,7 +175,7 @@ class ProductController extends Controller
       return handleError($e);
     }
     // DB::enableQueryLog();
-    $comments = Comment::where('idProducto',$id)->get();
+    $comments = Comment::where('product_id',$id)->get();
     // dd(DB::getQueryLog());
     return view('cliente.product',['producto' => $product,'comentarios' => $comments]);
   }
@@ -183,25 +183,28 @@ class ProductController extends Controller
   public function commentProduct(Request $request, $id){
     $data = $request->all();
     $product = Product::find($id);
-    $userEmail = Auth::user()->email;
+    $userId = Auth::user()->id;
     $comment = new Comment;
-    $comment->idUsuario = $userEmail;
-    $comment->comentario = $data['comentario'];
-    $comment->calificacion = $data['quantity_input'];
-    $comment->idProducto = $product->idProducto;
+    $comment->user_id = $userId;
+    $comment->comment = $data['comentario'];
+    $comment->calification = $data['quantity_input'];
+    $comment->product_id = $product->id;
     $comment->save();
+    $product->califications = ($product->califications + 1);
+    $product->average = ($product->average + $data['quantity_input'])/$product->califications;
+    $product->save();
     // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();
   }
 
   public function replyComment(Request $request, $id){
     $data = $request->all();
-    $userEmail = Auth::user()->email;
+    $userId = Auth::user()->id;
     // $reply = new Reply($data['respuestaText'],$id,$userEmail);
     $reply = new Reply;
-    $reply->idCalificacion = $id;
-    $reply->respuesta = $data['respuestaText'];
-    $reply->idUsuario = $userEmail;
+    $reply->calification_id = $id;
+    $reply->reply = $data['respuestaText'];
+    $reply->user_id = $userId;
     $reply->save();
     return redirect()->back();
   }

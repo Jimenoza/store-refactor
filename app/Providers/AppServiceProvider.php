@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $categories = Category::where('condicion',1)->get();
+      $categories = Category::where('enable',1)->get();
       $data = [
         'categorias' => $categories
       ];

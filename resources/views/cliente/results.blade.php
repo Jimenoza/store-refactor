@@ -50,12 +50,12 @@
 						<!-- Product Item -->
 						@foreach($productos as $prod)
 						<div class="product_item discount">
-							<a href="{{URL::action('ProductController@productDetail',$prod->idProducto)}}" tabindex="0">
+							<a href="{{URL::action('ProductController@productDetail',$prod->id)}}" tabindex="0">
 							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->imagen)}}" alt="" width="170" height="170"></div>
+							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="170" height="170"></div>
 							<div class="product_content">
-								<div class="product_price" id="product_price" name="product_price">${{$prod->precio}}</div>
-								<div class="product_name"><div>{{$prod->nombre}}</div></div>
+								<div class="product_price" id="product_price" name="product_price">${{$prod->price}}</div>
+								<div class="product_name"><div>{{$prod->name}}</div></div>
 							</div>
 							<div class="product_fav"><i class="fas fa-heart"></i></div>
 							</a>

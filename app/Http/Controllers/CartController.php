@@ -23,7 +23,7 @@ class CartController extends Controller
     public function addItem($id){
         /*Agrega productos al carrito*/
         try{//El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
-           $product = Product::where('idProducto',$id)
+           $product = Product::where('id',$id)
                                 ->where('stock','>',0)
                                 ->get();//productInStock($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
         }catch (\Exception $e){
@@ -34,7 +34,7 @@ class CartController extends Controller
     		$cart[] = $product[0];//Inserta el producto en el carrito,
             Cart::putCart($cart);//Actualiza el carrito,total,precio
     		$total = Cart::totalPrice();
-    		$total += $product[0]->precio;
+    		$total += $product[0]->price;
     		Cart::updatePrice($total);
     	}
     	return redirect()->back();
