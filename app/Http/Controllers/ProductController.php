@@ -183,11 +183,14 @@ class ProductController extends Controller
     $product = Product::find($id);
     $userId = Auth::user()->id;
     $comment = new Comment;
-    $comment->user_id = $userEmail;
+    $comment->user_id = $userId;
     $comment->comment = $data['comentario'];
     $comment->calification = $data['quantity_input'];
     $comment->product_id = $product->id;
     $comment->save();
+    $product->califications = ($product->califications + 1);
+    $product->average = ($product->average + $data['quantity_input'])/$product->califications;
+    $product->save();
     // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
     return redirect()->back();
   }
