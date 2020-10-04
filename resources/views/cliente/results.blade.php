@@ -50,16 +50,16 @@
 						<!-- Product Item -->
 						@foreach($productos as $prod)
 						<div class="product_item discount">
-							<a href="{{URL::action('ProductController@productDetail',$prod->id)}}" tabindex="0">
+							<a href="{{URL::action('ProductController@productDetail',$prod['id'])}}" tabindex="0">
 							<div class="product_border"></div>
-							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="170" height="170"></div>
+							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod['image'])}}" alt="" width="170" height="170"></div>
 							<div class="product_content">
-								<div class="product_price" id="product_price" name="product_price">${{$prod->price}}</div>
-								<div class="product_name"><div>{{$prod->name}}</div></div>
+								<div class="product_price" id="product_price" name="product_price">${{$prod['price']}}</div>
+								<div class="product_name"><div>{{$prod['name']}}</div></div>
 							</div>
 							<div class="product_fav"><i class="fas fa-heart"></i></div>
 							</a>
-							@if($prod->stock == 0)
+							@if($prod['stock'] == 0)
 							<ul class="product_marks">
 								<li class="product_mark product_discount">Agotado</li>
 							</ul>

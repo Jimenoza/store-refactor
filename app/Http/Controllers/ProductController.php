@@ -129,16 +129,16 @@ class ProductController extends Controller
     $data = $request->all();
     /*Busca productos por una frase ingresada por el usuario*/
     $filter = trim($data['buscador']);//Obtiene lo que el usuario ingresó
+    $products = Product::where('name','like','%'.$filter.'%');
     if($data['catFiltro']){
       $catFilter = trim($data['catFiltro']);
-      $products = Product::search($filter,$catFilter);
+      // $products = Product::search($filter,$catFilter);
+      $products = $products->where('category_id','=',$catFilter);
     }
-    else{
-      $products = Product::search($filter);
-    }
+
       // $categories = Category::where('condicion',1)->get();
-    
-    $products = self::paginate($products,$filter);
+    // dd($products->get());
+    $products = self::paginate($products->get()->toArray(),$filter);
     
     return view('cliente.results', ['productos'=> $products,'filtro' =>$filter]);
   }
