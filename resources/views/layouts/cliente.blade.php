@@ -38,6 +38,7 @@
 	@if(Session::has('success_msg'))
 		@include('cliente.popups.thanks')
 	@endif
+	@include('cliente.popups.modalLogin')
 
 
 	<!-- Footer -->
@@ -103,6 +104,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('js/shop_custom.js')}}"></script>
+<script src="{{asset('js/search.js')}}"></script>
 @stack('scripts')
 @if(Session::has('success_msg'))
 <script type="text/javascript">

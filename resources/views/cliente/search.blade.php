@@ -4,7 +4,7 @@
 	function nuevoMetodo() {
 	open('/cliente/metodos','','top=100,left=300,width=500,height=400') ;
 	}
-</script>
+	</script>
 <div class="top_bar">
 	<div class="container">
 		<div class="row">
@@ -21,8 +21,8 @@
 					<div class="top_bar_user">
 						@if(!Auth::user())
 							<div class="user_icon"><img src="{{asset('images/user.png')}}" alt=""></div>
-							<div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
-							<div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
+							<div><a href="#" id="register">Registrarse</a></div>
+							<div><a href="#" id="iniciarSesion">Iniciar Sesión</a></div>
 						@else
 							<div class="user_icon"><img src="{{asset('images/user.png')}}" alt=""></div>
 							<div class="top_bar_menu">

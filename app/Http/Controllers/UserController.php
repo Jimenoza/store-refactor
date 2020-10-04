@@ -55,7 +55,7 @@ class UserController extends Controller
         }
       }
       Session::forget('frontSession');
-      return redirect('/cliente');
+      return redirect('/');
     }
 
     public function checkEmail(Request $request) {
