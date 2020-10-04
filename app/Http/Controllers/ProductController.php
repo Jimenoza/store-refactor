@@ -1,6 +1,7 @@
 <?php
 namespace tiendaVirtual\Http\Controllers;
 use tiendaVirtual\Http\Requests\ProductoFormRequest;
+use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\Product;
 use tiendaVirtual\Category;
@@ -125,13 +126,14 @@ class ProductController extends Controller
   }
 
 
-  public function search(Request $request){
-    $data = $request->all();
+  public function search(ProductSearchRequest $request){
+    $data = $request->validated();
+    // $data = $request->all();
     /*Busca productos por una frase ingresada por el usuario*/
-    $filter = trim($data['buscador']);//Obtiene lo que el usuario ingresó
+    $filter = trim($data['searcher']);//Obtiene lo que el usuario ingresó
     $products = Product::where('name','like','%'.$filter.'%');
-    if($data['catFiltro']){
-      $catFilter = trim($data['catFiltro']);
+    if($data['categoryFilter']){
+      $catFilter = trim($data['categoryFilter']);
       // $products = Product::search($filter,$catFilter);
       $products = $products->where('category_id','=',$catFilter);
     }
@@ -211,7 +213,7 @@ class ProductController extends Controller
     if($filtro == NULL){
       $paginator->withPath('?');
     }else{
-      $paginator->withPath('?buscador='.$filtro);
+      $paginator->withPath('?searcher='.$filtro);
     }
     return $paginator;
   }

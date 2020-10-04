@@ -64,9 +64,17 @@
 			<div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
 				<div class="header_search">
 					<div class="header_search_content">
+						@if($errors->any())
+						<div class="alert alert-danger alert-block">
+							@foreach ($errors->all() as $error)
+							<button type="button" class="close" data-dismiss="alert">X</button>
+							<strong>{{ $error }}</strong>
+							@endforeach
+						</div>
+						@endif
 						<div class="header_search_form_container">
 						{!! Form::open(array('url' => 'results', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
-								<input type="search" name="buscador" required="required" class="header_search_input" placeholder="Buscar...">
+								<input type="search" name="searcher" required="required" class="header_search_input" placeholder="Buscar...">
 								<div class="custom_dropdown">
 									<!-- <div class="custom_dropdown_list">
 										<span class="custom_dropdown_placeholder clc">Todas las categorías</span>
@@ -85,7 +93,7 @@
 									<div class="custom_dropdown_list">
 										<span class="custom_dropdown_placeholder clc">Todas las categoria</span>
 										<i class="fas fa-chevron-down"></i>
-										<input type="hidden" id="catFiltro" name="catFiltro" />
+										<input type="hidden" id="categoryFilter" name="categoryFilter" />
 										<ul class="custom_list clc">
 											<li><a class="clc" href="#">Todas las categorias</a></li>
 											@foreach($data['categorias'] as $cat)

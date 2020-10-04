@@ -70,7 +70,7 @@
             <div class="header_search_content">
               <div class="header_search_form_container">
               {!! Form::open(array('url' => 'results/0', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
-                  <input type="search" name="buscador" required="required" class="header_search_input" placeholder="Buscar..." >
+                  <input type="search" name="searcher" required="required" class="header_search_input" placeholder="Buscar..." >
                   <div class="custom_dropdown" hidden="false">
                     <div class="custom_dropdown_list">
                       <span class="custom_dropdown_placeholder clc">Todas las categorías</span>
