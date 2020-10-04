@@ -22,13 +22,8 @@ class CartController extends Controller
 
     public function addItem($id){
         /*Agrega productos al carrito*/
-        try{//El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
-           $product = Product::where('id',$id)
-                                ->where('stock','>',0)
-                                ->get();//productInStock($id);//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
-        }catch (\Exception $e){
-            return handleError($e);
-        }
+        //El try es para verificar que haya conexión con la base de datos, sino, le avisa al usuario del problema
+        $product = Product::where('id',$id)->where('stock','>',0)->get();//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
     	if(count($product) != 0){ //Hay stock del producto
     		$cart = Cart::getCart();
     		$cart[] = $product[0];//Inserta el producto en el carrito,
@@ -42,11 +37,6 @@ class CartController extends Controller
 
     public function seeCart(){
         /*Llama a los productos en el carrito para desplegar en la ventana del carrito*/
-        try{
-    	//    $categories = Category::where('condicion',1)->get();//Obtiene las categorías de la base, si no hay conexión con la base, avisa del problema
-        }catch (\Exception $e){
-            return handleError($e);
-        }
     	// $user = Auth::user();
     	// $cartSize = Cart::getCartSize(); //Obitene la cantidad de items en el carrito
         $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito

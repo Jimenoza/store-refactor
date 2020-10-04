@@ -40,15 +40,11 @@ class ClientController extends Controller
       logueado. Despliega un pop-up con el aviso. Esta es la diferencia con inicioSesion en UserController*/
       if($request->isMethod('post')) {
         $data = $request->all();
-        try{//revisar la conexión con la base de datos
-          if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
-            // User::loginUser($data['correo']);
-            return redirect('/cart');
-          } else {
-            return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
-          }
-        }catch (\Exception $e){
-          return handleError($e);
+        if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
+          // User::loginUser($data['correo']);
+          return redirect('/cart');
+        } else {
+          return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
         }
       }
     }

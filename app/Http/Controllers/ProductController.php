@@ -145,13 +145,7 @@ class ProductController extends Controller
 
   public function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
-    try{
-      $categories = Category::where('enable',1)->get();
-    }catch (\Exception $e){
-      return handleError($e);
-    }
-    // $user = Auth::user();
-    // $cartSize = Cart::getCartSize();
+    $categories = Category::where('enable',1)->get();
     $total = Session::get('total');
     $catName = 'Productos de ';
     foreach ($categories as $cat) {
@@ -167,13 +161,7 @@ class ProductController extends Controller
   }
   
   public function productDetail($id){
-    /*Retorna toda la información del producto para desplegarse en pantalla*/
-    try{
-      $product = Product::find($id);
-      // $categories = Category::where('condicion',1)->get();
-    }catch (\Exception $e){
-      return handleError($e);
-    }
+    $product = Product::find($id);
     // DB::enableQueryLog();
     $comments = Comment::where('product_id',$id)->get();
     // dd(DB::getQueryLog());
