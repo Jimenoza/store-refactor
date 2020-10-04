@@ -2,6 +2,7 @@
 namespace tiendaVirtual\Http\Controllers;
 use tiendaVirtual\Http\Requests\ProductoFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
+use tiendaVirtual\Http\Requests\CommentProductRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\Product;
 use tiendaVirtual\Category;
@@ -170,20 +171,20 @@ class ProductController extends Controller
     return view('cliente.product',['producto' => $product,'comentarios' => $comments]);
   }
 
-  public function commentProduct(Request $request, $id){
-    $data = $request->all();
+  public function commentProduct(CommentProductRequest $request, $id){
+    $data = $request->validated();
     $product = Product::find($id);
     $userId = Auth::user()->id;
     $comment = new Comment;
     $comment->user_id = $userId;
     $comment->comment = $data['comentario'];
-    $comment->calification = $data['quantity_input'];
+    $comment->calification = $data['rate'];
     $comment->product_id = $product->id;
     $comment->save();
     $product->califications = ($product->califications + 1);
-    $product->average = ($product->average + $data['quantity_input'])/$product->califications;
+    $product->average = ($product->average + $data['rate'])/$product->califications;
     $product->save();
-    // $product->rate($userEmail,$data['comentario'],$data['quantity_input']);
+    // $product->rate($userEmail,$data['comentario'],$data['rate']);
     return redirect()->back();
   }
 

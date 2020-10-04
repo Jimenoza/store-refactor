@@ -310,7 +310,7 @@ $(document).ready(function()
 		// Handle product quantity input
 		if($('.product_quantity').length)
 		{
-			var input = $('#quantity_input');
+			var input = $('#rate');
 			var incButton = $('#quantity_inc_button');
 			var decButton = $('#quantity_dec_button');
 
@@ -408,7 +408,7 @@ $(document).ready(function()
 });
 
 function validar(){
-	var cal = $('#quantity_input').val();
+	var cal = $('#rate').val();
 	var text = document.getElementById("comentario").value;
 	var retorno = false;
 	var msj = "* Por favor, ingrese la calificación";

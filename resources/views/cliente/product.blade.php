@@ -40,20 +40,29 @@
 					<form name="formularioCali" id="formularioCali" action="{{url('comment/'.$producto->id)}}" method="post" onsubmit="return validar()"> {{csrf_field()}}
 						<!-- Product Quantity -->
 						<div class="modal-group">
+							@if($errors->any())
+							<div class="alert alert-danger alert-block">
+								@foreach ($errors->all() as $error)
+								<button type="button" class="close" data-dismiss="alert">X</button>
+								<strong>{{ $error }}</strong>
+								@endforeach
+							</div>
+							@endif
 							<label for="tarjetas" class="col-form-label">Califique este producto</label>
 							<div class="clearfix" style="z-index: 5;">
 								<div class="product_quantity clearfix">
 									<span>Calificación: </span>
-									<input id="quantity_input" name="quantity_input" type="text" pattern="[0-9]*" value="" readonly>
+									<input id="rate" name="rate" type="text" pattern="[0-9]*" value="" readonly>
 									<div class="quantity_buttons">
 										<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
 										<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
 									</div>
 								</div>
-								<p id="error" class="demoFont"></p>
+								<p id="rateError" class="demoFont"></p>
 							</div>
 							<label for=""></label>
-							<textarea class="form-control" id="comentario" name="comentario" placeholder="¿Qué le pareció el producto?"></textarea>
+							<textarea class="form-control" id="comment" name="comment" placeholder="¿Qué le pareció el producto?"></textarea>
+							<p id="commentError" class="demoFont"></p>
 			            </div>
 			            <div class="modal-footer">
 			            	<button type="submit" class="btn btn-primary">Comentar y calificar</button>
