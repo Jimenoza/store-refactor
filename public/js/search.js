@@ -7,3 +7,7 @@ $(document).ready(function(){
     });
 
 })
+
+function callModal(modal) {
+    $(modal).modal('show');
+};

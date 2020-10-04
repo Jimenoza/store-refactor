@@ -26,7 +26,9 @@ class UserController extends Controller
             return redirect()->back();
           }
         }else {
-          return redirect()->back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
+          $request->session()->put('flash_message_error', '¡El correo o la contraseña son inválidos!');
+          $request->session()->put('modal', '#popupLogin');
+          return redirect()->back();//->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
         }
       }
     }
@@ -48,13 +50,14 @@ class UserController extends Controller
           $user->password = bcrypt($data['contrasenaRegistrar']);
           $user->admin = 0;
           if(!$user->name || !$user->email || !$user->password){
-            return redirect()->back()->with('flash_message_error', '¡Introdujo un campo no válido!');
+            $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
+            $request->session()->put('modal', '#popupRegister');
+            return redirect()->back();//->with('flash_message_error', '¡Introdujo un campo no válido!');
           }else{
             $user->save();
           }
         }
       }
-      Session::forget('frontSession');
       return redirect('/');
     }
 

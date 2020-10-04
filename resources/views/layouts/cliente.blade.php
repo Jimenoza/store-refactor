@@ -104,13 +104,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('js/shop_custom.js')}}"></script>
-<!-- <script src="{{asset('js/search.js')}}"></script> -->
+<script src="{{asset('js/search.js')}}"></script>
 @stack('scripts')
 @if(Session::has('success_msg'))
 <script type="text/javascript">
 	$(function() {
 		$("#popupThanks").modal('show');
 	});
+</script>
+@endif
+@if(Session::has('flash_message_error'))
+<p hidden>{{Session::pull('flash_message_error')}}</p>
+<script type="text/javascript">
+	callModal("{{Session::pull('modal')}}");
 </script>
 @endif
 
