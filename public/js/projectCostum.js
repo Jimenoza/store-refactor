@@ -5,7 +5,12 @@ $(document).ready(function(){
     });
     $('#iniciarSesion').on('click', function (ev){
         $("#popupLogin").modal('show');
-    });
+	});
+	$("a div").click(function(e){
+	e.preventDefault();
+	//var padre = $("a div").parent();
+    //$("a div").parent().append("<p>Esto es un parrafo.</p>");
+	});
 
 })
 
@@ -14,32 +19,31 @@ function callModal(modal) {
 };
 
 function mostrar(e){
-	var formulario = '<form id="respuesta" class="answer" onsubmit="return respuesta()" ' + 
-	                    'action="http://localhost:8000/reply/' + e + '"' +' >'+
-						'<div class="form-group row">'+
-						'<div class="col-sm-6">'+
-						'<textarea type="text" class="form-control" id="respuestaText">'+
-						'</textarea>'+
-						'<p id="alerta" class="demoFont"></p>'+
-						'</div>'+
-						'</div>'+
-						'<button class="btn btn-primary">Responder</button>'+
-						'</form>';
+	// var padre = $('#link'+e).parent();
+	// padre.preventDefault();
+	var formulario = `<form id="respuesta" class="answer" onsubmit="return respuesta()" action="http://localhost:8000/reply/${e}" method="POST">
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<textarea type="text" class="form-control" id="replyText" name="replyText"></textarea>
+				<p id="alerta" class="demoFont"></p>
+			</div>
+		</div>
+		<button class="btn btn-primary">Responder</button>
+	</form>`;
 	var x = document.getElementById("" + e);
 	var y = document.getElementById("respuesta" + e);
-	var padre = $('#link'+e).parent();
 	if (x.style.display === "none") {
         x.style.display = "block";
     } else {
         x.style.display = "none";
         y.style.display = "block";
-    }
+	}
     //alert(formulario);
     //padre.append(formulario);
 }
 
 function respuesta(){
-	var text = document.getElementById("respuestaText").value;
+	var text = document.getElementById("replyText").value;
 	var retorno = true;
 	var msj = "* No deje una respuesta en blanco";
 	if(text){

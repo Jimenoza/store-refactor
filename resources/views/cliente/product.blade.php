@@ -119,7 +119,7 @@
 							<form id="respuesta{{$comentario->id}}" class="answer" action="{{url('reply/'.$comentario->id)}}" style="display: none;">
 								 <div class="form-group row">
     								<div class="col-sm-6">
-      									<textarea type="text" class="form-control" id="respuestaText" name="respuestaText"></textarea> 
+      									<textarea type="text" class="form-control" id="replyText" name="replyText"></textarea> 
     								</div>
   								</div>
   								<button class="btn btn-primary">Responder</button>

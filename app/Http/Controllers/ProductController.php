@@ -3,6 +3,7 @@ namespace tiendaVirtual\Http\Controllers;
 use tiendaVirtual\Http\Requests\ProductoFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
+use tiendaVirtual\Http\Requests\ReplyCommentRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\Product;
 use tiendaVirtual\Category;
@@ -188,13 +189,13 @@ class ProductController extends Controller
     return redirect()->back();
   }
 
-  public function replyComment(Request $request, $id){
-    $data = $request->all();
+  public function replyComment(ReplyCommentRequest $request, $id){
+    $data = $request->validated();
     $userId = Auth::user()->id;
     // $reply = new Reply($data['respuestaText'],$id,$userEmail);
     $reply = new Reply;
     $reply->calification_id = $id;
-    $reply->reply = $data['respuestaText'];
+    $reply->reply = $data['replyText'];
     $reply->user_id = $userId;
     $reply->save();
     return redirect()->back();
