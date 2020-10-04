@@ -23,7 +23,7 @@ class UserController extends Controller
             return redirect('admin/product/index');
           }
           else{
-            return redirect('/');
+            return redirect()->back();
           }
         }else {
           return redirect()->back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');

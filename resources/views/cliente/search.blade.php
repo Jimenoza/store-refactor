@@ -21,8 +21,8 @@
 					<div class="top_bar_user">
 						@if(!Auth::user())
 							<div class="user_icon"><img src="{{asset('images/user.png')}}" alt=""></div>
-							<div><a href="#" id="register">Registrarse</a></div>
-							<div><a href="#" id="iniciarSesion">Iniciar Sesión</a></div>
+							<div><a href="#" id="iniciarSesion" data-toggle="modal" data-target="#popupLogin">Iniciar Sesión</a></div>
+							<div><a href="#" id="register" data-toggle="modal" data-target="#popupRegister">Registrarse</a></div>
 						@else
 							<div class="user_icon"><img src="{{asset('images/user.png')}}" alt=""></div>
 							<div class="top_bar_menu">

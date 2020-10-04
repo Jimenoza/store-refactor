@@ -34,18 +34,4 @@ class ClientController extends Controller
     public function show($id){
       return view('cliente.show', ['producto'=>Product::findOrFail($id)]);
     }
-
-    public function login(Request $request) {//Hay diferencia con el otro login
-      /*Inicia sesión en la página del carrito si se hace click en proceder con pago y no hay alguien
-      logueado. Despliega un pop-up con el aviso. Esta es la diferencia con inicioSesion en UserController*/
-      if($request->isMethod('post')) {
-        $data = $request->all();
-        if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
-          // User::loginUser($data['correo']);
-          return redirect('/cart');
-        } else {
-          return Redirect::back()->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
-        }
-      }
-    }
 }

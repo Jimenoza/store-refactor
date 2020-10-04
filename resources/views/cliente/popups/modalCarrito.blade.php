@@ -51,6 +51,7 @@
     </div>
   @endif
 @else<!--No hay una sesión activa-->
+
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -67,7 +68,7 @@
               <strong>{!! session('flash_message_error') !!}</strong>
           </div>
           @endif
-         <form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/cliente/inicioSesion')}}" method="POST"> {{csrf_field()}}
+         <form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/login')}}" method="POST"> {{csrf_field()}}
             <div class="form-group">
               <label for="correo" class="col-form-label">Correo:</label>
               <input type="email" class="form-control" id="correo" name="correo">
