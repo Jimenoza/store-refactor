@@ -1,6 +1,35 @@
-@extends('layouts.cliente')
-@section('contenidoCliente')
-<header class="header">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tienda Virtual</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OneTech shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap4/bootstrap.min.css')}}">
+<link href="{{asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/animate.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/slick-1.8.0/slick.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.css')}}">
+</head>
+
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<!-- Banner -->
+
+
+
+	<!-- Characteristics -->
+
+	<header class="header">
   <div class="top_bar">
     <div class="container">
       <div class="row">
@@ -15,30 +44,9 @@
               </ul>
             </div>
             <div class="top_bar_user">
-              @if(Auth::user())
                 <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
                 <div><a href="{{url('/login/page')}}" id="register">Registrarse</a></div>
                 <div><a href="{{url('/login/page')}}" id="iniciarSesion">Iniciar Sesión</a></div>
-              @else
-                <div class="user_icon"><img src="{{asset('images/user.svg')}}" alt=""></div>
-                <div class="top_bar_menu">
-                  <ul class="standard_dropdown top_bar_dropdown">
-                    <li>
-                      <a href="#">Bienvenido {{Auth::user()->name}}<i class="fas fa-chevron-down"></i></a>
-                      <ul>
-                        <li><a href="{{url('/orders')}}">Mis órdenes</a></li>
-                        <!-- <li><a href="">Métodos de pago</a>
-                          <ul>
-                            <li><a href="/cliente/vermetodos">Ver métodos<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Agregar<i class="fas fa-chevron-right"></i></a></li>
-                          </ul>
-                        </li> -->
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-                <div><a href="{{URL::action('UserController@logout')}}">Cerrar Sesión</a></div>
-              @endif
             </div>
           </div>
         </div>
@@ -52,7 +60,7 @@
         <!-- Logo -->
         <div class="col-lg-2 col-sm-3 col-3 order-1">
           <div class="logo_container">
-            <div class="logo"><a href="{{URL::action('ClientController@index')}}">Tienda Virtual</a></div>
+            <div class="logo"><a href="/">Tienda Virtual</a></div>
           </div>
         </div>
 
@@ -87,11 +95,15 @@
                   <a href="{{url('/cart')}}">
                     <img src="{{asset('images/cart.png')}}" alt="">
                   </a>
-                  <div class="cart_count"><span>{{$data['carritoLen']}}</span></div>
+                  @if(Session::get('carrito'))
+                  <div class="cart_count"><span>{{count(Session::get('carrito'))}}</span></div>
+                  @else
+                  <div class="cart_count"><span>0</span></div>
+                  @endif
                 </div>
                 <div class="cart_content">
                   <div class="cart_text"><a href="{{url('/cart')}}">Carrito</a></div>
-                  <div class="cart_price">${{$total}}</div>
+                  <div class="cart_price">${{Session::get('total')}}</div>
                 </div>
               </div>
             </div>
@@ -121,7 +133,7 @@
 
           <div class="main_nav_menu ml-auto">
             <ul class="standard_dropdown main_nav_dropdown">
-              <li><a href="{{URL::action('ClientController@index')}}">Inicio<i class="fas fa-chevron-down"></i></a></li>
+              <li><a href="/">Inicio<i class="fas fa-chevron-down"></i></a></li>
             </ul>
           </div>
 
@@ -154,4 +166,80 @@
       </div>
     </div>
   </div>
-@stop
+
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-3 footer_col">
+					<div class="footer_column footer_contact">
+						<div class="logo_container">
+							<div class="logo"><a href="#">Tienda Virtual</a></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-2">
+					<div class="footer_column">
+						<div class="footer_title">Servicio al cliente</div>
+						<ul class="footer_list">
+							<li><a href="#">Mi cuenta</a></li>
+							<li><a href="#">Mis órdenes</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+
+	<!-- Copyright -->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+
+					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('css/bootstrap4/popper.js')}}"></script>
+<script src="{{asset('css/bootstrap4/bootstrap.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('plugins/slick-1.8.0/slick.js')}}"></script>
+<script src="{{asset('plugins/easing/easing.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('plugins/Isotope/isotope.pkgd.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
+<script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{asset('js/shop_custom.js')}}"></script>
+@stack('scripts')
+@if(Session::has('success_msg'))
+<script type="text/javascript">
+	$(function() {
+		$("#popupThanks").modal('show');
+	});
+</script>
+@endif
+
+</body>
+
+</html>

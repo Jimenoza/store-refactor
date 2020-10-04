@@ -21,15 +21,11 @@ class ClientController extends Controller
 
     }
 
-    public function index(Request $request){
+    public function index(){
       /*Función principal de la página de inicio: http://localhost:8000
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
-      try{
-        $products = Product::where('available',1)->orderBy('id', 'desc')->get();//Obtiene los productos en la base
-      }catch (\Exception $e){
-        return handleError($e);
-      }
+      $products = Product::where('available',1)->orderBy('id', 'desc')->get();//Obtiene los productos en la base
       Cart::createCart();
     	return view('cliente.index', ['productos'=> $products]);
 

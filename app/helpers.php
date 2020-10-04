@@ -5,5 +5,5 @@ function handleError($error){
   $carritoLen = Cart::getCartSize();
   $total = Cart::totalPrice();
   error_log($error);
-  return view('cliente.error',['usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]);
+  return Response::make(view('cliente.error',['usuario'=>$user,'carritoLen' => $carritoLen,'total' => $total]), 400);
 }

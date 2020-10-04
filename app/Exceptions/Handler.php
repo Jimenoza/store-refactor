@@ -3,6 +3,7 @@
 namespace tiendaVirtual\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -33,5 +34,12 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
+    }
+
+    public function render($request, Throwable $e){
+        if($e instanceof \Illuminate\Database\QueryException){
+            return handleError($e);
+        }
+        return parent::render($request, $e);
     }
 }
