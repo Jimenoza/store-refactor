@@ -4,7 +4,7 @@ namespace tiendaVirtual\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductoFormRequest extends FormRequest
+class NewProductFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class ProductoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'categorias' => 'integer',
-            'nombre' => 'required|max:45',//va a haber un objeto en el html llamado name
-            'descripcion' => 'required|max:200', //va a haber un objeto en el html llamado description que no va a ser requerido
-            //'imageInput' => 'mimes:jpeg,bmp,png',
-            'precio' => 'required|between:0,999999999999.99',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'imageInput' => 'required|image',
+            'precio' => 'required|numeric',
+            'categorias' => 'required|integer',
             'disponibles' => 'required|integer'
         ];
     }

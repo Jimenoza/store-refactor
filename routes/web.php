@@ -31,7 +31,8 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::match(['get','post'], '/admin/category/edit/{id}', 'CategoryController@editCategory');
 	Route::match(['get','post'], '/admin/category/delete/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
-	Route::match(['get','post'], '/admin/product/new', 'ProductController@newProduct');
+	Route::post('/admin/product/new', 'ProductController@newProduct');
+	Route::get('/admin/product/new','ProductController@newProductPage');
 	Route::get('/admin/product/index', 'ProductController@index');
 	Route::match(['get','post'], '/admin/product/edit/{id}', 'ProductController@editProduct');
 	Route::match(['get','post'], '/admin/product/delete/{id}', 'ProductController@removeProduct');

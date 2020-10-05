@@ -5,11 +5,13 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="#"> Producto</a> <a href="{{url('/admin/product/new')}}" class="current">Agregar Producto</a> </div>
     <h1>Agregar Producto</h1>
-    @if(Session::has('flash_message_error'))
-        <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">X</button>
-            <strong>{!! session('flash_message_error') !!}</strong>
-        </div>
+    @if($errors->any())
+    <div class="alert alert-danger alert-block">
+      @foreach ($errors->all() as $error)
+      <button type="button" class="close" data-dismiss="alert">X</button>
+      <strong>{{ $error }}</strong>
+      @endforeach
+    </div>
     @endif
     @if(Session::has('flash_message_success'))
         <div class="alert alert-success alert-block">

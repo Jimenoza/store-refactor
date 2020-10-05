@@ -1,6 +1,6 @@
 <?php
 namespace tiendaVirtual\Http\Controllers;
-use tiendaVirtual\Http\Requests\ProductoFormRequest;
+use tiendaVirtual\Http\Requests\NewProductFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
@@ -19,35 +19,33 @@ use DB;
 
 class ProductController extends Controller
 {
-  public function index(Request $request) {
+  public function index() {
     /*Verifica que haya alguien logueado como admin y despliega todos los productos de la
     base de datos*/
     $products = Product::all();
     return view('admin.producto.indexProducto',['productos' => $products]);
   }
-  public function newProduct(Request $request)
-  {
-    if($request->isMethod('post')) {
-      $data = $request->all();
-      $image = "";
-      if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
-        $image = self::addImage();
-      }
-      // Agregar el producto a la Base
-      $product = new Product;
-      $product->name = $data['nombre'];
-      $product->description = $data['descripcion'];
-      $product->image = $image;
-      $product->price = $data['precio'];
-      $product->category_id = $data['categorias'];
-      $product->stock = $data['disponibles'];
-      $product->save();
-      return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
+  public function newProduct(NewProductFormRequest $request){
+    $data = $request->validated();
+    $image = "";
+    if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
+      $image = self::addImage();
     }
+    // Agregar el producto a la Base
+    $product = new Product;
+    $product->name = $data['nombre'];
+    $product->description = $data['descripcion'];
+    $product->image = $image;
+    $product->price = $data['precio'];
+    $product->category_id = $data['categorias'];
+    $product->stock = $data['disponibles'];
+    $product->save();
+    return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
+  }
+  public function newProductPage(){
     $categoriesList = self::getCategories();
     return view('admin.producto.agregarProducto')->with(compact('categoriesList'));
   }
-
 
   private function getCategories(){
     /*Obtiene las categorías disponibles*/
