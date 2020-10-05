@@ -26,9 +26,15 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::post('/admin/password/check', 'AdminController@checkPassword');
 	Route::match(['get','post'], '/admin/password/change', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías
-	Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
+	// Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
+	Route::get('/admin/category/new', function(){
+		return view('admin.categoria.agregarCategoria');
+	});
+	Route::post('/admin/category/new', 'CategoryController@addCategory');
+	Route::get('/admin/category/edit/{id}', 'CategoryController@editCategory');
+	Route::post('/admin/category/edit/{id}', 'CategoryController@edit');
+	// Route::match(['get','post'], '/admin/category/edit/{id}', 'CategoryController@editCategory');
 	Route::get('/admin/category/index', 'CategoryController@indexCategory');
-	Route::match(['get','post'], '/admin/category/edit/{id}', 'CategoryController@editCategory');
 	Route::match(['get','post'], '/admin/category/delete/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
 	Route::get('/admin/product/new','ProductController@newProductPage');
