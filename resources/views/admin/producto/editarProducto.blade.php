@@ -26,7 +26,7 @@
             <h5>Formulario para Editar Producto</h5>
           </div>
           <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('/admin/product/edit/'.$productDetail->id)}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
+            <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="{{url('/admin/product/edit/'.$productDetail->id)}}" name="editarProducto" id="editarProducto" novalidate="novalidate"> {{csrf_field()}}
               <div class="control-group">
                 <label class="control-label">Nombre del Producto</label>
                 <div class="controls">

@@ -1,6 +1,6 @@
 <?php
 namespace tiendaVirtual\Http\Controllers;
-use tiendaVirtual\Http\Requests\NewProductFormRequest;
+use tiendaVirtual\Http\Requests\ProductFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
@@ -25,7 +25,7 @@ class ProductController extends Controller
     $products = Product::all();
     return view('admin.producto.indexProducto',['productos' => $products]);
   }
-  public function newProduct(NewProductFormRequest $request){
+  public function newProduct(ProductFormRequest $request){
     $data = $request->validated();
     $image = "";
     if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
@@ -59,25 +59,27 @@ class ProductController extends Controller
   }
 
 
-  public function editProduct(Request $request, $id) {
+  public function editProduct(ProductFormRequest $request, $id) {
     /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
     editar*/
+    $data = $request->validated();
     $productDetail = Product::find($id);
-    if ($request->isMethod('post')) {
-      $data = $request->all();
-      if($request->hasFile('imageInput')){
-          $imageName = self::addImage();
-      }
-      $productDetail->name = $data['nombre'];
-      $productDetail->description = $data['descripcion'];
-      $productDetail->image = $imageName;
-      $productDetail->price = $data['precio'];
-      $productDetail->category_id = $data['categorias'];
-      $productDetail->stock = $data['disponibles'];
-      $productDetail->save();
-      return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
+    if($request->hasFile('imageInput')){
+        $imageName = self::addImage();
     }
-    if ($productDetail == NULL) {
+    $productDetail->name = $data['nombre'];
+    $productDetail->description = $data['descripcion'];
+    $productDetail->image = $imageName;
+    $productDetail->price = $data['precio'];
+    $productDetail->category_id = $data['categorias'];
+    $productDetail->stock = $data['disponibles'];
+    $productDetail->save();
+    return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
+  }
+
+  public function editProductPage($id){
+    $productDetail = Product::find($id);
+    if (!$productDetail) {
       return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
     }
     $productCategory = $productDetail->category_id;

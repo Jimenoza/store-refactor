@@ -4,7 +4,7 @@ namespace tiendaVirtual\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewProductFormRequest extends FormRequest
+class ProductFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,7 @@ class NewProductFormRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     *  Rules apply for create a new product and edit a new product
      * @return array
      */
     public function rules()
