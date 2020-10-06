@@ -32,17 +32,17 @@ $(document).ready(function(){
 $().ready(function(){
   $("#formularioRegistro").validate({
     rules:{
-      nombre:{
+      userName:{
         required: true,
         minLength: 3,
         lettersOnly: true,
       },
-      correo: {
+      userEmail: {
         required: true,
         email: true,
         remote: "/usuarios/checkEmail"
       },
-      contrasena: {
+      password: {
         required: true,
         minLength: 8,
         maxLength: 20,

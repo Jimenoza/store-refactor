@@ -86,9 +86,9 @@
 					<div class="login-form"><!--sign up form-->
 						<h2>¡Registrarte!</h2>
 						<form name="formularioRegistro" id="formularioRegistro" action="{{url('/register')}}" method="POST"> {{csrf_field()}}
-							<input name="nombreRegistrar" id="nombreRegistrar" type="text" placeholder="Nombre"/>
-							<input name="correoRegistrar" id="correoRegistrar" type="email" placeholder="Correo"/>
-							<input name="contrasenaRegistrar" id="contrasenaRegistrar" type="password" placeholder="Contraseña"/>
+							<input name="userName" id="userName" type="text" placeholder="Nombre"/>
+							<input name="userEmail" id="userEmail" type="email" placeholder="Correo"/>
+							<input name="password" id="password" type="password" placeholder="Contraseña"/>
 							<button type="submit" class="btn btn-default">Registrarse</button>
 						</form>
 					</div><!--/sign up form-->

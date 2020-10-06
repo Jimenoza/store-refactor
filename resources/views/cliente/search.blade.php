@@ -66,9 +66,9 @@
 					<div class="header_search_content">
 						@if($errors->any())
 						<div class="alert alert-danger alert-block">
+						<button type="button" class="close" data-dismiss="alert">X</button>
 							@foreach ($errors->all() as $error)
-							<button type="button" class="close" data-dismiss="alert">X</button>
-							<strong>{{ $error }}</strong>
+							<strong>{{ $error }}<br></strong>
 							@endforeach
 						</div>
 						@endif

@@ -52,11 +52,11 @@
           <form name="formularioRegistro" id="formularioRegistro" action="{{url('/register')}}" method="POST"> {{csrf_field()}}
             <div class="form-group">
               <label for="nombreRegistrar" class="col-form-label">Nombre:</label>
-              <input type="text" class="form-control" id="nombreRegistrar" name="nombreRegistrar">
+              <input type="text" class="form-control" id="userName" name="userName">
               <label for="correo" class="col-form-label">Correo:</label>
-              <input type="email" class="form-control" name="correoRegistrar" id="correoRegistrar">
+              <input type="email" class="form-control" name="userEmail" id="userEmail">
               <label for="password" class="col-form-label">Contraseña:</label>
-              <input type="password" class="form-control" id="contrasenaRegistrar" name="contrasenaRegistrar">
+              <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

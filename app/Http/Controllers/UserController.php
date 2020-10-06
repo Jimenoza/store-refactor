@@ -3,6 +3,7 @@
 namespace tiendaVirtual\Http\Controllers;
 
 use tiendaVirtual\Http\Requests\LoginFormRequest;
+use tiendaVirtual\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\User;
 use Auth;
@@ -36,28 +37,25 @@ class UserController extends Controller
       return view('usuarios.cuenta');
     }
 
-    public function register(Request $request) {
-      if($request->isMethod('post')) {
-        $data = $request->all();
-        $existingUser = User::where('email', $data['correoRegistrar'])->count();
-        if ($existingUser > 0) {
-          return redirect()->back()->with('flash_message_error', '¡El correo introducido ya existe!');
-        } else {
-          $user = new User;
-          $user->name = $data['nombreRegistrar'];
-          $user->email = $data['correoRegistrar'];
-          $user->password = bcrypt($data['contrasenaRegistrar']);
-          $user->admin = 0;
-          if(!$user->name || !$user->email || !$user->password){
-            $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
-            $request->session()->put('modal', '#popupRegister');
-            return redirect()->back();//->with('flash_message_error', '¡Introdujo un campo no válido!');
-          }else{
-            $user->save();
-          }
+    public function register(RegisterFormRequest $request) {
+      $data = $request->validated();
+      $existingUser = User::where('email', $data['correoRegistrar'])->count();
+      if ($existingUser > 0) {
+        return redirect()->back()->with('flash_message_error', '¡El correo introducido ya existe!');
+      } else {
+        $user = new User;
+        $user->name = $data['nombreRegistrar'];
+        $user->email = $data['correoRegistrar'];
+        $user->password = bcrypt($data['contrasenaRegistrar']);
+        $user->admin = 0;
+        if(!$user->name || !$user->email || !$user->password){
+          $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
+          $request->session()->put('modal', '#popupRegister');
+          return redirect()->back();//->with('flash_message_error', '¡Introdujo un campo no válido!');
+        }else{
+          $user->save();
         }
       }
-      return redirect('/');
     }
 
     public function checkEmail(Request $request) {
