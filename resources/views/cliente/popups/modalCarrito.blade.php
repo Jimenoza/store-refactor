@@ -70,10 +70,10 @@
           @endif
          <form name="formularioInicioSesion" id="formularioInicioSesion" action="{{url('/login')}}" method="POST"> {{csrf_field()}}
             <div class="form-group">
-              <label for="correo" class="col-form-label">Correo:</label>
-              <input type="email" class="form-control" id="correo" name="correo">
+              <label for="email" class="col-form-label">Correo:</label>
+              <input type="email" class="form-control" id="email" name="email">
               <label for="password" class="col-form-label">Contraseña:</label>
-              <input type="password" class="form-control" id="contrasena" name="contrasena">
+              <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

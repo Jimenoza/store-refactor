@@ -74,11 +74,11 @@ $().ready(function(){
 
   $("#formularioInicioSesion").validate({
     rules:{
-      correo: {
+      email: {
         required: true,
         email: true
       },
-      contrasena: {
+      password: {
         required: true
       }
     }

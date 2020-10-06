@@ -2,6 +2,7 @@
 
 namespace tiendaVirtual\Http\Controllers;
 
+use tiendaVirtual\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
 use tiendaVirtual\User;
 use Auth;
@@ -10,26 +11,24 @@ use DB;
 
 class UserController extends Controller
 {
-    public function loginPage(Request $request) {
+    public function loginPage() {
       return view('usuarios.registrar');
     }
 
-    public function login(Request $request) {
-      if($request->isMethod('post')) {
-        $data = $request->all();
-        if(Auth::attempt(['email'=>$data['correo'], 'password'=>$data['contrasena']])) {
-          // User::loginUser($data['correo']);
-          if(Auth::user()->admin){
-            return redirect('admin/product/index');
-          }
-          else{
-            return redirect()->back();
-          }
-        }else {
-          $request->session()->put('flash_message_error', '¡El correo o la contraseña son inválidos!');
-          $request->session()->put('modal', '#popupLogin');
-          return redirect()->back();//->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
+    public function login(LoginFormRequest $request) {
+      $data = $request->validated();
+      if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
+        // User::loginUser($data['correo']);
+        if(Auth::user()->admin){
+          return redirect('admin/product/index');
         }
+        else{
+          return redirect()->back();
+        }
+      }else {
+        $request->session()->put('flash_message_error', '¡El correo o la contraseña son inválidos!');
+        $request->session()->put('modal', '#popupLogin');
+        return redirect()->back();//->with('flash_message_error', '¡El correo o la contraseña son inválidos!');
       }
     }
 
