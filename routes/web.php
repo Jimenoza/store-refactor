@@ -22,7 +22,8 @@ Route::group(['middleware' => ['auth','admin']], function(){
   //Admin - Manejo de cuentas
 	Route::get('/admin/index','AdminController@index');
 	Route::match(['get', 'post'], '/admin/configs', 'AdminController@configurations');
-  Route::match(['get', 'post'], '/admin/new/admin', 'AdminController@createAdminUser');
+  	Route::get('/admin/new/admin', 'AdminController@create');
+  	Route::post('/admin/new/admin', 'AdminController@store');
 	Route::post('/admin/password/check', 'AdminController@checkPassword');
 	Route::match(['get','post'], '/admin/password/change', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías

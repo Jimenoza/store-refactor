@@ -158,22 +158,22 @@ $(document).ready(function(){
 	// Confirmar Validacion de contraseña
 	$("#crearAdmin").validate({
 		rules:{
-			nombre:{
+			userName:{
 				required: true,
 				minlength: 3
 			},
-			correo:{
+			userEmail:{
 				required: true,
 				email: true
 			},
-			ctr_nueva:{
+			password:{
 				required: true,
 				rangelength: [8,20]
 			},
-			ctr_confirmar:{
+			passRepeated:{
 				required:true,
 				rangelength: [8,20],
-				equalTo:"#ctr_nueva"
+				equalTo:"#password"
 			}
 		},
 		errorClass: "help-inline",

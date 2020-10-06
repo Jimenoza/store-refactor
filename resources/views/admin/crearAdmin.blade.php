@@ -32,25 +32,25 @@
                 <div class="control-group">
                   <label class="control-label">Nombre del Nuevo Administrador</label>
                   <div class="controls">
-                    <input type="text" name="nombre" id="nombre" />
+                    <input type="text" name="userName" id="userName" />
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">Correo del Nuevo Administrador</label>
                   <div class="controls">
-                    <input type="email" name="correo" id="correo" />
+                    <input type="email" name="userEmail" id="userEmail" />
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">Contraseña del Nuevo Administrador</label>
                   <div class="controls">
-                    <input type="password" name="ctr_nueva" id="ctr_nueva" />
+                    <input type="password" name="password" id="password" />
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">Repetir Contraseña</label>
                   <div class="controls">
-                    <input type="password" name="ctr_confirmar" id="ctr_confirmar" />
+                    <input type="password" name="passRepeated" id="passRepeated" />
                   </div>
                 </div>
                 <div class="form-actions">

@@ -5,6 +5,8 @@ namespace tiendaVirtual\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use tiendaVirtual\Http\Requests\LoginFormRequest;
+use tiendaVirtual\Http\Requests\RegisterFormRequest;
 use Session;
 use tiendaVirtual\User;
 use tiendaVirtual\Cart;
@@ -12,11 +14,11 @@ use DB;
 
 class AdminController extends Controller
 {
-  public function loginAdmin(Request $request) {
+  public function loginAdmin(LoginFormRequest $request) {
     /*Inicia sesión en la página de administrador, sino, retorna a la página de login indicando
     que no puede*/
     if($request->isMethod('post')){
-  		$data = $request->input(); //Son las etiquetas del html, obitene lo que están en ellos
+  		$data = $request->validated(); //Son las etiquetas del html, obitene lo que están en ellos
   		if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'1'])){
         //User::loginUser($datos['email']);//Hace el login, llamando a la clase User
   			return redirect('admin/product/index');
@@ -64,29 +66,29 @@ class AdminController extends Controller
       }
   }
 
-  public function createAdminUser(Request $request) {
-    /*Crea un nuevo usuario administrador, el usuario logueado debe ser administrador y
-    el nuevo usuario debe estar previamente registrado en el sistema*/
-    self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
-    if($request->isMethod('post')) {
-      $data = $request->all();
-      // Obtener cantidad de usuarios con el mismo correo
-      $userCount = User::where('email', $datos['correo'])->count();
-      if ($userCount > 0) {
-        // El correo ingresado ya existe
-        return redirect('/admin/new/admin')->with('flash_message_error', '¡El correo introducido ya existe!');
-      } else {
-        // Creación de nuevo usuario administrador
-        $user = new User;
-        $user->name = $data['nombre'];
-        $user->email = $data['correo'];
-        $user->password = bcrypt($data['ctr_nueva']);
-        $data->admin = '1';
-        $user->save();
-        return redirect('/admin/new/admin')->with('flash_message_success', '¡Se ha creado un nuevo Administrador!');
-        }
-      }
+  public function create(){
     return view('admin.crearAdmin');
+  }
+
+  public function store(RegisterFormRequest $request) {
+    /*Crea un nuevo usuario administrador, el usuario logueado debe ser administrador y
+    el nuevo usuario no debe estar previamente registrado en el sistema*/
+    $data = $request->validated();
+    // Obtener cantidad de usuarios con el mismo correo
+    $userCount = User::where('email', $data['userEmail'])->count();
+    if ($userCount > 0) {
+      // El correo ingresado ya existe
+      return redirect('/admin/new/admin')->with('flash_message_error', '¡El correo introducido ya existe!');
+    } else {
+      // Creación de nuevo usuario administrador
+      $user = new User;
+      $user->name = $data['userName'];
+      $user->email = $data['userEmail'];
+      $user->password = bcrypt($data['password']);
+      $user->admin = '1';
+      $user->save();
+      return redirect('/admin/new/admin')->with('flash_message_success', '¡Se ha creado un nuevo Administrador!');
+    }
   }
 
   public function updatePassword (Request $request) {
