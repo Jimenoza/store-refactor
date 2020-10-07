@@ -104,9 +104,9 @@ class AdminController extends Controller
               $password = bcrypt($data['ctr_nueva']);
               // Actualización de la contraseña en la base de datos
               User::where('id','1')->update(['password' => $password]);
-              return redirect('/admin/configs')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
+              return redirect('/admin/password/change')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
           } else {
-              return redirect('/admin/configs')->with('flash_message_error', 'Contraseña actual incorrecta.');
+              return redirect('/admin/password/change')->with('flash_message_error', 'Contraseña actual incorrecta.');
           }
       }
   }

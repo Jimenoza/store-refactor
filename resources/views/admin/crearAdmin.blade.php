@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/configs')}}" class="current">Configuraciones</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/admin/index')}}" title="Inicio" class="tip-bottom"><i class="icon-home"></i> Inicio</a> <a href="{{url('/admin/password/change')}}" class="current">Configuraciones</a> </div>
     <h1>Crear Administrador</h1>
     @if(Session::has('flash_message_error'))
         <div class="alert alert-danger alert-block">

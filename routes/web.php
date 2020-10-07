@@ -21,11 +21,11 @@ Auth::routes();
 Route::group(['middleware' => ['auth','admin']], function(){
   //Admin - Manejo de cuentas
 	Route::get('/admin/index','AdminController@index');
-	Route::match(['get', 'post'], '/admin/configs', 'AdminController@configurations');
   	Route::get('/admin/new/admin', 'AdminController@create');
   	Route::post('/admin/new/admin', 'AdminController@store');
 	Route::post('/admin/password/check', 'AdminController@checkPassword');
-	Route::match(['get','post'], '/admin/password/change', 'AdminController@updatePassword');
+	Route::get('/admin/password/change', 'AdminController@configurations');
+	Route::post('/admin/password/change', 'AdminController@updatePassword');
 	//Admin - Manejo de Categorías
 	// Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
 	Route::get('/admin/category/new', function(){
