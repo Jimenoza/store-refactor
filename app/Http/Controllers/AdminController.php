@@ -94,7 +94,7 @@ class AdminController extends Controller
 
   public function updatePassword (UpdatePasswordFormRequest $request) {
     /*Permite cambiar la contraseña del usuario administrador logueado*/
-    $data = $request->all();
+    $data = $request->validated();
     // Obtiene los datos del usuario actual
     $checkPass = User::where(['email' => Auth::user()->email])->first();
     $currentPass = $data['currentPassword'];
