@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use tiendaVirtual\Http\Requests\LoginFormRequest;
 use tiendaVirtual\Http\Requests\RegisterFormRequest;
+use tiendaVirtual\Http\Requests\UpdatePasswordFormRequest;
 use Session;
 use tiendaVirtual\User;
 use tiendaVirtual\Cart;
@@ -91,24 +92,21 @@ class AdminController extends Controller
     }
   }
 
-  public function updatePassword (Request $request) {
+  public function updatePassword (UpdatePasswordFormRequest $request) {
     /*Permite cambiar la contraseña del usuario administrador logueado*/
-    self::checkIsAdminUser();//Verifica que el usuario logueado sea administrador
-      if($request->isMethod('post')) {
-          $data = $request->all();
-          // Obtiene los datos del usuario actual
-          $checkPass = User::where(['email' => Auth::user()->email])->first();
-          $currentPass = $data['ctr_actual'];
-          if (Hash::check($currentPass, $checkPass->password)) {
-              // Crea encriptación de contraseña ingresada
-              $password = bcrypt($data['ctr_nueva']);
-              // Actualización de la contraseña en la base de datos
-              User::where('id','1')->update(['password' => $password]);
-              return redirect('/admin/configs')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
-          } else {
-              return redirect('/admin/configs')->with('flash_message_error', 'Contraseña actual incorrecta.');
-          }
-      }
+    $data = $request->all();
+    // Obtiene los datos del usuario actual
+    $checkPass = User::where(['email' => Auth::user()->email])->first();
+    $currentPass = $data['currentPassword'];
+    if (Hash::check($currentPass, $checkPass->password)) {
+        // Crea encriptación de contraseña ingresada
+        $password = bcrypt($data['newPassword']);
+        // Actualización de la contraseña en la base de datos
+        User::where('id','1')->update(['password' => $password]);
+        return redirect('/admin/configs')->with('flash_message_success', 'Su contraseña ha sido actualizada.');
+    } else {
+        return redirect('/admin/configs')->with('flash_message_error', 'Contraseña actual incorrecta.');
+    }
   }
 
   private function checkIsAdminUser(){
