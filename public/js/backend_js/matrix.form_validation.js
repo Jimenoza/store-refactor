@@ -190,19 +190,19 @@ $(document).ready(function(){
 	// Confirmar Validacion de contraseña
 	$("#validarContrasena").validate({
 		rules:{
-			ctr_actual:{
+			currentPassword:{
 				required: true,
 				minlength:6,
 				maxlength:20
 			},
-			ctr_nueva:{
+			newPassword:{
 				required: true,
 				rangelength: [8,20]
 			},
-			ctr_confirmar:{
+			confirmPassoword:{
 				required:true,
 				rangelength: [8,20],
-				equalTo:"#ctr_nueva"
+				equalTo:"#newPassword"
 			}
 		},
 		errorClass: "help-inline",

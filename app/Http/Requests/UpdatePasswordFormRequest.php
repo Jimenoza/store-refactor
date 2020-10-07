@@ -4,7 +4,7 @@ namespace tiendaVirtual\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductSearchRequest extends FormRequest
+class UpdatePasswordFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,8 @@ class ProductSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'searcher' => 'required',
-            'categoryFilter' => 'nullable|integer'
-            //
+            'currentPassword' => 'required|min:8',
+            'newPassword' => 'required|min:8'
         ];
-    }
-    public function messages()
-    {
-        return ['searcher.required' => 'search filter is required',
-                'categoryFilter.integer' => 'categoryFilter must be a number'];
     }
 }

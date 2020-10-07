@@ -17,7 +17,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if(!$request->user()->admin){
-            return redirect('/cliente');
+            return redirect('/');
         }
         return $next($request);
     }

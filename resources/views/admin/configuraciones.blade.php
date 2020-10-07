@@ -32,20 +32,20 @@
                 <div class="control-group">
                   <label class="control-label">Contraseña Actual</label>
                   <div class="controls">
-                    <input type="password" name="ctr_actual" id="ctr_actual" />
+                    <input type="password" name="currentPassword" id="currentPassword" />
                     <span id="revisarContrasena"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">Contraseña Nueva</label>
                   <div class="controls">
-                    <input type="password" name="ctr_nueva" id="ctr_nueva" />
+                    <input type="password" name="newPassword" id="newPassword" />
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label">Repetir Contraseña</label>
                   <div class="controls">
-                    <input type="password" name="ctr_confirmar" id="ctr_confirmar" />
+                    <input type="password" name="confirmPassoword" id="confirmPassoword" />
                   </div>
                 </div>
                 <div class="form-actions">
