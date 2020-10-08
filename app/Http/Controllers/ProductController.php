@@ -1,6 +1,5 @@
 <?php
 namespace tiendaVirtual\Http\Controllers;
-use tiendaVirtual\Http\Requests\ProductFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
@@ -17,207 +16,105 @@ use Auth;
 use Session;
 use DB;
 
-class ProductController extends Controller
+class ProductController
 {
-  public function index() {
+  public static function index() {
     /*Verifica que haya alguien logueado como admin y despliega todos los productos de la
     base de datos*/
     $products = Product::all();
-    return view('admin.producto.indexProducto',['productos' => $products]);
+    return $products;
   }
-  public function newProduct(ProductFormRequest $request){
-    $data = $request->validated();
-    $image = "";
-    if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
-      $image = self::addImage();
-    }
+  public static function newProduct($data){
     // Agregar el producto a la Base
     $product = new Product;
-    $product->name = $data['nombre'];
-    $product->description = $data['descripcion'];
-    $product->image = $image;
-    $product->price = $data['precio'];
-    $product->category_id = $data['categorias'];
-    $product->stock = $data['disponibles'];
-    $product->save();
-    return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
-  }
-  public function newProductPage(){
-    $categoriesList = self::getCategories();
-    return view('admin.producto.agregarProducto')->with(compact('categoriesList'));
+    $product->name = $data['name'];
+    $product->description = $data['description'];
+    $product->image = $data['image'];
+    $product->price = $data['price'];
+    $product->category_id = $data['category_id'];
+    $product->stock = $data['stock'];
+    return $product->save();
   }
 
-  private function getCategories(){
-    /*Obtiene las categorías disponibles*/
-    $categories = Category::where('enable',1)->get();
-    /*Crea el string HTML de las categorías con respecto a un select*/
-    $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
-    foreach ($categories as $cat) {//ciclo para desplegar las categorías
-      $categoriesList .= "<option value='".$cat->id."'>".$cat->name."</option>";
-    }
-    return $categoriesList;
-  }
-
-
-  public function editProduct(ProductFormRequest $request, $id) {
+  public static function editProduct($data, $id) {
     /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
     editar*/
-    $data = $request->validated();
     $productDetail = Product::find($id);
-    if($request->hasFile('imageInput')){
-        $imageName = self::addImage();
-    }
     $productDetail->name = $data['nombre'];
     $productDetail->description = $data['descripcion'];
-    $productDetail->image = $imageName;
+    $productDetail->image = $image;
     $productDetail->price = $data['precio'];
     $productDetail->category_id = $data['categorias'];
     $productDetail->stock = $data['disponibles'];
-    $productDetail->save();
-    return redirect('/admin/product/index')->with('flash_message_success', '¡El Producto ha sido actualizado correctamente!');
+    return $productDetail->save();
   }
 
-  public function editProductPage($id){
-    $productDetail = Product::find($id);
-    if (!$productDetail) {
-      return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
-    }
-    $productCategory = $productDetail->category_id;
-    $categories = Category::where('enable',1)->get();
-    $categoriesList = "<option value='' selected disabled>Elija una opción</option>";
-    foreach ($categories as $cat) {
-        $selected = "";
-        error_log($cat->id." == ".$productCategory);
-        if ($cat->id == $productCategory) {
-            $selected = "selected";
-        }
-        $categoriesList .= "<option value='".$cat->id."' ".$selected." >".$cat->name."</option>";
-    }
-    return view('admin.producto.editarProducto')->with(compact('productDetail','categoriesList'));
+  public static function editProductPage($id){
+    
   }
 
-  private function addImage(){
-    $image = \Input::file('imageInput');
-    $extension = $image->getClientOriginalExtension();
-    $name = time().'.'.$extension;
-    // $photo->move(public_path().'\photos\\',$name);
-    // $photo = new Photo();
-    // $photo->route = 'photos/'.$name;
-    // error_log($name);
-    // $photo->report = $report->id;
-    // $photo->save();
-    $image->move(public_path().'/images/productos/',$name);//guarda la imagen en: \qa-grupo7\Tienda_Virtual\storage\app\images
-    return $name;
+  public static function removeProduct($id) {
+    $product = Product::find($id);
+    $product->available = 0;
+    return $product->save();
   }
 
-  public function removeProduct($id) {
-    if (!empty($id)) {
-      $product = Product::find($id);
-      $product->available = 0;
-      $product->save();
-      return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
-    }
-  }
-
-  public function enableProduct($id){
+  public static function enableProduct($id){
     $product = Product::find($id);
     $product->available = 1;
-    $product->save();
+    return $product->save();
     // DB::update("update producto set estado = 1 where idProducto = ".$id);
-    return redirect()->back()->with('flash_message_success', '¡Producto habilitado para la compra!');
   }
 
 
-  public function search(ProductSearchRequest $request){
-    $data = $request->validated();
+  public static function search($data){
     // $data = $request->all();
     /*Busca productos por una frase ingresada por el usuario*/
-    $filter = trim($data['searcher']);//Obtiene lo que el usuario ingresó
-    $products = Product::where('name','like','%'.$filter.'%');
-    if($data['categoryFilter']){
-      $catFilter = trim($data['categoryFilter']);
-      // $products = Product::search($filter,$catFilter);
-      $products = $products->where('category_id','=',$catFilter);
+    $products = Product::where('name','like','%'.$$data['filter'].'%');
+    if($data['category']){
+      $products = $products->where('category_id','=',$data['category']);
     }
-
-      // $categories = Category::where('condicion',1)->get();
-    // dd($products->get());
-    $products = self::paginate($products->get()->toArray(),$filter);
-    
-    return view('cliente.results', ['productos'=> $products,'filtro' =>$filter]);
+    return $products->get();
   }
 
-  public function filter($id){
+  public static function filter($id){
     /*Filtra y retorna productos por la categoría a la que pertenecen*/
-    $categories = Category::where('enable',1)->get();
-    $total = Session::get('total');
-    $catName = 'Productos de ';
-    foreach ($categories as $cat) {
-      if($cat->id == $id){
-        $catName = $catName.$cat->name;
-        break;
-      }
-    }
-    $products = Product::where('category_id',$id)->get();
-    $pages = self::paginate($products->toArray());
-    // dd($pages);
-    return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName]);
+    $products = Product::where('category_id',$id)->where('available',1)->get();
+    return $products;
   }
   
-  public function productDetail($id){
+  public static function productDetail($id){
     $product = Product::find($id);
     // DB::enableQueryLog();
     $comments = Comment::where('product_id',$id)->get();
     // dd(DB::getQueryLog());
-    return view('cliente.product',['producto' => $product,'comentarios' => $comments]);
+    return ['product' => $product,'comments' => $comments];
   }
 
-  public function commentProduct(CommentProductRequest $request, $id){
-    $data = $request->validated();
+  public static function commentProduct($data, $id){
     $product = Product::find($id);
     $userId = Auth::user()->id;
     $comment = new Comment;
     $comment->user_id = $userId;
-    $comment->comment = $data['comentario'];
+    $comment->comment = $data['comment'];
     $comment->calification = $data['rate'];
     $comment->product_id = $product->id;
-    $comment->save();
+    $commentSaved = $comment->save();
     $product->califications = ($product->califications + 1);
     $product->average = ($product->average + $data['rate'])/$product->califications;
-    $product->save();
+    $productSaved = $product->save();
     // $product->rate($userEmail,$data['comentario'],$data['rate']);
-    return redirect()->back();
+    return $commentSaved && $productSaved;
   }
 
-  public function replyComment(ReplyCommentRequest $request, $id){
-    $data = $request->validated();
+  public static function replyComment($data, $id){
     $userId = Auth::user()->id;
     // $reply = new Reply($data['respuestaText'],$id,$userEmail);
     $reply = new Reply;
     $reply->calification_id = $id;
     $reply->reply = $data['replyText'];
     $reply->user_id = $userId;
-    $reply->save();
-    return redirect()->back();
-  }
-
-  private function paginate($arreglo,$filtro = NULL){
-
-    $perPage = 20;
-    $page = \Input::get('page', 1);
-
-    $compensador = ($page * $perPage) - $perPage;  
-
-    $productsOnPage = array_slice($arreglo, $compensador, $perPage, true);  
-
-    $paginator = new LengthAwarePaginator($productsOnPage, count($arreglo), $perPage, $page);
-
-    if($filtro == NULL){
-      $paginator->withPath('?');
-    }else{
-      $paginator->withPath('?searcher='.$filtro);
-    }
-    return $paginator;
+    return $reply->save();
   }
 
 }
