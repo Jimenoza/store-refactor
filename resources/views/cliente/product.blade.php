@@ -108,7 +108,7 @@
 								</div>
 							</div>
 							@if(Auth::user())
-							<a href="#" id="link{{$comentario->id}}" name="link{{$comentario->id}}" onclick="mostrar('{{$comentario->id}}')">
+							<a href="" id="linkReply" name="linkReply" onclick="mostrar('{{$comentario->id}}')">
 								<div id="{{$comentario->id}}" name="{{$comentario->id}}">Dejar una respuesta</div>
 		            		</a>
 		            		@else

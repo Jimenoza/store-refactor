@@ -6,8 +6,8 @@ $(document).ready(function(){
     $('#iniciarSesion').on('click', function (ev){
         $("#popupLogin").modal('show');
 	});
-	$("a div").click(function(e){
-	e.preventDefault();
+	$("#linkReply").click(function(e){
+		e.preventDefault();
 	//var padre = $("a div").parent();
     //$("a div").parent().append("<p>Esto es un parrafo.</p>");
 	});

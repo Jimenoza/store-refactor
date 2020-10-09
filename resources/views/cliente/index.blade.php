@@ -109,33 +109,33 @@
 								<!-- Slider Item 1-->
 								@foreach($productos as $prod)
 								<div class="featured_slider_item">
-										<a href="{{URL::action('ProductController@productDetail',$prod->id)}}" class="productoSlider_{{$prod->id}}">
-										<div class="border_active"></div>
-											<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="150"></div>
-												<div class="product_content">
-													<div class="product_price discount">${{$prod->price}}</div>
-													<div class="product_name"><div>{{$prod->name}}</div></div>
-													<div class="product_extras">
-													@if($prod->stock > 0)
-													<a href="{{url('/cart/add/'.$prod->id)}}" id="addCart_{{$prod->id}}">
-														<button class="product_cart_button" > Añadir al carrito</button>
-														</a>
-													@else
-														<!-- Button trigger modal -->
-														<button type="button" class="product_cart_button" data-toggle="modal" data-target="#exampleModalCenter">
-	  													Añadir al carrito
-														</button>
-													@endif
-													</div>
-												</div>
-												@if($prod->stock == 0)
-												<ul class="product_marks">
-													<li class="product_mark product_discount">Agotado</li>
-												</ul>
+									<div class="border_active"></div>
+									<a href="{{URL::action('ProductController@productDetail',$prod->id)}}">
+										<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+											<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="150"></div>
+											<div class="product_content">
+												<div class="product_price discount">${{$prod->price}}</div>
+												<div class="product_name"><div>{{$prod->name}}</div></div>
+												<div class="product_extras">
+												@if($prod->stock > 0)
+												<a href="{{url('/cart/add/'.$prod->id)}}" id="addCart_{{$prod->id}}" >
+													<button class="product_cart_button" > Añadir al carrito</button>
+												</a>
+												@else
+													<!-- Button trigger modal -->
+													<button type="button" class="product_cart_button" data-toggle="modal" data-target="#exampleModalCenter">
+													Añadir al carrito
+													</button>
 												@endif
+												</div>
 											</div>
-										</a>
+											@if($prod->stock == 0)
+											<ul class="product_marks">
+												<li class="product_mark product_discount">Agotado</li>
+											</ul>
+											@endif
+										</div>
+									</a>
 								</div>
 								@endforeach
 							</div>
