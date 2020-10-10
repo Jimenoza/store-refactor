@@ -11,7 +11,6 @@ use tiendaVirtual\User;
 use tiendaVirtual\Reply;
 use tiendaVirtual\Comment;
 // use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
 use Session;
 use DB;
@@ -19,13 +18,12 @@ use DB;
 class ProductController
 {
   public static function index() {
-    /*Verifica que haya alguien logueado como admin y despliega todos los productos de la
-    base de datos*/
+    /*Returns all the products from database*/
     $products = Product::all();
     return $products;
   }
   public static function newProduct($data){
-    // Agregar el producto a la Base
+    // Adds a new product to database
     $product = new Product;
     $product->name = $data['name'];
     $product->description = $data['description'];
@@ -37,40 +35,35 @@ class ProductController
   }
 
   public static function editProduct($data, $id) {
-    /*Busca el producto en la base de datos para desplegar en la interfaz y que se pueda
-    editar*/
+    /*Gets the product and edit with the values in $data*/
     $productDetail = Product::find($id);
-    $productDetail->name = $data['nombre'];
-    $productDetail->description = $data['descripcion'];
-    $productDetail->image = $image;
-    $productDetail->price = $data['precio'];
-    $productDetail->category_id = $data['categorias'];
-    $productDetail->stock = $data['disponibles'];
+    $productDetail->name = $data['name'];
+    $productDetail->description = $data['description'];
+    $productDetail->image = $data['image'];
+    $productDetail->price = $data['price'];
+    $productDetail->category_id = $data['category_id'];
+    $productDetail->stock = $data['stock'];
     return $productDetail->save();
   }
 
-  public static function editProductPage($id){
-    
-  }
-
   public static function removeProduct($id) {
+    // set available to false, products are not removed
     $product = Product::find($id);
     $product->available = 0;
     return $product->save();
   }
 
   public static function enableProduct($id){
+    // set available to true
     $product = Product::find($id);
     $product->available = 1;
     return $product->save();
-    // DB::update("update producto set estado = 1 where idProducto = ".$id);
   }
 
 
   public static function search($data){
-    // $data = $request->all();
-    /*Busca productos por una frase ingresada por el usuario*/
-    $products = Product::where('name','like','%'.$$data['filter'].'%');
+    /*Searches products by a filter string and by category*/
+    $products = Product::where('name','like','%'.$data['filter'].'%');
     if($data['category']){
       $products = $products->where('category_id','=',$data['category']);
     }
@@ -78,7 +71,7 @@ class ProductController
   }
 
   public static function filter($id){
-    /*Filtra y retorna productos por la categoría a la que pertenecen*/
+    /*Gets all products from one category*/
     $products = Product::where('category_id',$id)->where('available',1)->get();
     return $products;
   }
@@ -92,6 +85,7 @@ class ProductController
   }
 
   public static function commentProduct($data, $id){
+    //saves a comment on the product
     $product = Product::find($id);
     $userId = Auth::user()->id;
     $comment = new Comment;
@@ -100,16 +94,16 @@ class ProductController
     $comment->calification = $data['rate'];
     $comment->product_id = $product->id;
     $commentSaved = $comment->save();
-    $product->califications = ($product->califications + 1);
-    $product->average = ($product->average + $data['rate'])/$product->califications;
+    $product->califications = ($product->califications + 1); // total of califications + 1
+    $product->average = ($product->average + $data['rate'])/$product->califications; // create a new average
     $productSaved = $product->save();
     // $product->rate($userEmail,$data['comentario'],$data['rate']);
     return $commentSaved && $productSaved;
   }
 
   public static function replyComment($data, $id){
+    // replies a comment
     $userId = Auth::user()->id;
-    // $reply = new Reply($data['respuestaText'],$id,$userEmail);
     $reply = new Reply;
     $reply->calification_id = $id;
     $reply->reply = $data['replyText'];

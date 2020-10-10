@@ -10,6 +10,7 @@ use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
 use tiendaVirtual\Product;
 use tiendaVirtual\Category;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class WebProductController extends Controller
 {
@@ -68,9 +69,7 @@ class WebProductController extends Controller
             'stock' => $data['disponibles']
         ];
         $backend = ProductController::newProduct($body);
-        if($backend){
-            return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
-        }
+        return redirect('/admin/product/index')->with('flash_message_success', 'El producto ha sido añadido correctamente.');
     }
 
     private function addImage(){
@@ -174,7 +173,7 @@ class WebProductController extends Controller
      */
     public function enable($id)
     {
-        $enable = ProductController::enableProduct($body,$id);
+        $enable = ProductController::enableProduct($id);
         return redirect()->back()->with('flash_message_success', '¡Producto habilitado para la compra!');
     }
 
