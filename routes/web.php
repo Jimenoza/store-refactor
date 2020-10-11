@@ -14,18 +14,19 @@ Route::get('/', function () {
 });
 
 //Admin - Inicio y Ciere de Sesión
-Route::match(['get','post'],'/admin','AdminController@loginAdmin');
-Route::get('/logout', 'AdminController@logout');
+Route::get('/admin','Web\WebAdminController@loginPage');
+Route::post('/admin','Web\WebAdminController@loginAdmin');
+Route::get('/logout', 'Web\WebAdminController@logout');
 Auth::routes();
 
 Route::group(['middleware' => ['auth','admin']], function(){
   //Admin - Manejo de cuentas
-	Route::get('/admin/index','AdminController@index');
-  	Route::get('/admin/new/admin', 'AdminController@create');
-  	Route::post('/admin/new/admin', 'AdminController@store');
-	Route::post('/admin/password/check', 'AdminController@checkPassword');
-	Route::get('/admin/password/change', 'AdminController@configurations');
-	Route::post('/admin/password/change', 'AdminController@updatePassword');
+	Route::get('/admin/index','Web\WebAdminController@index');
+  	Route::get('/admin/new/admin', 'Web\WebAdminController@create');
+  	Route::post('/admin/new/admin', 'Web\WebAdminController@store');
+	Route::post('/admin/password/check', 'Web\WebAdminController@checkPassword');
+	Route::get('/admin/password/change', 'Web\WebAdminController@configurations');
+	Route::post('/admin/password/change', 'Web\WebAdminController@update');
 	//Admin - Manejo de Categorías
 	// Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
 	Route::get('/admin/category/new', function(){
