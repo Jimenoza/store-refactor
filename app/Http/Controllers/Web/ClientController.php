@@ -10,6 +10,7 @@ use tiendaVirtual\User;
 use Illuminate\Support\Facades\Redirect;
 use tiendaVirtual\Http\Requests\ClienteFormRequest;
 use Illuminate\Support\Facades\Input;
+use tiendaVirtual\Http\Controllers\Controller;
 use DB;
 use Session;
 use Auth;
