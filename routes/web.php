@@ -75,10 +75,10 @@ Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail
 
 Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
 
-Route::get('/cart/add/{id}','CartController@addItem');
-Route::get('/cart','CartController@seeCart');
-Route::get('/cart/delete','CartController@deleteCart');
-Route::get('/cart/remove/{id}','CartController@removeFromCart');
+Route::get('/cart/add/{id}','Web\WebCartController@store');
+Route::get('/cart','Web\WebCartController@index');
+Route::get('/cart/delete','Web\WebCartController@destroy');
+Route::get('/cart/remove/{id}','Web\WebCartController@edit');
 
 
 
