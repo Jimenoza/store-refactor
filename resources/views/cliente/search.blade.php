@@ -155,7 +155,7 @@
 						<ul class="cat_menu">
 						@foreach($data['categorias'] as $cat)
 							@if($cat->enable != 0)
-								<li><a href="{{URL::action('WebProductController@filter',$cat->id)}}" id="categoria_{{$cat->id}}">{{$cat->name}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
+								<li><a href="{{URL::action('Web\WebProductController@filter',$cat->id)}}" id="categoria_{{$cat->id}}">{{$cat->name}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
 							@endif
 						@endforeach
 						</ul>

@@ -38,24 +38,24 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::get('/admin/category/index', 'CategoryController@indexCategory');
 	Route::match(['get','post'], '/admin/category/delete/{id}', 'CategoryController@deleteCategory');
 	//Admin - Manejo de Productos
-	Route::get('/admin/product/new','WebProductController@create');
-	Route::post('/admin/product/new', 'WebProductController@store');
-	Route::get('/admin/product/edit/{id}', 'WebProductController@edit');
-	Route::post('/admin/product/edit/{id}','WebProductController@update');
-	Route::get('/admin/product/index', 'WebProductController@index');
+	Route::get('/admin/product/new','Web\WebProductController@create');
+	Route::post('/admin/product/new', 'Web\WebProductController@store');
+	Route::get('/admin/product/edit/{id}', 'Web\WebProductController@edit');
+	Route::post('/admin/product/edit/{id}','Web\WebProductController@update');
+	Route::get('/admin/product/index', 'Web\WebProductController@index');
 	// Route::match(['get','post'], '/admin/product/edit/{id}', 'ProductController@editProduct');
-	Route::match(['get','post'], '/admin/product/delete/{id}', 'WebProductController@disable');
-	Route::match(['get','post'], '/admin/product/enable/{id}', 'WebProductController@enable');
+	Route::match(['get','post'], '/admin/product/delete/{id}', 'Web\WebProductController@disable');
+	Route::match(['get','post'], '/admin/product/enable/{id}', 'Web\WebProductController@enable');
   
 });
 // FrontEnd
 Route::get('/','ClientController@index')->name('home');
-Route::get('categories/{id}','WebProductController@filter');
-Route::get('results','WebProductController@search');
-Route::get('product/{id}','WebProductController@show');//<---------------
+Route::get('categories/{id}','Web\WebProductController@filter');
+Route::get('results','Web\WebProductController@search');
+Route::get('product/{id}','Web\WebProductController@show');//<---------------
 try{
-	Route::post('comment/{id}','WebProductController@comment')->middleware('auth');
-	Route::get('reply/{id}','WebProductController@reply')->middleware('auth');;
+	Route::post('comment/{id}','Web\WebProductController@comment')->middleware('auth');
+	Route::get('reply/{id}','Web\WebProductController@reply')->middleware('auth');;
 }catch (\Exception $e){
 	Route::get('comment/{id}','ClientController@index');
 	Route::get('reply/{id}','ClientController@index');

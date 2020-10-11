@@ -1,5 +1,5 @@
 <?php
-namespace tiendaVirtual\Http\Controllers;
+namespace tiendaVirtual\Http\Controllers\Common;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;

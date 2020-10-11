@@ -1,9 +1,9 @@
 <?php
 
-namespace tiendaVirtual\Http\Controllers;
+namespace tiendaVirtual\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
-use tiendaVirtual\Http\Controllers\ProductController;
+use tiendaVirtual\Http\Controllers\Common\ProductController;
 use tiendaVirtual\Http\Requests\ProductFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
@@ -11,6 +11,7 @@ use tiendaVirtual\Http\Requests\ReplyCommentRequest;
 use tiendaVirtual\Product;
 use tiendaVirtual\Category;
 use Illuminate\Pagination\LengthAwarePaginator;
+use tiendaVirtual\Http\Controllers\Controller;
 
 class WebProductController extends Controller
 {
@@ -160,7 +161,7 @@ class WebProductController extends Controller
     public function disable($id)
     {
         if(!empty($id)){
-            $disabled = ProductController::removeProduct($body,$id);
+            $disabled = ProductController::removeProduct($id);
             return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
         }
     }
@@ -192,7 +193,7 @@ class WebProductController extends Controller
         ];
         if($data['categoryFilter']){
             $category = trim($data['categoryFilter']);
-            array_push($body,['category' => $category]);
+            $body['category'] = $category;
         }
         $products = ProductController::search($body);
         $products = self::paginate($products->toArray(),$filter);
