@@ -29,7 +29,7 @@ class OrderController extends Controller
 
     public function getOrder($id){
         $products = Order::products($id);//DB::select("call productosPorOrden(".$id.");");
-        return view('cliente.popups.orden',['productos' => $products]);
+        return view('cliente.orden',['productos' => $products]);
     }
 
     public function payOrder(Request $request){
