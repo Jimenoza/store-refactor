@@ -50,7 +50,7 @@
 						<!-- Product Item -->
 						@foreach($productos as $prod)
 						<div class="product_item discount">
-							<a href="{{URL::action('ProductController@productDetail',$prod['id'])}}" tabindex="0">
+							<a href="{{URL::action('Web\WebProductController@show',$prod['id'])}}" tabindex="0">
 							<div class="product_border"></div>
 							<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod['image'])}}" alt="" width="170" height="170"></div>
 							<div class="product_content">

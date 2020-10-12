@@ -30,7 +30,7 @@
 											<i class="fas fa-star-half"></i>
 											@endif
 										</div>
-										<div class="button banner_2_button"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('ProductController@productDetail',$prod->id)}}">Explorar</a></div>
+										<div class="button banner_2_button"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('Web\WebProductController@show',$prod->id)}}">Explorar</a></div>
 									</div>
 
 								</div>
@@ -68,7 +68,7 @@
 								<div class="deals_image"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="350"></div>
 								<div class="deals_content">
 									<div class="deals_info_line d-flex flex-row justify-content-start">
-										<div class="deals_item_name"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('ProductController@productDetail',$prod->id)}}">{{$prod->name}}</a></div>
+										<div class="deals_item_name"><a class="productoSlider_{{$prod->id}}"  href="{{URL::action('Web\WebProductController@show',$prod->id)}}">{{$prod->name}}</a></div>
 										<div class="deals_item_price ml-auto">${{$prod->price}}</div>
 									</div>
 									<div class="deals_info_line d-flex flex-row justify-content-start">

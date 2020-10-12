@@ -41,7 +41,7 @@
 									</li>
 								</ul>
 							</div>
-							<div><a href="{{URL::action('UserController@logout')}}" id="cerrarSesion">Cerrar Sesión</a></div>
+							<div><a href="{{URL::action('Web\WebUserController@logout')}}" id="cerrarSesion">Cerrar Sesión</a></div>
 						@endif
 					</div>
 				</div>
@@ -155,7 +155,7 @@
 						<ul class="cat_menu">
 						@foreach($data['categorias'] as $cat)
 							@if($cat->enable != 0)
-								<li><a href="{{URL::action('ProductController@filter',$cat->id)}}" id="categoria_{{$cat->id}}">{{$cat->name}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
+								<li><a href="{{URL::action('Web\WebProductController@filter',$cat->id)}}" id="categoria_{{$cat->id}}">{{$cat->name}}<i class="fas fa-chevron-right ml-auto"></i></a></li>
 							@endif
 						@endforeach
 						</ul>
