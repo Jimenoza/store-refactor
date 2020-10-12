@@ -13,7 +13,7 @@ use tiendaVirtual\Order;
 use Carbon\Carbon;
 use tiendaVirtual\Product;
 
-class OrderController extends Controller
+class OrderController
 {
 
     public static function getOrders(){

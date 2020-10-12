@@ -110,7 +110,7 @@
 								@foreach($productos as $prod)
 								<div class="featured_slider_item">
 									<div class="border_active"></div>
-									<a href="{{URL::action('ProductController@productDetail',$prod->id)}}">
+									<a href="{{URL::action('Web\WebProductController@show',$prod->id)}}">
 										<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 											<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/productos/'.$prod->image)}}" alt="" width="150" height="150"></div>
 											<div class="product_content">

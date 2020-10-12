@@ -1,8 +1,3 @@
-<script>
-	function abrir(id) {
-		window.open(`/order/${id}`) ;
-	}
-</script>
 @push('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('css/cart_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/cart_responsive.css')}}">
@@ -16,7 +11,7 @@
 <div class="cart_section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-10 offset-lg-1">
+        <div class="col-lg-10">
           <div class="cart_container">
             <div class="cart_title">Productos en la orden</div>
             <div class="cart_items">

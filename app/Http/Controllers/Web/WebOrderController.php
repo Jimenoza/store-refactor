@@ -56,7 +56,7 @@ class WebOrderController extends Controller
     public function show($id)
     {
         $response = OrderController::getOrder($id);
-        return view('cliente.popups.orden',['productos' => $response]);
+        return view('cliente.orden',['productos' => $response]);
     }
 
     /**
