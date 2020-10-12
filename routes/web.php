@@ -79,7 +79,7 @@ Route::get('/cart/remove/{id}','Web\WebCartController@edit');
 
 
 
-Route::post('/purchase', 'OrderController@payOrder')->middleware('auth');;
+Route::post('/purchase', 'Web\WebOrderController@store')->middleware('auth');;
 
-Route::get('/orders','OrderController@getOrders')->middleware('auth');
-Route::get('/order/{id}','OrderController@getOrder')->middleware('auth');
+Route::get('/orders','Web\WebOrderController@index')->middleware('auth');
+Route::get('/order/{id}','Web\WebOrderController@show')->middleware('auth');

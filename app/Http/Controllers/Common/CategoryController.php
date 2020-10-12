@@ -2,7 +2,6 @@
 
 namespace tiendaVirtual\Http\Controllers\Common;
 
-use tiendaVirtual\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use tiendaVirtual\Category;
 use Session;
