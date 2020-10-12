@@ -28,16 +28,13 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::get('/admin/password/change', 'Web\WebAdminController@configurations');
 	Route::post('/admin/password/change', 'Web\WebAdminController@update');
 	//Admin - Manejo de Categorías
-	// Route::match(['get','post'], '/admin/category/new', 'CategoryController@addCategory');
-	Route::get('/admin/category/new', function(){
-		return view('admin.categoria.agregarCategoria');
-	});
-	Route::post('/admin/category/new', 'CategoryController@addCategory');
-	Route::get('/admin/category/edit/{id}', 'CategoryController@editCategory');
-	Route::post('/admin/category/edit/{id}', 'CategoryController@edit');
+	Route::get('/admin/category/new', 'Web\WebCategoryController@create');
+	Route::post('/admin/category/new', 'Web\WebCategoryController@store');
+	Route::get('/admin/category/edit/{id}', 'Web\WebCategoryController@edit');
+	Route::post('/admin/category/edit/{id}', 'Web\WebCategoryController@update');
 	// Route::match(['get','post'], '/admin/category/edit/{id}', 'CategoryController@editCategory');
-	Route::get('/admin/category/index', 'CategoryController@indexCategory');
-	Route::match(['get','post'], '/admin/category/delete/{id}', 'CategoryController@deleteCategory');
+	Route::get('/admin/category/index', 'Web\WebCategoryController@index');
+	Route::get('/admin/category/delete/{id}', 'Web\WebCategoryController@destroy');
 	//Admin - Manejo de Productos
 	Route::get('/admin/product/new','Web\WebProductController@create');
 	Route::post('/admin/product/new', 'Web\WebProductController@store');

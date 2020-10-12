@@ -26,6 +26,7 @@ class CategoriaFormRequest extends FormRequest
         return [
             'nombre' => 'required|max:45',
             'descripcion' => 'required|max:200',
+            'condicion' => 'nullable|integer'
         ];
     }
 }
