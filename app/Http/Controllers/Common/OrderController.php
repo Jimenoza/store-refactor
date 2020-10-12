@@ -12,7 +12,6 @@ use tiendaVirtual\Cart;
 use tiendaVirtual\Order;
 use Carbon\Carbon;
 use tiendaVirtual\Product;
-use tiendaVirtual\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {

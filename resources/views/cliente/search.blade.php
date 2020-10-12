@@ -41,7 +41,7 @@
 									</li>
 								</ul>
 							</div>
-							<div><a href="{{URL::action('UserController@logout')}}" id="cerrarSesion">Cerrar Sesión</a></div>
+							<div><a href="{{URL::action('Web\WebUserController@logout')}}" id="cerrarSesion">Cerrar Sesión</a></div>
 						@endif
 					</div>
 				</div>

@@ -59,18 +59,15 @@ try{
 	Route::get('reply/{id}','ClientController@index');
 }
 
-Route::group(['middleware'=>['frontLogin']],function(){
-  Route::match(['get','post'],'cuenta','UserController@account');
-});
-Route::get('/login/page','UserController@loginPage');
-Route::post('/register','UserController@register');
-Route::get('logout','UserController@logout')->middleware('auth');
-Route::post('/login', 'UserController@login');
+Route::get('/login/page','Web\WebUserController@create');
+Route::post('/register','Web\WebUserController@store');
+Route::get('logout','Web\WebUserController@logout')->middleware('auth');
+Route::post('/login', 'Web\WebUserController@login');
 
 
-Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
+Route::match(['GET','POST'],'/usuarios/chequearEmail','Web\WebUserController@checkEmail');
 
-Route::match(['GET','POST'],'/usuarios/chequearEmail','UserController@checkEmail');
+Route::match(['GET','POST'],'/usuarios/chequearEmail','Web\WebUserController@checkEmail');
 
 Route::get('/cart/add/{id}','Web\WebCartController@store');
 Route::get('/cart','Web\WebCartController@index');
