@@ -5,7 +5,7 @@ namespace tiendaVirtual\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\CategoryController;
-use tiendaVirtual\Http\Requests\CategoriaFormRequest;
+use tiendaVirtual\Http\Requests\Web\WebCategoriaFormRequest;
 use tiendaVirtual\Category;
 
 class WebCategoryController extends Controller
@@ -37,7 +37,7 @@ class WebCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoriaFormRequest $request)
+    public function store(WebCategoriaFormRequest $request)
     {
         $data = $request->validated();
         $body = [
@@ -68,7 +68,7 @@ class WebCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoriaFormRequest $request, $id)
+    public function update(WebCategoriaFormRequest $request, $id)
     {
         $data = $request->validated();
         $body = [
