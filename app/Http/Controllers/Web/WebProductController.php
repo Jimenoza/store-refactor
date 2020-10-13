@@ -187,12 +187,12 @@ class WebProductController extends Controller
     public function search(ProductSearchRequest $request)
     {
         $data = $request->validated();
-        $filter = trim($data['searcher']);//Obtiene lo que el usuario ingresó
+        $filter = trim($data['expression']);//Obtiene lo que el usuario ingresó
         $body = [
             'filter' => $filter
         ];
-        if($data['categoryFilter']){
-            $category = trim($data['categoryFilter']);
+        if($data['category']){
+            $category = trim($data['category']);
             $body['category'] = $category;
         }
         $products = ProductController::search($body);

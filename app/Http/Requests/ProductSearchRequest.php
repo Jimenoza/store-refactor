@@ -24,14 +24,14 @@ class ProductSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'searcher' => 'required',
-            'categoryFilter' => 'nullable|integer'
+            'expression' => 'required',
+            'category' => 'nullable|integer'
             //
         ];
     }
     public function messages()
     {
-        return ['searcher.required' => 'search filter is required',
-                'categoryFilter.integer' => 'categoryFilter must be a number'];
+        return ['expression.required' => 'search filter is required',
+                'category.integer' => 'categoryFilter must be a number'];
     }
 }

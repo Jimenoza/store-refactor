@@ -74,7 +74,7 @@
 						@endif
 						<div class="header_search_form_container">
 						{!! Form::open(array('url' => 'results', 'method' =>'GET', 'autocomplete' => 'off','role' => 'search','class' => 'header_search_form clearfix'))!!}
-								<input type="search" name="searcher" required="required" class="header_search_input" placeholder="Buscar...">
+								<input type="search" name="expression" required="required" class="header_search_input" placeholder="Buscar...">
 								<div class="custom_dropdown">
 									<!-- <div class="custom_dropdown_list">
 										<span class="custom_dropdown_placeholder clc">Todas las categorías</span>
@@ -93,7 +93,7 @@
 									<div class="custom_dropdown_list">
 										<span class="custom_dropdown_placeholder clc">Todas las categoria</span>
 										<i class="fas fa-chevron-down"></i>
-										<input type="hidden" id="categoryFilter" name="categoryFilter" />
+										<input type="hidden" id="category" name="category" />
 										<ul class="custom_list clc">
 											<li><a class="clc" href="#">Todas las categorias</a></li>
 											@foreach($data['categorias'] as $cat)

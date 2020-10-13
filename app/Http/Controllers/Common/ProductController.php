@@ -1,6 +1,5 @@
 <?php
 namespace tiendaVirtual\Http\Controllers\Common;
-use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
 use Illuminate\Http\Request;
@@ -64,7 +63,7 @@ class ProductController
   public static function search($data){
     /*Searches products by a filter string and by category*/
     $products = Product::where('name','like','%'.$data['filter'].'%');
-    if($data['category']){
+    if(array_key_exists('category',$data)){
       $products = $products->where('category_id','=',$data['category']);
     }
     return $products->get();

@@ -145,7 +145,7 @@ $(document).ready(function()
 			var index = $(this).parent().index();
 
 			placeholder.text( $(this).text() ).css('opacity', '1');
-			$('#categoryFilter').val($(this).data("value"));
+			$('#category').val($(this).data("value"));
 			console.log(this);
 
 			if(list.hasClass('active'))
