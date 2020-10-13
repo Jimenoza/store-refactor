@@ -53,7 +53,8 @@ class ApiProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $backend = ProductController::productDetail($id);
+        return response()->json(['data' => $backend,'error' => NULL]);
     }
 
     /**
