@@ -4,7 +4,7 @@ namespace tiendaVirtual\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Common\ProductController;
-use tiendaVirtual\Http\Requests\ProductFormRequest;
+use tiendaVirtual\Http\Requests\Web\WebProductFormRequest;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
@@ -55,7 +55,7 @@ class WebProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductFormRequest $request)
+    public function store(WebProductFormRequest $request)
     {
         $data = $request->validated();
         // if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
@@ -132,7 +132,7 @@ class WebProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductFormRequest $request, $id)
+    public function update(WebProductFormRequest $request, $id)
     {
         $data = $request->validated();
         // if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto

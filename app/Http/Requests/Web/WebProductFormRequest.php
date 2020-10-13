@@ -1,10 +1,10 @@
 <?php
 
-namespace tiendaVirtual\Http\Requests;
+namespace tiendaVirtual\Http\Requests\Web;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductFormRequest extends FormRequest
+class WebProductFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
