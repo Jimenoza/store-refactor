@@ -16,9 +16,14 @@ use DB;
 
 class ProductController
 {
-  public static function index() {
+  public static function index($pagination = null) {
     /*Returns all the products from database*/
-    $products = Product::all();
+    if($pagination){
+      $products = Product::paginate($pagination);
+    }
+    else{
+      $products = Product::all();
+    }
     return $products;
   }
   public static function newProduct($data){
