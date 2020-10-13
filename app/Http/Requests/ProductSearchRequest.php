@@ -31,7 +31,7 @@ class ProductSearchRequest extends FormRequest
     }
     public function messages()
     {
-        return ['expression.required' => 'search filter is required',
+        return ['expression.required' => 'expression is required',
                 'category.integer' => 'categoryFilter must be a number'];
     }
 }
