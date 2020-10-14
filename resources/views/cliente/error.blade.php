@@ -161,7 +161,7 @@
       </div>
       <div class="modal-body">
         <div class="alert alert-danger alert-block">
-            <strong>Lo sentimos, algo salió mal en el servidor, inténtelo más tarde</strong>
+            <strong>{{$message}}</strong>
           </div>
       </div>
     </div>

@@ -81,7 +81,7 @@ class ProductController
   }
   
   public static function productDetail($id){
-    $product = Product::find($id);
+    $product = Product::findOrFail($id);
     // DB::enableQueryLog();
     $comments = Comment::where('product_id',$id)->get();
     // dd(DB::getQueryLog());

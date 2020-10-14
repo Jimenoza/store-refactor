@@ -17,8 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Products
+// Products without login
 Route::get('/products', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
 Route::post('/products/search','Api\ApiProductController@search');
 Route::get('/products/{id}','Api\ApiProductController@show');
+
+// Cart without login
+Route::get('/cart','Api\ApiCartController@index');
+Route::post('/cart','Api\ApiCartController@create');
+Route::post('/cart/{id}','Api\ApiCartController@store');
+Route::get('/cart/delete','Web\WebCartController@destroy');
+Route::get('/cart/remove/{id}','Web\WebCartController@edit');

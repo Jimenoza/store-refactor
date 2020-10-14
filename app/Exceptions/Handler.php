@@ -37,8 +37,15 @@ class Handler extends ExceptionHandler
     }
 
     public function render($request, Throwable $e){
+        // dd($e);
         if($e instanceof \Illuminate\Database\QueryException){
-            return handleError($e);
+            return handleError($e,'Lo sentimos, hubo un error en base de datos, inténtelo más tarde',400);
+        }
+        else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
+            return handleError($e,'No se encontró la información que buscaba',404);
+        }
+        else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
+            return handleError($e,'Página no encontrada',404);
         }
         return parent::render($request, $e);
     }
