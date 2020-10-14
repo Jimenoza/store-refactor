@@ -44,7 +44,7 @@ class OrderController
         $body = [];
         foreach ($products as $product) {
             array_push($body,['order_id' => $order->id, 'product_id' => $product->id]);// to create relation of product per order
-            $prod = Product::find($product->id);
+            $prod = Product::findOrFail($product->id);
             $prod->stock = ($prod->stock - 1);
             $prod->save();
         };

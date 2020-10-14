@@ -40,7 +40,7 @@ class ProductController
 
   public static function editProduct($data, $id) {
     /*Gets the product and edit with the values in $data*/
-    $productDetail = Product::find($id);
+    $productDetail = Product::findOrFail($id);
     $productDetail->name = $data['name'];
     $productDetail->description = $data['description'];
     $productDetail->image = $data['image'];
@@ -52,14 +52,14 @@ class ProductController
 
   public static function removeProduct($id) {
     // set available to false, products are not removed
-    $product = Product::find($id);
+    $product = Product::findOrFail($id);
     $product->available = 0;
     return $product->save();
   }
 
   public static function enableProduct($id){
     // set available to true
-    $product = Product::find($id);
+    $product = Product::findOrFail($id);
     $product->available = 1;
     return $product->save();
   }
@@ -90,7 +90,7 @@ class ProductController
 
   public static function commentProduct($data, $id){
     //saves a comment on the product
-    $product = Product::find($id);
+    $product = Product::findOrFail($id);
     $userId = Auth::user()->id;
     $comment = new Comment;
     $comment->user_id = $userId;

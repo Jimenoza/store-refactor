@@ -38,14 +38,28 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e){
         // dd($e);
-        if($e instanceof \Illuminate\Database\QueryException){
-            return handleError($e,'Lo sentimos, hubo un error en base de datos, inténtelo más tarde',400);
+        // error_log($request);
+        if(!$request->wantsJson()){ // It is a web request
+            if($e instanceof \Illuminate\Database\QueryException){
+                return handleError($e,'Lo sentimos, hubo un error en base de datos, inténtelo más tarde',500);
+            }
+            else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
+                return handleError($e,'No se encontró la información que buscaba',404);
+            }
+            else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
+                return handleError($e,'Página no encontrada',404);
+            }
         }
-        else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
-            return handleError($e,'No se encontró la información que buscaba',404);
-        }
-        else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
-            return handleError($e,'Página no encontrada',404);
+        else { // it is a API request
+            if($e instanceof \Illuminate\Database\QueryException){
+                return response()->json(['data' => $e->getMessage(),'error' => 500]);
+            }
+            else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
+                return response()->json(['data' => 'ModelNotFoundException: No such data','error' => 404]);
+            }
+            else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
+                return response()->json(['data' => 'NotFoundHttpException: page not found','error' => 404]);
+            }
         }
         return parent::render($request, $e);
     }

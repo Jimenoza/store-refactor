@@ -107,7 +107,7 @@ class WebProductController extends Controller
      */
     public function edit($id)
     {
-        $productDetail = Product::find($id);
+        $productDetail = Product::findOrFail($id);
         if (!$productDetail) {
             return redirect()->back()->with('flash_message_error', 'La URL especificada no existe');
         }
@@ -207,7 +207,7 @@ class WebProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function filter($id){
-        $category = Category::find($id);
+        $category = Category::fifindOrFailnd($id);
         $catName = 'Productos de '.$category->name;
         $products = ProductController::filter($id);
         $pages = self::paginate($products->toArray());

@@ -31,7 +31,7 @@ class CategoryController
   public static function update($data, $id = null) {
     /*Obtiene una categoría y despliega en pantalla sus datos para editarlos*/
 	// Actualizar categoría en la base de datos
-	$category = Category::find($id);
+	$category = Category::findOrFail($id);
 	$category->name = $data['name'];
 	$category->description = $data['description'];
 	$category->enable = $data['enable'];
@@ -43,7 +43,7 @@ class CategoryController
     /*Elimina la categoría de la base (cambia el estado y no se despliega)*/
     // Verifica si el id es diferente de nulo
   	if (!empty($id)) {
-		$category = Category::find($id);
+		$category = Category::findOrFail($id);
 		$category->enable = 0;
 		return $category->save();
   		// Category::where(['id'=>$id])->update(['enable'=>'0']);

@@ -98,15 +98,9 @@ class ApiProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function filter($id){
-        if(Category::find($id)){
-            $products = ProductController::filter($id);
-            $error = null;
-        }
-        else{
-            $products = [];
-            $error = ['code' => 404, 'message' => 'category_not_found'];
-        }
-        return response()->json(['data' => $products,'error' => $error]);
+        Category::findOrFail($id);
+        $products = ProductController::filter($id);
+        return response()->json(['data' => $products,'error' => null]);
     }
 
     /**

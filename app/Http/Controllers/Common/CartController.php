@@ -19,7 +19,7 @@ class CartController
 
     public static function addItem($id){
         /*Agrega productos al carrito*/
-        $product = Product::find($id);//where('id',$id)->where('stock','>',0)->get();//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
+        $product = Product::findOrFail($id);//where('id',$id)->where('stock','>',0)->get();//Devuelve un array, de largo 1 o largo 0 con la información del producto a añadir. 0 indica que no queda en stock
     	if($product->stock != 0){ //Hay stock del producto
     		$cart = Cart::getCart();
     		$cart[] = $product;//Inserta el producto en el carrito,
