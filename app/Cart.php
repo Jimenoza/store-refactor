@@ -47,16 +47,19 @@ class Cart
         Session::forget('carrito');
         Session::forget('total');
         self::createCart();
+        return true;
     }
 
     public static function removeProduct($idProducto){
         $cart = Session::get('carrito');
         $total = Session::get('total');
+        $removed = false;
         for($i = 0; $i < count($cart); $i++){
             //dd($cart);
             if($cart[$i]->id == $idProducto){//Encuentra el item a quitar del carrito
                 $total -= $cart[$i]->price;
                 array_splice($cart,$i,1);//Lo quita de la lista(array)
+                $removed = true;
                 //unset($cart[$i]);
                 break;
             }
@@ -66,5 +69,6 @@ class Cart
         }
         Session::put('total',$total);
         Session::put('carrito',$cart);
+        return $removed;
     }
 }

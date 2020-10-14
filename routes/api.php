@@ -27,5 +27,5 @@ Route::get('/products/{id}','Api\ApiProductController@show');
 Route::get('/cart','Api\ApiCartController@index');
 Route::post('/cart','Api\ApiCartController@create');
 Route::post('/cart/{id}','Api\ApiCartController@store');
-Route::get('/cart/delete','Web\WebCartController@destroy');
-Route::get('/cart/remove/{id}','Web\WebCartController@edit');
+Route::get('/cart/delete','Api\ApiCartController@destroy');
+Route::get('/cart/remove/{id}','Api\ApiCartController@edit');

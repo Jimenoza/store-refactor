@@ -44,17 +44,6 @@ class ApiCartController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -62,7 +51,7 @@ class ApiCartController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(['data' => CartController::removeFromCart($id),'error' => NULL]);
     }
 
     /**
@@ -83,8 +72,8 @@ class ApiCartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        return response()->json(['data' => CartController::deleteCart(),'error' => NULL]);
     }
 }

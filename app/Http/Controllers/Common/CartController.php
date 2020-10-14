@@ -49,8 +49,7 @@ class CartController
 
     public static function removeFromCart($id){
         /*Borra un elemento del carrito*/
-        Cart::removeProduct($id);
-        return true;
+        return Cart::removeProduct($id);
     }
 }
 
