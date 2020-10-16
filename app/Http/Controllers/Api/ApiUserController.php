@@ -21,17 +21,11 @@ class ApiUserController extends Controller
         $body = ['email'=>$data['email'], 'password'=>$data['password']];
         $user = UserController::login($body);
         if($user){
-            if($user->admin){
-                return redirect('admin/product/index');
-            }
-            else {
-                return redirect()->back();
-            }
+            $tokenResult = $user->createToken('authToken')->plainTextToken;  
+            return response()->json(['data' => $tokenResult,'error' => null]);
         }
         else{
-            $request->session()->put('flash_message_error', '¡El correo o la contraseña son inválidos!');
-            $request->session()->put('modal', '#popupLogin');
-            return redirect()->back();
+            return response()->json(['data' => 'user_not_found','error' => 500]);   
         }
     }
 }

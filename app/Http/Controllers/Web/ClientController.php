@@ -26,7 +26,11 @@ class ClientController extends Controller
       /*Función principal de la página de inicio: http://localhost:8000
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
+      // DB::enableQueryLog();
+      // dd(DB::connection()->getPdo());
+
       $products = Product::where('available',1)->orderBy('id', 'desc')->get();//Obtiene los productos en la base
+      // dd(DB::getQueryLog());
       Cart::createCart();
     	return view('cliente.index', ['productos'=> $products]);
 
