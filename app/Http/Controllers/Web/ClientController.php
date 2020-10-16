@@ -27,8 +27,6 @@ class ClientController extends Controller
       Despliega los productos al usuario. Además de verificar si hay un carro creado en
       la sesión*/
       // DB::enableQueryLog();
-      // dd(DB::connection()->getPdo());
-
       $products = Product::where('available',1)->orderBy('id', 'desc')->get();//Obtiene los productos en la base
       // dd(DB::getQueryLog());
       Cart::createCart();
