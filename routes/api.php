@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 // routes that don't need authentication
 Route::post('/login', 'Api\ApiUserController@login');
+Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');
 // Products
 Route::get('/products', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
@@ -32,3 +33,5 @@ Route::get('/cart/delete','Api\ApiCartController@destroy');
 Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
 
 // routes that need authetication
+Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum');
+Route::get('/order/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
