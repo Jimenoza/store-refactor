@@ -24,6 +24,7 @@ Route::get('/products', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
 Route::post('/products/search','Api\ApiProductController@search');
 Route::get('/products/{id}','Api\ApiProductController@show');
+Route::post('/products/comment/{id}','Api\ApiProductController@comment')->middleware('auth:sanctum');
 
 // Cart
 Route::get('/cart','Api\ApiCartController@index');
@@ -33,5 +34,9 @@ Route::get('/cart/delete','Api\ApiCartController@destroy');
 Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
 
 // routes that need authetication
+//orders
 Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum','token.admin');
 Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
+
+//Comments
+Route::get('reply/{id}','Api\ApiProductController@reply')->middleware('auth:sanctum');

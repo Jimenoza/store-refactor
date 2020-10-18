@@ -7,6 +7,7 @@ use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\ProductController;
 use tiendaVirtual\Category;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
+use tiendaVirtual\Http\Requests\CommentProductRequest;
 
 class ApiProductController extends Controller
 {
@@ -122,5 +123,21 @@ class ApiProductController extends Controller
         }
         $products = ProductController::search($body);
         return response()->json(['data' => $products,'error' => null]);
+    }
+
+    /**
+     * Leaves a comment and a rating on the product
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function comment(CommentProductRequest $request, $id){
+        $data = $request->validated();
+        $body = [
+            'comment' => $data['comment'],
+            'rate' => $data['rate']
+        ];
+        $backend = ProductController::commentProduct($body,$id);
+        return response()->json(['data' => $backend,'error' => null]);
     }
 }
