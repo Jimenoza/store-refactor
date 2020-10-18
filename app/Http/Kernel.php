@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'frontLogin' => \tiendaVirtual\Http\Middleware\FrontInicioSesion::class,
         'admin' => \tiendaVirtual\Http\Middleware\CheckAdmin::class,
+        'token.admin' => \tiendaVirtual\Http\Middleware\CheckAdminAPI::class,
     ];
 }

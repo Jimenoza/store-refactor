@@ -48,7 +48,8 @@ class ApiOrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $response = OrderController::getOrder($id);
+        return response()->json(['data' => $response,'error' => null]);
     }
 
     /**

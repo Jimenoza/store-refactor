@@ -33,5 +33,5 @@ Route::get('/cart/delete','Api\ApiCartController@destroy');
 Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
 
 // routes that need authetication
-Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum');
-Route::get('/order/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
+Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum','token.admin');
+Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
