@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// All routes are for users, not admin
 // routes that don't need authentication
 Route::post('/login', 'Api\ApiUserController@login');
 Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');

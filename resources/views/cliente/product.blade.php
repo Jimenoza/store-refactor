@@ -82,7 +82,7 @@
 				<div class="divTableBody">
 					@foreach($comentarios as $comentario)
 					<div class="divTableRow usuario">
-						<div class="divTableCell">{{$comentario->user_id}}</div>
+						<div class="divTableCell">{{$comentario->userName}}</div>
 						@for($i = 0; $i < $comentario->calification; $i++)
 						<i class="fas fa-star"></i>
 						@endfor
@@ -94,12 +94,12 @@
 							<div style="padding: 0px 30px;">
 								<div class="divTable response">
 									<div class="divTableBody">
-										@foreach($Comment::getReplies($comentario->id) as $respuesta)
+										@foreach($comentario->replies as $reply)
 										<div class="divTableRow">
 											<div class="divTableCell">
-												<div class="nombre">{{$respuesta->user_id}}:</div>
+												<div class="nombre">{{$reply->userName}}:</div>
 												<div class="respuesta" align="justify">	
-													{{$respuesta->reply}}
+													{{$reply->reply}}
 												</div>
 											</div>
 										</div>
