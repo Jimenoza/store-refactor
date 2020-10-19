@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // All routes are for users, not admin
 // routes that don't need authentication
 Route::post('/login', 'Api\ApiUserController@login');
+Route::post('/register', 'Api\ApiUserController@store');
 Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');
 // Products
 Route::get('/products', 'Api\ApiProductController@index');

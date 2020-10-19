@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\UserController;
 use tiendaVirtual\Http\Requests\LoginFormRequest;
+use tiendaVirtual\Http\Requests\RegisterFormRequest;
 use Auth;
 
 class ApiUserController extends Controller
@@ -41,5 +42,30 @@ class ApiUserController extends Controller
         $user = Auth::user();
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
         return response()->json(['data' => true,'error' => null]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(RegisterFormRequest $request)
+    {
+        $data = $request->validated();
+        $body = [
+            'email' => $data['userEmail'],
+            'name' => $data['userName'],
+            'password' => $data['password']
+        ];
+        $response = UserController::register($body);
+        if($response){
+            return response()->json(['data' => true,'error' => null]);
+        }
+        else{
+            return response()->json(['data' => 'email exists','error' => 409]);
+        }
+        // $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
+        // $request->session()->put('modal', '#popupRegister');
     }
 }
