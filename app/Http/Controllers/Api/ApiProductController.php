@@ -9,6 +9,7 @@ use tiendaVirtual\Category;
 use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
+use tiendaVirtual\Http\Requests\Api\ApiProductFormRequest;
 
 class ApiProductController extends Controller
 {
@@ -29,23 +30,37 @@ class ApiProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WebProductFormRequest $request)
+    public function store(ApiProductFormRequest $request)
     {
         $data = $request->validated();
         // if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
         $image = self::addImage();
         //   }
         $body = [
-            'name' => $data['nombre'],
-            'description' => $data['descripcion'],
+            'name' => $data['name'],
+            'description' => $data['description'],
             'image' => $image,
-            'price' => $data['precio'],
-            'category_id' => $data['categorias'],
-            'stock' => $data['disponibles']
+            'price' => $data['price'],
+            'category_id' => $data['category'],
+            'stock' => $data['stock']
         ];
         $backend = ProductController::newProduct($body);
         return response()->json(['data' => $backend,'error' => NULL]);
     }
+
+    private function addImage(){
+        $image = \Input::file('image');
+        $extension = $image->getClientOriginalExtension();
+        $name = time().'.'.$extension;
+        // $photo->move(public_path().'\photos\\',$name);
+        // $photo = new Photo();
+        // $photo->route = 'photos/'.$name;
+        // error_log($name);
+        // $photo->report = $report->id;
+        // $photo->save();
+        $image->move(public_path().'/images/productos/',$name);//guarda la imagen en: \qa-grupo7\Tienda_Virtual\storage\app\images
+        return $name;
+      }
 
     /**
      * Display the specified resource.

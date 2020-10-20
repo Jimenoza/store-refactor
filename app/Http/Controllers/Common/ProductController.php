@@ -27,6 +27,7 @@ class ProductController
   }
   public static function newProduct($data){
     // Adds a new product to database
+    Category::findOrFail($data['category_id']);
     $product = new Product;
     $product->name = $data['name'];
     $product->description = $data['description'];

@@ -55,7 +55,11 @@ class Handler extends ExceptionHandler
                 return response()->json(['data' => $e->getMessage(),'error' => 500]);
             }
             else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
-                return response()->json(['data' => 'ModelNotFoundException: No such data','error' => 404]);
+                // dd(explode("\\",$e->getModel()));
+                $model = explode("\\",$e->getModel());
+                $id = $e->getIds();
+                $message = 'ModelNotFoundException: No such '.$model[1]." with id ".$id[0];
+                return response()->json(['data' => $message,'error' => 404]);
             }
             else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
                 return response()->json(['data' => 'NotFoundHttpException: page not found','error' => 404]);
