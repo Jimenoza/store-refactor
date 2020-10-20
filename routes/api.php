@@ -43,23 +43,23 @@ Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanct
 
 //Routes for admin
 
-Route::group(['middleware' => ['auth','admin']], function(){
+Route::group(['middleware' => ['auth:sanctum','token.admin']], function(){
     //Admin - Manejo de cuentas
-    Route::post('/admin/new', 'Web\WebAdminController@store');
-    Route::post('/admin/password/check', 'Web\WebAdminController@checkPassword');
-    Route::put('/admin/password/change', 'Web\WebAdminController@update');
+    Route::post('/admin/new', 'Api\ApiAdminController@store');
+    Route::post('/admin/password/check', 'Api\ApiAdminController@checkPassword');
+    Route::put('/admin/password/change', 'Api\ApiAdminController@update');
     //Admin - Manejo de Categorías
-    Route::get('/admin/category', 'Web\WebCategoryController@index');
-    Route::get('/admin/category/{id}', 'Web\WebCategoryController@index');
-    Route::post('/admin/category', 'Web\WebCategoryController@store');
-    Route::put('/admin/category/{id}', 'Web\WebCategoryController@update');
-    Route::delete('/admin/category/{id}', 'Web\WebCategoryController@edit');
+    Route::get('/admin/category', 'Api\ApiCategoryController@index');
+    Route::get('/admin/category/{id}', 'Api\ApiCategoryController@index');
+    Route::post('/admin/category', 'Api\ApiCategoryController@store');
+    Route::put('/admin/category/{id}', 'Api\ApiCategoryController@update');
+    Route::delete('/admin/category/{id}', 'Api\ApiCategoryController@edit');
     //Admin - Manejo de Productos
-    Route::get('/admin/product/{id}','Web\WebProductController@store');// gets product info, without comments and replies
-    Route::post('/admin/product','Web\WebProductController@store');
-    Route::put('/admin/product/{id}', 'Web\WebProductController@edit');
-    Route::post('/admin/product/enable/{id}','Web\WebProductController@update');
-    Route::post('/admin/product/disable/{id}','Web\WebProductController@update');
+    Route::get('/admin/product/{id}','Api\ApiProductController@info');// gets product info, without comments and replies
+    Route::post('/admin/product','Api\ApiProductController@store');
+    Route::put('/admin/product/{id}', 'Api\ApiProductController@edit');
+    Route::post('/admin/product/enable/{id}','Api\ApiProductController@update');
+    Route::post('/admin/product/disable/{id}','Api\ApiProductController@update');
     // Route::match(['get','post'], '/admin/product/edit/{id}', 'ProductController@editProduct');
     
   });

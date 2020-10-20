@@ -79,6 +79,10 @@ class ProductController
     return $products;
   }
   
+  /**
+   * Returns product info with comments and replies
+   * @param int id (id product)
+   */
   public static function productDetail($id){
     $product = Product::findOrFail($id);
     // DB::enableQueryLog();
@@ -93,8 +97,17 @@ class ProductController
       }
       
     }
-    // dd(DB::getQueryLog());
     return ['product' => $product,'comments' => $comments];
+  }
+
+  /**
+   * Returns product info without comments and replies
+   * @param int id (id product)
+   * @return array
+   */
+  public static function productInfo($id){
+    $product = Product::findOrFail($id);
+    return ['product' => $product];
   }
 
   public static function commentProduct($data, $id){

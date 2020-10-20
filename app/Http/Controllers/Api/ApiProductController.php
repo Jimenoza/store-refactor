@@ -156,4 +156,15 @@ class ApiProductController extends Controller
         $backend = ProductController::replyComment($body,$id);
         return response()->json(['data' => $backend,'error' => null]);
     }
+
+    /**
+     * Returns product info without comments and replies
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function info($id){
+        $backend = ProductController::productInfo($id);
+        return response()->json(['data' => $backend,'error' => null]);
+    }
 }
