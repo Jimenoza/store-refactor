@@ -52,17 +52,17 @@ class Handler extends ExceptionHandler
         }
         else { // it is a API request
             if($e instanceof \Illuminate\Database\QueryException){
-                return response()->json(['data' => $e->getMessage(),'error' => 500]);
+                return response()->json(['data' => $e->getMessage(),'error' => 500],500);
             }
             else if($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException){
                 // dd(explode("\\",$e->getModel()));
                 $model = explode("\\",$e->getModel());
                 $id = $e->getIds();
                 $message = 'ModelNotFoundException: No such '.$model[1]." with id ".$id[0];
-                return response()->json(['data' => $message,'error' => 404]);
+                return response()->json(['data' => $message,'error' => 404],404);
             }
             else if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException){
-                return response()->json(['data' => 'NotFoundHttpException: page not found','error' => 404]);
+                return response()->json(['data' => 'NotFoundHttpException: page not found','error' => 404],404);
             }
         }
         return parent::render($request, $e);

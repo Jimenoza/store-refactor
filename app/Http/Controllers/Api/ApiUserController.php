@@ -27,7 +27,7 @@ class ApiUserController extends Controller
             return response()->json(['data' => $tokenResult,'error' => null]);
         }
         else{
-            return response()->json(['data' => 'user_not_found','error' => 500]);   
+            return response()->json(['data' => 'user_not_found','error' => 404],404);   
         }
     }
 
@@ -63,7 +63,7 @@ class ApiUserController extends Controller
             return response()->json(['data' => true,'error' => null]);
         }
         else{
-            return response()->json(['data' => 'email exists','error' => 409]);
+            return response()->json(['data' => 'email exists','error' => 409],409);
         }
         // $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
         // $request->session()->put('modal', '#popupRegister');

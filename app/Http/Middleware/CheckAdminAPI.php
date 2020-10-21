@@ -17,7 +17,7 @@ class CheckAdminAPI
     public function handle(Request $request, Closure $next)
     {
         if(!$request->user()->admin){
-            return response()->json(['data' => 'Forbidden','error' => 403]);
+            return response()->json(['data' => 'Forbidden','error' => 403],403);
         }
         return $next($request);
     }
