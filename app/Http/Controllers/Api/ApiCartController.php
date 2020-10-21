@@ -28,7 +28,7 @@ class ApiCartController extends Controller
     public function create()
     {
         Cart::createCart();
-        return response()->json(['data' => true,'error' => NULL]);
+        return response()->json(['data' => true,'error' => NULL],201);
     }
 
     /**

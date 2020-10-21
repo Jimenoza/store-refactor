@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth:sanctum','token.admin']], function(){
     //Admin - Manejo de Productos
     Route::get('/admin/product/{id}','Api\ApiProductController@info');// gets product info, without comments and replies
     Route::post('/admin/product','Api\ApiProductController@store');
-    Route::put('/admin/product/{id}', 'Api\ApiProductController@edit');
+    Route::put('/admin/product/{id}', 'Api\ApiProductController@update');
     Route::post('/admin/product/enable/{id}','Api\ApiProductController@update');
     Route::post('/admin/product/disable/{id}','Api\ApiProductController@update');
     // Route::match(['get','post'], '/admin/product/edit/{id}', 'ProductController@editProduct');

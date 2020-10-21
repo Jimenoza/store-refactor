@@ -45,7 +45,7 @@ class ApiProductController extends Controller
             'stock' => $data['stock']
         ];
         $backend = ProductController::newProduct($body);
-        return response()->json(['data' => $backend,'error' => NULL]);
+        return response()->json(['data' => $backend,'error' => NULL],201);
     }
 
     private function addImage(){
@@ -75,26 +75,28 @@ class ApiProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApiProductFormRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        // if($request->hasFile('imageInput')){ //Primero pregunta si se subió una foto
+        $image = self::addImage();
+        //   }
+        $body = [
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'image' => $image,
+            'price' => $data['price'],
+            'category_id' => $data['category'],
+            'stock' => $data['stock']
+        ];
+        $updated = ProductController::editProduct($body,$id);
+        return response()->json(['data' => $updated,'error' => NULL]);
     }
 
     /**
