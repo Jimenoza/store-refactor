@@ -8,6 +8,7 @@ use tiendaVirtual\Cart;
 use tiendaVirtual\User;
 use tiendaVirtual\Reply;
 use tiendaVirtual\Comment;
+use Illuminate\Support\Facades\File; 
 // use Illuminate\Support\Facades\Input;
 use Auth;
 use Session;
@@ -43,6 +44,7 @@ class ProductController
     $productDetail = Product::findOrFail($id);
     $productDetail->name = $data['name'];
     $productDetail->description = $data['description'];
+    File::delete(public_path().'/images/productos/'.$productDetail->image);
     $productDetail->image = $data['image'];
     $productDetail->price = $data['price'];
     $productDetail->category_id = $data['category_id'];
