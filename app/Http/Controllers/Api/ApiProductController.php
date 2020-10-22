@@ -184,4 +184,32 @@ class ApiProductController extends Controller
         $backend = ProductController::productInfo($id);
         return response()->json(['data' => $backend,'error' => null]);
     }
+
+    /**
+     * Disable the specified product from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function disable($id)
+    {
+        if(!empty($id)){
+            $disabled = ProductController::disableProduct($id);
+            return response()->json(['data' => $disabled,'error' => null]);
+        }
+    }
+
+    /**
+     * Enable the specified product from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function enable($id)
+    {
+        if(!empty($id)){
+            $enable = ProductController::enableProduct($id);
+            return response()->json(['data' => $enable,'error' => null]);
+        }
+    }
 }

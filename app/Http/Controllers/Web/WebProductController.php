@@ -161,7 +161,7 @@ class WebProductController extends Controller
     public function disable($id)
     {
         if(!empty($id)){
-            $disabled = ProductController::removeProduct($id);
+            $disabled = ProductController::disableProduct($id);
             return redirect()->back()->with('flash_message_success', '¡El producto ha sido inhabilitado correctamente!');
         }
     }

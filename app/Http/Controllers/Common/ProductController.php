@@ -52,7 +52,7 @@ class ProductController
     return $productDetail->save();
   }
 
-  public static function removeProduct($id) {
+  public static function disableProduct($id) {
     // set available to false, products are not removed
     $product = Product::findOrFail($id);
     $product->available = 0;
