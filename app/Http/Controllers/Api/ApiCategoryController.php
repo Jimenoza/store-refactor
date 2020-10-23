@@ -49,26 +49,24 @@ class ApiCategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApiCategoryFormRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $body = [
+            'name' => $data['name'],
+            'description' => $data['description'],
+        ];
+        if(array_key_exists('condition',$data)){
+            $body['enable'] = $data['condition'];
+        }
+        $response = CategoryController::update($body,$id);
+        return response()->json(['data' => $response,'error' => null]);
     }
 
     /**

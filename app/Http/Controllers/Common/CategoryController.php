@@ -38,7 +38,9 @@ class CategoryController
 	$category = Category::findOrFail($id);
 	$category->name = $data['name'];
 	$category->description = $data['description'];
-	$category->enable = $data['enable'];
+	if(array_key_exists('enable',$data)){
+		$category->enable = $data['enable'];
+	}
 	return $category->save();
 	//Category::where(['id'=>$id])->update(['name'=>, 'description'=>, 'enable'=>]);//actualiza los datos
   }
