@@ -20,16 +20,6 @@ class ApiCategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,7 +38,7 @@ class ApiCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(['data' => CategoryController::getCategory($id),'error' => null]);
     }
 
     /**

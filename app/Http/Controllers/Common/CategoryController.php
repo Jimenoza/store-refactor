@@ -18,6 +18,10 @@ class CategoryController
 	return $categories;
   }
 
+  public static function getCategory($id){
+	  return Category::findOrFail($id);
+  }
+
   public static function addCategory($data) {
     /*Agrega una nueva categoría al sistema*/
 	// Agregar categoría a la base de datos

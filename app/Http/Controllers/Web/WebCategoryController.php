@@ -57,7 +57,7 @@ class WebCategoryController extends Controller
     public function edit($id)
     {
         // Obtiene la información relacionada con la categoria
-  	    $detallesCategoria = Category::findOrFail($id);//Obtiene los datos de la base
+  	    $detallesCategoria = CategoryController::getCategory($id);//Obtiene los datos de la base
   	    return view('admin.categoria.editarCategoria')->with(compact('detallesCategoria'));
     }
 

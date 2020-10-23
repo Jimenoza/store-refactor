@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth:sanctum','token.admin']], function(){
     Route::put('/admin/password/change', 'Api\ApiAdminController@update');
     //Admin - Manejo de Categorías
     Route::get('/admin/category', 'Api\ApiCategoryController@index');
-    Route::get('/admin/category/{id}', 'Api\ApiCategoryController@index');
+    Route::get('/admin/category/{id}', 'Api\ApiCategoryController@show');
     Route::post('/admin/category', 'Api\ApiCategoryController@store');
     Route::put('/admin/category/{id}', 'Api\ApiCategoryController@update');
     Route::delete('/admin/category/{id}', 'Api\ApiCategoryController@edit');
