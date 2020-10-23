@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth:sanctum','token.admin']], function(){
     Route::get('/admin/category/{id}', 'Api\ApiCategoryController@show');
     Route::post('/admin/category', 'Api\ApiCategoryController@store');
     Route::put('/admin/category/{id}', 'Api\ApiCategoryController@update');
-    Route::delete('/admin/category/{id}', 'Api\ApiCategoryController@edit');
+    // Route::post('/admin/category/{id}', 'Api\ApiCategoryController@disable');
     //Admin - Manejo de Productos
     Route::get('/admin/product/{id}','Api\ApiProductController@info');// gets product info, without comments and replies
     Route::post('/admin/product','Api\ApiProductController@store');
