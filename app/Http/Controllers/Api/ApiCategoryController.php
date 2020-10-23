@@ -5,6 +5,7 @@ namespace tiendaVirtual\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\CategoryController;
+use tiendaVirtual\Http\Requests\Api\ApiCategoryFormRequest;
 
 class ApiCategoryController extends Controller
 {
@@ -25,9 +26,15 @@ class ApiCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApiCategoryFormRequest $request)
     {
-        //
+        $data = $request->validated();
+        $body = [
+            'name' => $data['name'],
+            'description' => $data['description']
+        ];
+        $response = CategoryController::addCategory($body);
+        return response()->json(['data' => $response,'error' => null]);
     }
 
     /**
