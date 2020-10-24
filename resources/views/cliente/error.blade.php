@@ -95,8 +95,8 @@
                   <a href="{{url('/cart')}}">
                     <img src="{{asset('images/cart.png')}}" alt="">
                   </a>
-                  @if(Session::get('carrito'))
-                  <div class="cart_count"><span>{{count(Session::get('carrito'))}}</span></div>
+                  @if(Session::get('cart'))
+                  <div class="cart_count"><span>{{count(Session::get('cart'))}}</span></div>
                   @else
                   <div class="cart_count"><span>0</span></div>
                   @endif

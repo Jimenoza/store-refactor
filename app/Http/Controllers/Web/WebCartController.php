@@ -16,7 +16,7 @@ class WebCartController extends Controller
     public function index()
     {
         $respose = CartController::getCart();
-        return view('cliente.cart',['total' => $respose['total'],'carrito' => $respose['cart']]);
+        return view('cliente.cart',['total' => $respose['total'],'cart' => $respose['cart']]);
     }
 
     /**

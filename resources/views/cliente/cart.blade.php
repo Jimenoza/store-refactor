@@ -23,7 +23,7 @@
 						<div class="cart_title">Carrito de compras</div>
 						<div class="cart_items">
 							<ul class="cart_list">
-							@foreach($carrito as $producto)
+							@foreach($cart as $producto)
 								<li class="cart_item clearfix">
 									<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 										<div class="cart_item_image cart_info_col">

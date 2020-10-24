@@ -11,20 +11,20 @@ class Cart
     //
 
     public static function createCart(){
-    	if(!Session::has('carrito')){ //Pregunta si hay un carrito creado
-        	Session::put('carrito',array()); //Crea un carrito en la sesión
+    	if(!Session::has('cart')){ //Pregunta si hay un carrito creado
+        	Session::put('cart',array()); //Crea un carrito en la sesión
         	Session::put('total',0);
       	}
     }
 
     public static function getCart(){
     	self::createCart();
-    	return Session::get('carrito');
+    	return Session::get('cart');
     }
 
     public static function getCartSize(){
-    	if(Session::has('carrito')){
-            return count(Session::get('carrito'));
+    	if(Session::has('cart')){
+            return count(Session::get('cart'));
         }
         else{
             return 0;
@@ -32,7 +32,7 @@ class Cart
     }
 
     public static function putCart($carrito){
-        Session::put('carrito',$carrito);
+        Session::put('cart',$carrito);
     }
 
     public static function totalPrice(){
@@ -44,14 +44,14 @@ class Cart
     }
 
     public static function deleteCart(){
-        Session::forget('carrito');
+        Session::forget('cart');
         Session::forget('total');
         self::createCart();
         return true;
     }
 
     public static function removeProduct($idProducto){
-        $cart = Session::get('carrito');
+        $cart = Session::get('cart');
         $total = Session::get('total');
         $removed = false;
         for($i = 0; $i < count($cart); $i++){
@@ -68,7 +68,7 @@ class Cart
             $total = 0;
         }
         Session::put('total',$total);
-        Session::put('carrito',$cart);
+        Session::put('cart',$cart);
         return $removed;
     }
 }

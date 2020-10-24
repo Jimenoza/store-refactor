@@ -37,9 +37,9 @@ Route::get('/cart/delete','Api\ApiCartController@destroy');
 Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
 
 //orders
-// Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum','token.admin');
 Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum');
 Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
+Route::post('/orders','Api\ApiOrderController@store')->middleware('auth:sanctum');
 
 //Routes for admin
 

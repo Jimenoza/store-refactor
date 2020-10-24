@@ -5,6 +5,7 @@ namespace tiendaVirtual\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\OrderController;
+use tiendaVirtual\Http\Requests\Api\ApiOrderFormRequest;
 
 class ApiOrderController extends Controller
 {
@@ -35,9 +36,16 @@ class ApiOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApiOrderFormRequest $request)
     {
-        //
+        $data = $request->validated();
+        $response = OrderController::payOrder(['address' => $data['address']]);
+        if($response){
+            return response()->json(['data' => $response,'error' => null]);
+        }
+        else{
+            return response()->json(['data' => 'NotProductsInCartError','error' => 406],406);
+        }
     }
 
     /**

@@ -32,26 +32,31 @@ class OrderController
     public static function payOrder($data){
         /*Genera una orden en la base de datos. Obtiene todo lo necesario para ello*/
         // $data = $request->all();
-        $user = Auth::user();//Siempre retorna el usuario que esté logueado
-        $order = new Order;
-        $order->total = Cart::totalPrice();
-        $order->date = Carbon::now()->toDateTimeString();
-        $order->address = $data['address'];
-        $order->user_id = $user->id;
-        $order->save();
         $products = Cart::getCart();// get array of products from cart
-        $total = Cart::totalPrice();
-        $body = [];
-        foreach ($products as $product) {
-            array_push($body,['order_id' => $order->id, 'product_id' => $product->id]);// to create relation of product per order
-            $prod = Product::findOrFail($product->id);
-            $prod->stock = ($prod->stock - 1);
-            $prod->save();
-        };
-        DB::table('products_per_order')->insert($body);//Genera una orden con el carrito creado
-        Session::forget('carrito');//Olvida el carrito que había
-        Session::forget('total');
-        return true;
+        if(count($products)){
+            $user = Auth::user();//Siempre retorna el usuario que esté logueado
+            $order = new Order;
+            $order->total = Cart::totalPrice();
+            $order->date = Carbon::now()->toDateTimeString();
+            $order->address = $data['address'];
+            $order->user_id = $user->id;
+            $order->save();
+            $total = Cart::totalPrice();
+            $body = [];
+            foreach ($products as $product) {
+                array_push($body,['order_id' => $order->id, 'product_id' => $product->id]);// to create relation of product per order
+                $prod = Product::findOrFail($product->id);
+                $prod->stock = ($prod->stock - 1);
+                $prod->save();
+            };
+            DB::table('products_per_order')->insert($body);//Genera una orden con el carrito creado
+            Session::forget('cart');//Olvida el carrito que había
+            Session::forget('total');
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
