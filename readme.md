@@ -137,3 +137,14 @@ email: user email
     "email" : string
 }
 ```
+
+## Routes
+| Action | URL | BODY | RESPONSE |
+| POST | api/login | email, password | API token |
+| POST | api/logout | | true |
+| POST | api/register | userName, userEmail, password | true |
+| GET | api/products |  | list of Products |
+| GET | api/products/category/category_id | | list of Product by the category|
+| POST | api/products/search | expression, category | list of Product that matches expression and category |
+| GET | api/products/product_id | | Product details and comments |
+| POST | api/login | email, password | API token |
