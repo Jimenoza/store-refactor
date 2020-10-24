@@ -140,6 +140,7 @@ email: user email
 
 ## Routes
 | Action | URL | BODY | RESPONSE |
+| ------ | ------ | ------ | ------ |
 | POST | api/login | email, password | API token |
 | POST | api/logout | | true |
 | POST | api/register | userName, userEmail, password | true |
