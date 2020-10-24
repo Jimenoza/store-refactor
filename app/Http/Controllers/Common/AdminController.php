@@ -30,9 +30,8 @@ class AdminController
     /*Compara la contraseña ingresada con la que está registrada en la base de datos
     Retorna true si coinciden, false caso contrario*/
       $password = $data['password']; // Contiene la contraseña ingresada por el usuario
-      $checkPass = User::where(['admin'=>'1'])->first(); //Obtiene la información del usuario actual
       // Se verifica que la contraseña ingresada coincida con la contraseña almacenda en la BD por medio del hash
-      if (Hash::check($contrasenaActual, $checkPass->contrasena)) {
+      if (Hash::check($password, Auth::user()->password)) {
         return true;
       } else {
         return false;

@@ -45,7 +45,7 @@ Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanct
 
 Route::group(['middleware' => ['auth:sanctum','token.admin']], function(){
     //Admin - Manejo de cuentas
-    Route::post('/admin/new', 'Api\ApiAdminController@store');
+    Route::post('/admin', 'Api\ApiAdminController@store');
     Route::post('/admin/password/check', 'Api\ApiAdminController@checkPassword');
     Route::put('/admin/password/change', 'Api\ApiAdminController@update');
     //Admin - Manejo de Categorías
