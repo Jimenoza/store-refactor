@@ -142,10 +142,31 @@ email: user email
 | Action | URL | BODY | RESPONSE |
 | ------ | ------ | ------ | ------ |
 | POST | api/login | email, password | API token |
-| POST | api/logout | | true |
-| POST | api/register | userName, userEmail, password | true |
-| GET | api/products |  | list of Products |
-| GET | api/products/category/category_id | | list of Product by the category|
-| POST | api/products/search | expression, category | list of Product that matches expression and category |
-| GET | api/products/product_id | | Product details and comments |
-| POST | api/login | email, password | API token |
+| POST | api/logout | | boolean |
+| POST | api/register | userName, userEmail, password | boolean |
+| GET | api/products |  | list<Products>  |
+| GET | api/products/category/{category_id} | | list<Product> by the category|
+| POST | api/products/search | expression, category | list<Product> that matches expression and category |
+| GET | api/products/product_id | | Product, list<Comment> |
+| POST | api/products/comment/{product_id} | comment, rate | Product, lisi<Comment> |
+| POST | api/products/reply/{comment_id} | replyText | Product, lisi<Comment> |
+| GET | api/cart | | Cart |
+| POST | api/cart | | boolean |
+| POST | api/cart/{product_id} | | boolean |
+| GET | api/cart/delete | | boolean |
+| POST | api/cart/remove/{product_id} | | boolean |
+| GET | api/orders | | Orders |
+| GET | api/orders/{order_id} | | Order|
+| POST | api/orders | address | boolean or error |
+| POST | api/admin | userName, userEmail, password | boolean |
+| POST | api/admin/password/check | password | boolean |
+| PUT | api/admin/password/change | currentPassword, newPassword | Boolean |
+| GET | api/admin/category | | list<Category> |
+| GET | api/admin/category/{category_id} | | Category |
+| POST | api/admin/category | name, description | Boolean |
+| PUT | api/admin/category{category_id} | name, description, condition (optional) | Boolean |
+| GET | api/admin/product/{product_id} | | Product |
+| POST | api/admin/product | name, description, image, price, category_id, stock | Boolean |
+| PUT | api/admin/product/{product_id} | name, description, image, price, category_id, stock | boolean |
+| PUT | /admin/product/enable/{product_id} | | Boolean |
+| PUT | /admin/product/disable/{product_id} | | Boolean |
