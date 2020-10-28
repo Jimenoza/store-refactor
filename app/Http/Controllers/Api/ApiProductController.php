@@ -21,6 +21,9 @@ class ApiProductController extends Controller
     public function index()
     {
         $products = ProductController::index(10);
+        foreach($products as $prod){
+            $prod->image = asset('images/productos/'.$prod->image);
+        }
         return response()->json(['data' => $products,'error' => NULL]);
     }
 
@@ -71,6 +74,7 @@ class ApiProductController extends Controller
     public function show($id)
     {
         $backend = ProductController::productDetail($id);
+        $backend['product']->image = asset('images/productos/'.$backend['product']->image);
         return response()->json(['data' => $backend,'error' => NULL]);
     }
 
@@ -119,6 +123,9 @@ class ApiProductController extends Controller
     public function filter($id){
         Category::findOrFail($id);
         $products = ProductController::filter($id);
+        foreach($products as $prod){
+            $prod->image = asset('images/productos/'.$prod->image);
+        }
         return response()->json(['data' => $products,'error' => null]);
     }
 
@@ -140,6 +147,9 @@ class ApiProductController extends Controller
             $body['category'] = $category;
         }
         $products = ProductController::search($body);
+        foreach($products as $prod){
+            $prod->image = asset('images/productos/'.$prod->image);
+        }
         return response()->json(['data' => $products,'error' => null]);
     }
 
