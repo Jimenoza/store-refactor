@@ -18,12 +18,21 @@ class ProductController
 {
   public static function index($pagination = null) {
     /*Returns all the products from database*/
+    $categories = Category::all();
     if($pagination){
       $products = Product::paginate($pagination);
+      foreach ($products as $prod) {
+        foreach ($categories as $cat) {
+          if($cat->id === $prod->category_id){
+            $prod->category_name = $cat->name;
+          }
+        }
+      }
     }
     else{
       $products = Product::all();
     }
+
     return $products;
   }
   public static function newProduct($data){
