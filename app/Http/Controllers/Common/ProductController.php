@@ -99,6 +99,8 @@ class ProductController
     $product = Product::findOrFail($id);
     // DB::enableQueryLog();
     $comments = Comment::where('product_id',$id)->get();
+    $category = Category::findOrFail($product->category_id);
+    $product->category_name = $category->name;
     foreach($comments as $comment){
       $user = User::where('id',$comment->user_id)->get();
       $comment->userName = $user[0]->name;
