@@ -17,6 +17,9 @@ class ApiCartController extends Controller
     public function index()
     {
         $respose = CartController::getCart();
+        foreach($respose['cart'] as $prod){
+            $prod->image = asset('images/productos/'.$prod->image);
+        }
         return response()->json(['data' => $respose,'error' => NULL]);
     }
 
