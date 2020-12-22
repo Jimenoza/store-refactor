@@ -17,10 +17,15 @@ class ApiCartController extends Controller
     public function index()
     {
         $respose = CartController::getCart();
+        $copy = array();
+        $copy['total'] = $respose['total'];
+        $copy['cart'] = array();
         foreach($respose['cart'] as $prod){
-            $prod->image = asset('images/productos/'.$prod->image);
+            $new = clone $prod;
+            $new->image = asset('images/productos/'.$new->image);
+            $copy['cart'][] = $new;
         }
-        return response()->json(['data' => $respose,'error' => NULL]);
+        return response()->json(['data' => $copy,'error' => NULL]);
     }
 
     /**
