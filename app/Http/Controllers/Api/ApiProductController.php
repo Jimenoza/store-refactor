@@ -166,7 +166,8 @@ class ApiProductController extends Controller
             'rate' => $data['rate']
         ];
         $backend = ProductController::commentProduct($body,$id);
-        return response()->json(['data' => $backend,'error' => null]);
+        $comments = ProductController::getComments($id);
+        return response()->json(['data' => ['result' => $backend, 'comments' => $comments],'error' => null]);
     }
 
     /**

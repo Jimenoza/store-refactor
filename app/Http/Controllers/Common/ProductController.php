@@ -151,4 +151,20 @@ class ProductController
     return $reply->save();
   }
 
+  public static function getComments($id){
+    // DB::enableQueryLog();
+    $comments = Comment::where('product_id',$id)->get();
+    foreach($comments as $comment){
+      $user = User::where('id',$comment->user_id)->get();
+      $comment->userName = $user[0]->name;
+      $comment->replies = Reply::where('calification_id',$comment->id)->get();
+      foreach($comment->replies as $reply){
+        $user = User::where('id',$reply->user_id)->get();
+        $reply->userName = $user[0]->name;
+      }
+      
+    }
+    return ['comments' => $comments];
+  }
+
 }
