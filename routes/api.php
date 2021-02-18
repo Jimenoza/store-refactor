@@ -32,6 +32,7 @@ Route::post('/products/reply/{id}','Api\ApiProductController@reply')->middleware
 // Cart
 Route::get('/cart','Api\ApiCartController@index');
 Route::post('/cart','Api\ApiCartController@create');
+Route::put('/cart','Api\ApiCartController@buildCart');
 Route::post('/cart/{id}','Api\ApiCartController@store');
 Route::get('/cart/delete','Api\ApiCartController@destroy');
 Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
@@ -40,6 +41,9 @@ Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
 Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum');
 Route::get('/orders/{id}','Api\ApiOrderController@show')->middleware('auth:sanctum');
 Route::post('/orders','Api\ApiOrderController@store')->middleware('auth:sanctum');
+
+//Category
+Route::get('/categories', 'Api\ApiCategoryController@index');
 
 //Routes for admin
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use tiendaVirtual\Http\Controllers\Controller;
 use tiendaVirtual\Http\Controllers\Common\CartController;
 use tiendaVirtual\Cart;
+use tiendaVirtual\Http\Requests\Api\ApiCartRequest;
 
 class ApiCartController extends Controller
 {
@@ -36,6 +37,13 @@ class ApiCartController extends Controller
     public function create()
     {
         Cart::createCart();
+        return response()->json(['data' => true,'error' => NULL],201);
+    }
+
+    public function buildCart(ApiCartRequest $request)
+    {
+        $data = $request->validated();
+        CartController::buildCart($data['data']['cart'],$data['data']['total']);
         return response()->json(['data' => true,'error' => NULL],201);
     }
 

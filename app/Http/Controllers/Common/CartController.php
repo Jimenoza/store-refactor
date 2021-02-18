@@ -53,5 +53,11 @@ class CartController
         /*Borra un elemento del carrito*/
         return Cart::removeProduct($id);
     }
+
+    public static function buildCart($products,$total){
+        Cart::putCart($products);
+        Cart::updatePrice($total);
+        return true;
+    }
 }
 
