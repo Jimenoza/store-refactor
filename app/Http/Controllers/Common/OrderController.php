@@ -25,7 +25,15 @@ class OrderController
     }
 
     public static function getOrder($id){
+        $categories = Category::all();
         $products = Order::products($id);//DB::select("call productosPorOrden(".$id.");");
+        foreach ($products as $prod) {
+            foreach ($categories as $cat) {
+              if($cat->id === $prod->category_id){
+                $prod->category_name = $cat->name;
+              }
+            }
+        }
         return $products;
     }
 
