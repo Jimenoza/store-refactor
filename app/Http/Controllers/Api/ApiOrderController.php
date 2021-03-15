@@ -57,6 +57,9 @@ class ApiOrderController extends Controller
     public function show($id)
     {
         $response = OrderController::getOrder($id);
+        foreach($response as $prod){
+            $prod->image = asset('images/productos/'.$prod->image);
+        }
         return response()->json(['data' => $response,'error' => null]);
     }
 
