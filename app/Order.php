@@ -23,7 +23,7 @@ class Order extends Model
         $products = DB::table('products')
                         ->join('products_per_order','products_per_order.product_id','=','products.id')
                         ->where('order_id','=',$id)
-                        ->select('name','description','image','price','available','category_id')->get();
+                        ->select('name','description','image','price','available','category_id','id')->get();
         // dd(DB::getQueryLog());
         return $products;//DB::select('select * from users where active = ?', [1])
     }
