@@ -22,7 +22,7 @@ Route::post('/login', 'Api\ApiUserController@login');
 Route::post('/register', 'Api\ApiUserController@store');
 Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');
 // Products
-Route::get('/products', 'Api\ApiProductController@index');
+Route::get('/products/list/{amount?}', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
 Route::post('/products/search','Api\ApiProductController@search');
 Route::get('/products/{id}','Api\ApiProductController@show');

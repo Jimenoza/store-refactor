@@ -18,9 +18,14 @@ class ApiProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($amount = null)
     {
-        $products = ProductController::index(10);
+        if(!empty($amount)){
+            $products = ProductController::index($amount);
+        }
+        else{
+            $products = ProductController::index(10);
+        }
         foreach($products as $prod){
             $prod->image = asset('images/productos/'.$prod->image);
         }
