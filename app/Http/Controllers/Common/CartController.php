@@ -29,7 +29,7 @@ class CartController
     		$total = Cart::totalPrice();
     		$total += $product->price;
             Cart::updatePrice($total);
-            return true;
+            return ['total' => $total,'cart' => $cart];
         }
         else{
             return false;

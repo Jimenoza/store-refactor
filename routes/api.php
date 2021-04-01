@@ -34,8 +34,8 @@ Route::get('/cart','Api\ApiCartController@index');
 Route::post('/cart','Api\ApiCartController@create');
 Route::put('/cart','Api\ApiCartController@buildCart');
 Route::post('/cart/{id}','Api\ApiCartController@store');
-Route::get('/cart/delete','Api\ApiCartController@destroy');
-Route::get('/cart/remove/{id}','Api\ApiCartController@edit');
+Route::delete('/cart','Api\ApiCartController@destroy');
+Route::delete('/cart/{id}','Api\ApiCartController@remove');
 
 //orders
 Route::get('/orders','Api\ApiOrderController@index')->middleware('auth:sanctum');
