@@ -56,7 +56,15 @@ class ApiCartController extends Controller
     public function store($id)
     {
         $response = CartController::addItem($id);
-        return response()->json(['data' => $response,'error' => NULL]);
+        $copy = array();
+        $copy['total'] = $response['total'];
+        $copy['cart'] = array();
+        foreach($response['cart'] as $prod){
+            $new = clone $prod;
+            $new->image = asset('images/productos/'.$new->image);
+            $copy['cart'][] = $new;
+        }
+        return response()->json(['data' => $copy,'error' => NULL]);
     }
 
     /**

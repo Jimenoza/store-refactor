@@ -45,8 +45,7 @@ class CartController
 
     public static function deleteCart(){
         /*Borra todo el carrito*/
-    	Cart::deleteCart();
-    	return true;
+    	return Cart::deleteCart();
     }
 
     public static function removeFromCart($id){

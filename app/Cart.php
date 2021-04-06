@@ -47,7 +47,7 @@ class Cart
         Session::forget('cart');
         Session::forget('total');
         self::createCart();
-        return true;
+        return Session::get('cart');
     }
 
     public static function removeProduct($idProducto){
