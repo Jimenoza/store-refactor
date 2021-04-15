@@ -45,7 +45,10 @@ class CartController
 
     public static function deleteCart(){
         /*Borra todo el carrito*/
-    	return Cart::deleteCart();
+        Cart::deleteCart();
+        $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito
+        $total = Cart::totalPrice();
+        return ['total' => $total,'cart' => $cart];
     }
 
     public static function removeFromCart($id){
