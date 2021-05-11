@@ -151,6 +151,10 @@ class ApiProductController extends Controller
             $category = trim($data['category']);
             $body['category'] = $category;
         }
+        if(array_key_exists('pagination',$data)){
+            $category = trim($data['pagination']);
+            $body['pagination'] = $category;
+        }
         $products = ProductController::search($body);
         foreach($products as $prod){
             $prod->image = asset('images/productos/'.$prod->image);

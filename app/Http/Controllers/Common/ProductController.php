@@ -82,6 +82,10 @@ class ProductController
     if(array_key_exists('category',$data)){
       $products = $products->where('category_id','=',$data['category']);
     }
+    if(array_key_exists('pagination',$data)){
+      $products = $products->paginate((int)$data['pagination']);
+      return $products;
+    }
     return $products->get();
   }
 

@@ -25,13 +25,15 @@ class ProductSearchRequest extends FormRequest
     {
         return [
             'expression' => 'required',
-            'category' => 'nullable|integer'
+            'category' => 'nullable|integer',
+            'pagination' => 'nullable|integer'
             //
         ];
     }
     public function messages()
     {
         return ['expression.required' => 'expression is required',
-                'category.integer' => 'categoryFilter must be a number'];
+                'category.integer' => 'categoryFilter must be a number',
+                'pagination.integer' => 'pagination must be a number'];
     }
 }
