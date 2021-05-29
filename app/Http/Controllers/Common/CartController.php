@@ -53,7 +53,10 @@ class CartController
 
     public static function removeFromCart($id){
         /*Borra un elemento del carrito*/
-        return Cart::removeProduct($id);
+        Cart::removeProduct($id);
+        $cart = Cart::getCart(); //Obtiene una lista (array) de los productos en el carrito
+        $total = Cart::totalPrice();
+        return ['total' => $total,'cart' => $cart];
     }
 
     public static function buildCart($products,$total){
