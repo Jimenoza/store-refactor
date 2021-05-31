@@ -131,6 +131,7 @@ class ApiProductController extends Controller
         foreach($products as $prod){
             $prod->image = asset('images/productos/'.$prod->image);
         }
+        $products = $products->paginate(10);
         return response()->json(['data' => $products,'error' => null]);
     }
 

@@ -209,7 +209,7 @@ class WebProductController extends Controller
     public function filter($id){
         $category = Category::fifindOrFailnd($id);
         $catName = 'Productos de '.$category->name;
-        $products = ProductController::filter($id);
+        $products = ProductController::filter($id)->get();
         $pages = self::paginate($products->toArray());
         return view('cliente.categories',['productos'=> $pages,'nombreCat' => $catName]);
     }

@@ -91,7 +91,7 @@ class ProductController
 
   public static function filter($id){
     /*Gets all products from one category*/
-    $products = Product::where('category_id',$id)->where('available',1)->get();
+    $products = Product::where('category_id',$id)->where('available',1);
     return $products;
   }
   
