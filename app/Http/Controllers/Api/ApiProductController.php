@@ -128,10 +128,10 @@ class ApiProductController extends Controller
     public function filter($id){
         Category::findOrFail($id);
         $products = ProductController::filter($id);
+        $products = $products->paginate(10);
         foreach($products as $prod){
             $prod->image = asset('images/productos/'.$prod->image);
         }
-        $products = $products->paginate(10);
         return response()->json(['data' => $products,'error' => null]);
     }
 
