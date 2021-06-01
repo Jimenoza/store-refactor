@@ -126,11 +126,12 @@ class ApiProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function filter($id){
-        Category::findOrFail($id);
+        $cat = Category::findOrFail($id); //Verifies that category exists
         $products = ProductController::filter($id);
         $products = $products->paginate(10);
         foreach($products as $prod){
             $prod->image = asset('images/productos/'.$prod->image);
+            $prod->category_name = $cat->name;
         }
         return response()->json(['data' => $products,'error' => null]);
     }
