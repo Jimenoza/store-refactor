@@ -78,13 +78,22 @@ class ProductController
 
   public static function search($data){
     /*Searches products by a filter string and by category*/
+    $categories = Category::all();
     $products = Product::where('name','like','%'.$data['filter'].'%');
     if(array_key_exists('category',$data)){
       $products = $products->where('category_id','=',$data['category']);
     }
     if(array_key_exists('pagination',$data)){
       $products = $products->paginate((int)$data['pagination']);
-      return $products;
+      foreach ($products as $prod) {
+        foreach ($categories as $cat) {
+          if($cat->id === $prod->category_id){
+            $prod->category_name = $cat->name;
+            break; // It needs to stop iterating because category was found
+          }
+        }
+      }
+      return $products; //If pagination, object is different so it needs to be returned as it is
     }
     return $products->get();
   }
