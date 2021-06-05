@@ -39,9 +39,21 @@ class ApiUserController extends Controller
      */
     public function logout()
     {
+        // $user = Auth::user();
+        // $user = $request->user();
+        // Auth::user()->tokens()->where('id', Auth::user()->id)->delete();
+        // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+        // Auth::user()->currentAccessToken()->delete();
+        // Auth::logout();
         $user = Auth::user();
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
         return response()->json(['data' => true,'error' => null]);
+    }
+
+    public function logged()
+    {
+        $user = Auth::user();
+        return response()->json(['user' => $user,'error' => null]);
     }
 
     /**

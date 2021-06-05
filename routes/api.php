@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'Api\ApiUserController@login');
 Route::post('/register', 'Api\ApiUserController@store');
 Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');
+Route::get('/logged', 'Api\ApiUserController@logged')->middleware('auth:sanctum');
 // Products
 Route::get('/products/list/{amount?}', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
