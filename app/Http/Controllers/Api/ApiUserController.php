@@ -24,7 +24,7 @@ class ApiUserController extends Controller
         $user = UserController::login($body);
         if($user){
             $tokenResult = $user->createToken('authToken')->plainTextToken;  
-            return response()->json(['data' => $tokenResult,'error' => null]);
+            return response()->json(['data' => ['token' => $tokenResult, 'user' => $user],'error' => null]);
         }
         else{
             return response()->json(['data' => 'user_not_found','error' => 404],404);   
