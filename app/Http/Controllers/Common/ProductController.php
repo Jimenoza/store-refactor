@@ -20,7 +20,8 @@ class ProductController
     /*Returns all the products from database*/
     $categories = Category::all();
     if($pagination){
-      $products = Product::paginate($pagination);
+      // $products = Product::paginate($pagination);
+      $products = Product::where('available',1);
       foreach ($products as $prod) {
         foreach ($categories as $cat) {
           if($cat->id === $prod->category_id){
@@ -30,10 +31,10 @@ class ProductController
       }
     }
     else{
-      $products = Product::all();
+      return Product::where('available',1)->get();
     }
 
-    return $products;
+    return $products->paginate($pagination);
   }
   public static function newProduct($data){
     // Adds a new product to database

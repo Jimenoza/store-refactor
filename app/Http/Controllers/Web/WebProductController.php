@@ -207,7 +207,7 @@ class WebProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function filter($id){
-        $category = Category::fifindOrFailnd($id);
+        $category = Category::findOrFail($id);
         $catName = 'Productos de '.$category->name;
         $products = ProductController::filter($id)->get();
         $pages = self::paginate($products->toArray());
