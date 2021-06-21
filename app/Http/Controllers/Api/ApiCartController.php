@@ -22,9 +22,11 @@ class ApiCartController extends Controller
         $copy['total'] = $respose['total'];
         $copy['cart'] = array();
         foreach($respose['cart'] as $prod){
-            $new = clone $prod;
-            $new->image = asset('images/productos/'.$new->image);
-            $copy['cart'][] = $new;
+            // error_log( print_r($prod, TRUE) );
+            // $new = clone $prod;
+            // error_log( print_r($new, TRUE) );
+            $prod['image'] = asset('images/productos/'.$prod['image']);
+            $copy['cart'][] = $prod;
         }
         return response()->json(['data' => $copy,'error' => NULL]);
     }
