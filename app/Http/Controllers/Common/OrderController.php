@@ -52,8 +52,8 @@ class OrderController
             $total = Cart::totalPrice();
             $body = [];
             foreach ($products as $product) {
-                array_push($body,['order_id' => $order->id, 'product_id' => $product->id]);// to create relation of product per order
-                $prod = Product::findOrFail($product->id);
+                array_push($body,['order_id' => $order['id'], 'product_id' => $product['id']]);// to create relation of product per order
+                $prod = Product::findOrFail($product['id']);
                 $prod->stock = ($prod->stock - 1);
                 $prod->save();
             };
