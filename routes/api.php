@@ -27,6 +27,7 @@ Route::get('/products/list/{amount?}', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');
 Route::post('/products/search','Api\ApiProductController@search');
 Route::get('/products/{id}','Api\ApiProductController@show');
+Route::get('/products/comment/replies/{reply}','Api\ApiProductController@replies');
 Route::post('/products/comment/{id}','Api\ApiProductController@comment')->middleware('auth:sanctum');
 Route::post('/products/reply/{id}','Api\ApiProductController@reply')->middleware('auth:sanctum');;
 

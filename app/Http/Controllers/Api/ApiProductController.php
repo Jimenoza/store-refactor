@@ -10,6 +10,8 @@ use tiendaVirtual\Http\Requests\ProductSearchRequest;
 use tiendaVirtual\Http\Requests\CommentProductRequest;
 use tiendaVirtual\Http\Requests\ReplyCommentRequest;
 use tiendaVirtual\Http\Requests\Api\ApiProductFormRequest;
+use tiendaVirtual\Http\Controllers\Common\ReplyController;
+use tiendaVirtual\User;
 
 class ApiProductController extends Controller
 {
@@ -192,8 +194,13 @@ class ApiProductController extends Controller
         $body = [
             'replyText' => $data['replyText']
         ];
-        $backend = ProductController::replyComment($body,$id);
-        return response()->json(['data' => $backend,'error' => null]);
+        ProductController::replyComment($body,$id);
+        $replies = ReplyController::getReplies($id);
+        foreach($replies as $reply){
+            $user = User::where('id',$reply->user_id)->get();
+            $reply->userName = $user[0]->name;
+        }
+        return response()->json(['data' => $replies,'error' => null]);
     }
 
     /**
@@ -233,5 +240,18 @@ class ApiProductController extends Controller
             $enable = ProductController::enableProduct($id);
             return response()->json(['data' => $enable,'error' => null]);
         }
+    }
+
+    /**
+     * Returns the replies of a product's calification .
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function replies($reply)
+    {
+        // $backend = ProductController::productDetail($id);
+        // $backend['product']->image = asset('images/productos/'.$backend['product']->image);
+        return response()->json(['data' => ReplyController::getReplies($reply),'error' => NULL]);
     }
 }
