@@ -9,18 +9,26 @@ use tiendaVirtual\User;
 use Auth;
 use Session;
 use DB;
+use Hash;
 
 class UserController extends Controller
 {
   
     public static function login($data) {
       // $data = $request->validated();
-      if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
-        // User::loginUser($data['correo']);
-        return Auth::user();
-      }else {
+      $user = User::where('email',$data['email'])->first();
+      if(!$user || !Hash::check($data['password'], $user->password)){
         return null;
       }
+      else {
+        return $user;
+      }
+      // if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
+      //   // User::loginUser($data['correo']);
+      //   return Auth::user();
+      // }else {
+      //   return null;
+      // }
     }
 
     public static function register($data) {

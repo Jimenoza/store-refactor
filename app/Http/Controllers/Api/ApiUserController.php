@@ -37,7 +37,7 @@ class ApiUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function logout(Request $request)
     {
         // $user = Auth::user();
         // $user = $request->user();
@@ -45,8 +45,9 @@ class ApiUserController extends Controller
         // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
         // Auth::user()->currentAccessToken()->delete();
         // Auth::logout();
-        $user = Auth::user();
-        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+        // $user = Auth::user();
+        // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+        auth()->user()->tokens()->delete();
         return response()->json(['data' => true,'error' => null]);
     }
 
