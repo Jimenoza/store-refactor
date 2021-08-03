@@ -81,4 +81,22 @@ class ApiUserController extends Controller
         // $request->session()->put('flash_message_error', '¡Introdujo un campo no válido!');
         // $request->session()->put('modal', '#popupRegister');
     }
+
+    public function dummyLogin(Request $request)
+    { 
+        $dummy = [
+            "admin" => 0,
+            "created_at" => "2020-10-24T19:09:56.000000Z",
+            "email" => "h@mail.com",
+            "id" => 9,
+            "name" => "Mario Hugo",
+            "updated_at" => "2020-10-24T19:09:56.000000Z"
+        ];
+        return response()->json(['data' => ['token' => '24|DUyNEiq7rEFZPOTJtcvzqPlaalZNYQiLdx6XE39m', 'user' => $dummy],'error' => null]);
+    }
+
+    public function dummyLogout(Request $request)
+    {
+        return response()->json(['data' => true,'error' => null]);
+    }
 }

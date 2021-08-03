@@ -4,7 +4,6 @@ namespace tiendaVirtual;
 
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Session;
 use DB;
@@ -12,7 +11,7 @@ use Auth;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

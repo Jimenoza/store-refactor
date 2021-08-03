@@ -22,6 +22,9 @@ Route::post('/login', 'Api\ApiUserController@login');
 Route::post('/register', 'Api\ApiUserController@store');
 Route::post('/logout', 'Api\ApiUserController@logout')->middleware('auth:sanctum');
 Route::get('/logged', 'Api\ApiUserController@logged')->middleware('auth:sanctum');
+
+Route::post('/dummy/login', 'Api\ApiUserController@dummyLogin');
+Route::post('/dummy/logout', 'Api\ApiUserController@dummyLogout');
 // Products
 Route::get('/products/list/{amount?}', 'Api\ApiProductController@index');
 Route::get('/products/category/{id}','Api\ApiProductController@filter');

@@ -82,6 +82,7 @@ class ProductController
     /*Searches products by a filter string and by category*/
     $categories = Category::all();
     $products = Product::where('name','like','%'.$data['filter'].'%');
+    $products = $products->where('available',1);
     if(array_key_exists('category',$data)){
       $products = $products->where('category_id','=',$data['category']);
     }
